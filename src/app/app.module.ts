@@ -12,6 +12,7 @@ import { DetailsPageComponent } from './components/details-page/details-page.com
 import { CatalogPageComponent } from './components/catalog-page/catalog-page.component';
 import { AboutComponent } from './components/about/about.component';
 import { from } from 'rxjs';
+import { AddPageComponent } from './components/add-page/add-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { from } from 'rxjs';
     DropdownNavigationComponent,
     DetailsPageComponent,
     CatalogPageComponent,
-    AboutComponent
+    AboutComponent,
+    AddPageComponent
   ],
   imports: [
     BrowserModule,
