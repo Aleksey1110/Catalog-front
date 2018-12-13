@@ -15,6 +15,17 @@
         <a class="nav-link" [routerLink]="['/1']">About</a>
       </li>
       <!-- Ссылка на страницу добавления машин -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" [routerLink]="['/add']" role="button" aria-haspopup="true"
+          aria-expanded="true">Dropdown</a>
+        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </li>
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" [routerLink]="['/add']">Add car</a>
       </li>

@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +13,7 @@ import { DetailsPageComponent } from './components/details-page/details-page.com
 import { CatalogPageComponent } from './components/catalog-page/catalog-page.component';
 import { AboutComponent } from './components/about/about.component';
 import { from } from 'rxjs';
-import { AddPageComponent } from './components/add-page/add-page.component';
+import { AddCarModule } from './modules/add-car/add-car.module';
 
 @NgModule({
   declarations: [
@@ -21,13 +22,14 @@ import { AddPageComponent } from './components/add-page/add-page.component';
     DropdownNavigationComponent,
     DetailsPageComponent,
     CatalogPageComponent,
-    AboutComponent,
-    AddPageComponent
+    AboutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AddCarModule,
+    FormsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

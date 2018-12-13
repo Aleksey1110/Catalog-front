@@ -21,6 +21,11 @@ export class ApiService {
     return this.http.get<Car[]>('http://localhost:3000/api');
   }
 
+  // Добавить марку авто
+  createCar(mark): Observable<Car> {
+    return this.http.post<Car>('http://localhost:3000/add/addCar', mark);
+  }
+
   // Получить список моделей
   getModelName(id1): Observable<Models[]> {
     return this.http.get<Models[]>(`http://localhost:3000/api/${id1}`);
