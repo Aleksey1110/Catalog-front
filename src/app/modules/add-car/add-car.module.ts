@@ -8,6 +8,9 @@ import { AddUnitComponent } from './add-unit/add-unit.component';
 import { AddDetailComponent } from './add-detail/add-detail.component';
 import { AddDetailItemComponent } from './add-detail-item/add-detail-item.component';
 import { AddAnalogueComponent } from './add-analogue/add-analogue.component';
+import { AddMainComponent } from './add-main/add-main.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 @NgModule({
   declarations: [
     AddCarComponent,
@@ -16,11 +19,14 @@ import { AddAnalogueComponent } from './add-analogue/add-analogue.component';
     AddUnitComponent,
     AddDetailComponent,
     AddDetailItemComponent,
-    AddAnalogueComponent
+    AddAnalogueComponent,
+    AddMainComponent
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    BrowserModule,
+    AppRoutingModule
   ]
 })
 export class AddCarModule { }
