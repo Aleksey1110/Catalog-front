@@ -1,3 +1,15 @@
-<p>
-  add-model works!
-</p>
+<div class="select">
+  <label for="markName">Марка</label>
+  <!-- Передача ID выбранной марки в компонент -->
+  <select id="markName" (change)="passCarId($event)" class="form-control">
+    <option></option>
+    <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
+  </select>
+</div>
+<form #form="ngForm">
+  <div class="form-group">
+    <p>Внесите название модели автомобиля</p>
+    <input type="text" class="form-control" [(ngModel)]="modelName" name="modelName" required>
+  </div>
+  <button class="btn btn-success" (click)="addModel()" [disabled]="!form.valid">Добавить</button>
+</form>

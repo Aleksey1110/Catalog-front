@@ -3,7 +3,7 @@ import { ApiService } from './services/api.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +29,8 @@ import { AddCarModule } from './modules/add-car/add-car.module';
     AppRoutingModule,
     HttpClientModule,
     AddCarModule,
-    FormsModule
+    FormsModule,
+    FlashMessagesModule.forRoot()
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

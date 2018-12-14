@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+
 import { AddCarComponent } from './add-car/add-car.component';
 import { AddModelComponent } from './add-model/add-model.component';
 import { AddModificationComponent } from './add-modification/add-modification.component';
@@ -9,8 +13,7 @@ import { AddDetailComponent } from './add-detail/add-detail.component';
 import { AddDetailItemComponent } from './add-detail-item/add-detail-item.component';
 import { AddAnalogueComponent } from './add-analogue/add-analogue.component';
 import { AddMainComponent } from './add-main/add-main.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+
 @NgModule({
   declarations: [
     AddCarComponent,
@@ -26,7 +29,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     CommonModule,
     FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FlashMessagesModule.forRoot()
   ]
 })
 export class AddCarModule { }

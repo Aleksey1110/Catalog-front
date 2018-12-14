@@ -1,24 +1,33 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item" [routerLinkActive]="['active']">
-    <a class="nav-link  show" data-toggle="tab" [routerLink]="['/mark']">Марка</a>
-  </li>
-  <li class="nav-item" [routerLinkActive]="['active']">
-    <a class="nav-link  show" data-toggle="tab" [routerLink]="['/model']">Модель</a>
-  </li>
-  <li class="nav-item" [routerLinkActive]="['active']">
-    <a class="nav-link  show" data-toggle="tab" [routerLink]="['/modification']">Модификация</a>
-  </li>
-  <li class="nav-item" [routerLinkActive]="['active']">
-    <a class="nav-link  show" data-toggle="tab" [routerLink]="['/unit']">Агрегат</a>
-  </li>
-  <li class="nav-item" [routerLinkActive]="['active']">
-    <a class="nav-link  show" data-toggle="tab" [routerLink]="['/detail']">Название детали</a>
-  </li>
-  <li class="nav-item" [routerLinkActive]="['active']">
-    <a class="nav-link show" data-toggle="tab" [routerLink]="['/item']">Составляющте детали</a>
-  </li>
-  <li class="nav-item" [routerLinkActive]="['active']">
-    <a class="nav-link show" data-toggle="tab" [routerLink]="['/analogue']">Аналог</a>
-  </li>
-</ul>
-<router-outlet></router-outlet>
+<flash-messages></flash-messages>
+<div class="row">
+  <!-- Колонка с роутами для добавления данных -->
+  <div class="col-lg-4">
+    <ul class="nav nav-pills flex-column">
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/add/mark']">добавить марку</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/add/model']">Добавить модель</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/add/modification']">Добавить модификацию</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/add/unit']">Добавить агрегат</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/add/detail']">Добавить деталь</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/add/item']">Добавить составляющие детали</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/add/analogue']">Добавить аналог</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-lg-8">
+    <!-- Страницы добавления данных -->
+    <router-outlet></router-outlet>
+  </div>
+</div>
