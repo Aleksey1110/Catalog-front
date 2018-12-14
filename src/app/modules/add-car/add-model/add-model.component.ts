@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-add-model',
@@ -6,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-model.component.css']
 })
 export class AddModelComponent implements OnInit {
-
-  constructor() { }
+  public markName = [];
+  public carId: String;
+  public modelName: String;
+  public isConfirmed = false;
+  constructor(
+    private apiService: ApiService,
+    private _flashMessagesService: FlashMessagesService
+  ) { }
 
   ngOnInit() {
     // Получение списка машин при загрузке страницы
@@ -22,13 +30,24 @@ export class AddModelComponent implements OnInit {
       });
   }
 
-  // Получение Id выбранной машины. Получение списка моделей
+  // Получение Id выбранной машины.
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
-      .subscribe(data => {
-        this.modelName = data;
-      });
+    this.isConfirmed = true;
   }
 
+  // Создать новый объект модели, передать название модели, отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
+  public addModel() {
+    const model = {
+      modelsName: this.modelName
+    };
+    if (this.carId) {
+      this.apiService.createModel(this.carId, model)
+        .subscribe();
+      this.modelName = '';
+      this._flashMessagesService.show('Модель успешно добавлена', { cssClass: 'alert-success', timeout: 4000 });
+    } else {
+      this._flashMessagesService.show('Выберите марку автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+    }
+  }
 }

@@ -17,7 +17,7 @@ export class AddCarComponent implements OnInit {
 
   ngOnInit() {
   }
-  // Создать новый объект в машины, передать название марки, отправить на сервер, очистить форму, вывести сообщение об успехе
+  // Создать новый объект машины, передать название марки, отправить на сервер, очистить форму, вывести сообщение об успехе
   addCar() {
     const car = {
       markName: this.markName
@@ -25,6 +25,6 @@ export class AddCarComponent implements OnInit {
     this.apiService.createCar(car)
       .subscribe(data => console.log(data));
     this.markName = '';
-    this._flashMessagesService.show('Марка машины успешно добавлена', {cssClass: 'alert-success', timeout: 5000});
+    this._flashMessagesService.show('Марка машины успешно добавлена', {cssClass: 'alert-success', timeout: 4000});
   }
 }

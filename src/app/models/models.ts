@@ -1,7 +1,7 @@
 import { Modifications } from './modifications';
 
 export interface Models {
-    modelName: String;
+    modelsName: String;
     modifications: Array<Modifications>;
     _id: String;
 }

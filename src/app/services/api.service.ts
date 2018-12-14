@@ -21,11 +21,6 @@ export class ApiService {
     return this.http.get<Car[]>('http://localhost:3000/api');
   }
 
-  // Добавить марку авто
-  createCar(mark): Observable<Car> {
-    return this.http.post<Car>('http://localhost:3000/add/addCar', mark);
-  }
-
   // Получить список моделей
   getModelName(id1): Observable<Models[]> {
     return this.http.get<Models[]>(`http://localhost:3000/api/${id1}`);
@@ -49,5 +44,30 @@ export class ApiService {
   // Получить составляющие выбранной детали
   getItem(id1, id2, id3, id4, id5): Observable<Items[]> {
     return this.http.get<Items[]>(`http://localhost:3000/api/${id1}/${id2}/${id3}/${id4}/${id5}`);
+  }
+
+  // Добавить марку авто
+  createCar(mark): Observable<Car> {
+    return this.http.post<Car>('http://localhost:3000/add/addCar', mark);
+  }
+
+  // Добавить модель авто
+  createModel(id1, model): Observable<Models> {
+    return this.http.post<Models>(`http://localhost:3000/add/addCar/${id1}`, model);
+  }
+
+  // Добавить модификацию авто
+  createModification(id1, id2, modification): Observable<Modifications> {
+    return this.http.post<Modifications>(`http://localhost:3000/add/addCar/${id1}/${id2}`, modification);
+  }
+
+  // Добавить модификацию авто
+  createUnit(id1, id2, id3, unit): Observable<Unit> {
+    return this.http.post<Unit>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}`, unit);
+  }
+
+  // Добавить деталь
+  createDetail(id1, id2, id3, id4, detail): Observable<Unit> {
+    return this.http.post<Unit>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}/${id4}`, detail);
   }
 }
