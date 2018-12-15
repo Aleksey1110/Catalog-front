@@ -13,6 +13,8 @@ import { AddDetailComponent } from './add-detail/add-detail.component';
 import { AddDetailItemComponent } from './add-detail-item/add-detail-item.component';
 import { AddAnalogueComponent } from './add-analogue/add-analogue.component';
 import { AddMainComponent } from './add-main/add-main.component';
+import { AddEditingComponent } from './add-editing/add-editing.component';
+import { EditMainComponent } from './edit-main/edit-main.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AddMainComponent } from './add-main/add-main.component';
     AddDetailComponent,
     AddDetailItemComponent,
     AddAnalogueComponent,
-    AddMainComponent
+    AddMainComponent,
+    AddEditingComponent,
+    EditMainComponent
   ],
   imports: [
     CommonModule,

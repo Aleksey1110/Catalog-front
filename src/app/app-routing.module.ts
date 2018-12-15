@@ -11,6 +11,8 @@ import { AddDetailComponent } from './modules/add-car/add-detail/add-detail.comp
 import { AddDetailItemComponent } from './modules/add-car/add-detail-item/add-detail-item.component';
 import { AddAnalogueComponent } from './modules/add-car/add-analogue/add-analogue.component';
 import { AddMainComponent } from './modules/add-car/add-main/add-main.component';
+import { AddEditingComponent } from './modules/add-car/add-editing/add-editing.component';
+import { EditMainComponent } from './modules/add-car/edit-main/edit-main.component';
 
 // Роуты Add компонента
 const addRoutes: Routes = [
@@ -22,12 +24,17 @@ const addRoutes: Routes = [
   {path: 'item', component: AddDetailItemComponent},
   {path: 'analogue', component: AddAnalogueComponent}
 ];
+// Роуты на страницы добавления и редактирования данных
+const addEditingRoutes: Routes = [
+  {path: 'addmain', component: AddMainComponent, children: addRoutes},
+  {path: 'editmain', component: EditMainComponent}
+];
 // Основные роуты сайта
 const routes: Routes = [
   {path: '', component: DetailsPageComponent},
   {path: 'catalog', component: CatalogPageComponent},
   {path: 'about', component: AboutComponent},
-  {path: 'add', component: AddMainComponent, children: addRoutes}
+  {path: 'editing', component: AddEditingComponent, children: addEditingRoutes}
 ];
 
 @NgModule({
