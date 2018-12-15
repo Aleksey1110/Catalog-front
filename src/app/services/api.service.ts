@@ -1,3 +1,4 @@
+import { AnalogueNumber } from './../models/analogueNumber';
 import { Detail } from './../models/detail';
 import { Items } from '../models/items';
 import { Unit } from './../models/unit';
@@ -69,5 +70,15 @@ export class ApiService {
   // Добавить деталь
   createDetail(id1, id2, id3, id4, detail): Observable<Unit> {
     return this.http.post<Unit>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}/${id4}`, detail);
+  }
+
+  // Добавить составляющие детали
+  createDetailItem(id1, id2, id3, id4, id5, item): Observable<Items> {
+    return this.http.post<Items>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}/${id4}/${id5}`, item);
+  }
+
+  // Добавить аналог
+  createAnalogue(id1, id2, id3, id4, id5, id6, analogue): Observable<AnalogueNumber> {
+    return this.http.post<AnalogueNumber>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, analogue);
   }
 }

@@ -32,7 +32,9 @@ import { AddCarModule } from './modules/add-car/add-car.module';
     FormsModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [ApiService],
+  providers: [
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
