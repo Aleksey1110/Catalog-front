@@ -3,11 +3,11 @@ import { ApiService } from './../../../services/api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-add-detail-item',
-  templateUrl: './add-detail-item.component.html',
-  styleUrls: ['./add-detail-item.component.css']
+  selector: 'app-edit-detail',
+  templateUrl: './edit-detail.component.html',
+  styleUrls: ['./edit-detail.component.css']
 })
-export class AddDetailItemComponent implements OnInit {
+export class EditDetailComponent implements OnInit {
   public markName = [];
   public modelName = [];
   public modifications = [];
@@ -22,6 +22,7 @@ export class AddDetailItemComponent implements OnInit {
   public unitId: String;
   public detailId: String;
   public itemId: String;
+  public detailName: String;
   constructor(
     private apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
@@ -83,20 +84,16 @@ export class AddDetailItemComponent implements OnInit {
       .subscribe();
   }
 
-  // Создать новый объект для дынных детали, передать сервису,
+  // Создать новый объект для детали, передать сервису,
   //  отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
-  public addItems() {
-    const item = {
-      originalNumber: this.originalNumber,
-      note: this.note,
-      picture: this.picture
+  public editDetail() {
+    const detail = {
+      detailName: this.detailName
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
-      this.apiService.createDetailItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, item)
+      this.apiService.editDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, detail)
         .subscribe();
-      this.originalNumber = [];
-      this.note = '';
-      this.picture = '';
+      this.detailName = '';
       this._flashMessagesService.show('Данные детали успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       // tslint:disable-next-line:max-line-length

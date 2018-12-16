@@ -15,6 +15,13 @@ import { AddAnalogueComponent } from './add-analogue/add-analogue.component';
 import { AddMainComponent } from './add-main/add-main.component';
 import { AddEditingComponent } from './add-editing/add-editing.component';
 import { EditMainComponent } from './edit-main/edit-main.component';
+import { EditMarkComponent } from './edit-mark/edit-mark.component';
+import { EditModelComponent } from './edit-model/edit-model.component';
+import { EditModificationComponent } from './edit-modification/edit-modification.component';
+import { EditUnitComponent } from './edit-unit/edit-unit.component';
+import { EditDetailComponent } from './edit-detail/edit-detail.component';
+import { EditDetailItemComponent } from './edit-detail-item/edit-detail-item.component';
+import { EditDetailAnalogueComponent } from './edit-detail-analogue/edit-detail-analogue.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,14 @@ import { EditMainComponent } from './edit-main/edit-main.component';
     AddAnalogueComponent,
     AddMainComponent,
     AddEditingComponent,
-    EditMainComponent
+    EditMainComponent,
+    EditMarkComponent,
+    EditModelComponent,
+    EditModificationComponent,
+    EditUnitComponent,
+    EditDetailComponent,
+    EditDetailItemComponent,
+    EditDetailAnalogueComponent
   ],
   imports: [
     CommonModule,

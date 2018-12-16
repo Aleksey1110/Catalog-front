@@ -47,6 +47,11 @@ export class ApiService {
     return this.http.get<Items[]>(`http://localhost:3000/api/${id1}/${id2}/${id3}/${id4}/${id5}`);
   }
 
+  // Получить аналоги выбранной детали
+  getAnalogue(id1, id2, id3, id4, id5, id6): Observable<AnalogueNumber[]> {
+    return this.http.get<AnalogueNumber[]>(`http://localhost:3000/api/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`);
+  }
+
   // Добавить марку авто
   createCar(mark): Observable<Car> {
     return this.http.post<Car>('http://localhost:3000/add/addCar', mark);
@@ -80,5 +85,40 @@ export class ApiService {
   // Добавить аналог
   createAnalogue(id1, id2, id3, id4, id5, id6, analogue): Observable<AnalogueNumber> {
     return this.http.post<AnalogueNumber>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, analogue);
+  }
+
+  // Редактировать название марки авто
+  editMark(id1, mark): Observable<Car> {
+    return this.http.put<Car>(`http://localhost:3000/edit/editcar/${id1}`, mark);
+  }
+
+  // Редактировать название модели авто
+  editModel(id1, id2, model): Observable<Models> {
+    return this.http.put<Models>(`http://localhost:3000/edit/editcar/${id1}/${id2}`, model);
+  }
+
+  // Редактировать название модификации авто
+  editModification(id1, id2, id3, modification): Observable<Modifications> {
+    return this.http.put<Modifications>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}`, modification);
+  }
+
+  // Редактировать название агрегата авто
+  editUnit(id1, id2, id3, id4, unit): Observable<Unit> {
+    return this.http.put<Unit>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}/${id4}`, unit);
+  }
+
+  // Редактировать название детали
+  editDetail(id1, id2, id3, id4, id5, detail): Observable<Detail> {
+    return this.http.put<Detail>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}`, detail);
+  }
+
+  // Редактировать составляющие детали
+  editDetailItems(id1, id2, id3, id4, id5, id6, item): Observable<Detail> {
+    return this.http.put<Detail>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, item);
+  }
+
+  // Редактировать аналог детали
+  editAnalogue(id1, id2, id3, id4, id5, id6, id7, analogue): Observable<Detail> {
+    return this.http.put<Detail>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`, analogue);
   }
 }
