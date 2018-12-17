@@ -15,6 +15,7 @@
       <option *ngFor="let model of modelsName" [value]="model._id">{{model.modelsName}}</option>
     </select>
   </div>
+  <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
   <div class="form-group">
     <p>Внесите новое название модели автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="modelName" name="modelName" required>

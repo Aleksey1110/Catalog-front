@@ -40,7 +40,7 @@
     </select>
   </div>
   <div class="select">
-    <label for="analogueName">Номер аналога</label>
+    <label for="analogueName">Номер оригинальный</label>
     <!-- Передача ID выбранных оригинальных номеров в компонент -->
     <select id="analogueName" (change)="passOriginalId($event)" class="form-control">
       <option></option>
@@ -48,13 +48,14 @@
     </select>
   </div>
   <div class="select">
-    <label for="anName">Номер аналога</label>
+    <label for="anName">Фирма аналога</label>
     <!-- Передача ID выбранных оригинальных номеров в компонент -->
     <select id="anName" (change)="passAnalogueId($event)" class="form-control">
       <option></option>
       <option *ngFor="let an of ans" [value]="an._id">{{an.analogueName}}</option>
     </select>
   </div>
+  <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
   <div class="form-group">
     <p>Внесите данные аналога</p>
     <input type="text" class="form-control" [(ngModel)]="analogueName" name="analogueName" required placeholder="Внесите название аналога">

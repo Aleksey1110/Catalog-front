@@ -51,5 +51,16 @@ export class EditMarkComponent implements OnInit {
       this._flashMessagesService.show('Выберите марку автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
+
+  // Удаление выбранной марки
+  public remove() {
+    if (this.carId) {
+      this.apiService.removeMark(this.carId)
+        .subscribe();
+      this._flashMessagesService.show('Марка успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
+    } else {
+      this._flashMessagesService.show('Выберите марку автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+    }
+  }
 }
 

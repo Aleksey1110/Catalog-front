@@ -62,4 +62,15 @@ export class EditModelComponent implements OnInit {
       this._flashMessagesService.show('Выберите марку и модель автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
+
+  // Удаление выбранной модели
+  public remove() {
+    if (this.carId && this.modelId) {
+      this.apiService.removeModel(this.carId, this.modelId)
+        .subscribe();
+      this._flashMessagesService.show('Модель успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
+    } else {
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+    }
+  }
 }

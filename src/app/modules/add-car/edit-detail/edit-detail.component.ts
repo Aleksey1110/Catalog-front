@@ -23,6 +23,7 @@ export class EditDetailComponent implements OnInit {
   public detailId: String;
   public itemId: String;
   public detailName: String;
+  public isConfirmed = false;
   constructor(
     private apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
@@ -79,6 +80,7 @@ export class EditDetailComponent implements OnInit {
 
   // Получение Id детали. Получение списка составляющих детали.
   public passDetailId(event) {
+    this.isConfirmed = true;
     this.itemId = event.target.value;
     this.apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe();
@@ -101,4 +103,14 @@ export class EditDetailComponent implements OnInit {
     }
   }
 
+  // Удаление выбранной детали
+  public remove() {
+    if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
+      this.apiService.removeDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
+        .subscribe();
+      this._flashMessagesService.show('Деталь успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
+    } else {
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+    }
+  }
 }

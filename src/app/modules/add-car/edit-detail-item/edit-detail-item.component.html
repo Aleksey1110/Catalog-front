@@ -47,6 +47,7 @@
       <option *ngFor="let analogue of analogues" [value]="analogue._id">{{analogue.originalNumber}}</option>
     </select>
   </div>
+  <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
   <div class="form-group">
     <p>Внесите новые данные для детали автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="originalNumber" name="originalNumber" required placeholder="Внесите оригинальные номера через запятую">

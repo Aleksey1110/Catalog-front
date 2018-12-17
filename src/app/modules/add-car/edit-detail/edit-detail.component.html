@@ -39,6 +39,7 @@
       <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
     </select>
   </div>
+  <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
   <div class="form-group">
     <p>Внесите новые данные для детали автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="detailName" name="detailName" required>

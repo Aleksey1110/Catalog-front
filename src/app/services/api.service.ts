@@ -121,4 +121,39 @@ export class ApiService {
   editAnalogue(id1, id2, id3, id4, id5, id6, id7, analogue): Observable<Detail> {
     return this.http.put<Detail>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`, analogue);
   }
+
+  // Удалить марку
+  removeMark(id1): Observable<Car> {
+    return this.http.delete<Car>(`http://localhost:3000/remove/removecar/${id1}`);
+  }
+
+  // Удалить модель
+  removeModel(id1, id2): Observable<Models> {
+    return this.http.delete<Models>(`http://localhost:3000/remove/removecar/${id1}/${id2}`);
+  }
+
+  // Удалить модификацию
+  removeModification(id1, id2, id3): Observable<Modifications> {
+    return this.http.delete<Modifications>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}`);
+  }
+
+  // Удалить агрегат
+  removeUnit(id1, id2, id3, id4): Observable<Unit> {
+    return this.http.delete<Unit>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}/${id4}`);
+  }
+
+  // Удалить деталь
+  removeDetail(id1, id2, id3, id4, id5): Observable<Detail> {
+    return this.http.delete<Detail>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}`);
+  }
+
+  // Удалить данные детали
+  removeItem(id1, id2, id3, id4, id5, id6): Observable<Items> {
+    return this.http.delete<Items>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`);
+  }
+
+  // Удалить аналог
+  removeAnalogue(id1, id2, id3, id4, id5, id6, id7): Observable<AnalogueNumber> {
+    return this.http.delete<AnalogueNumber>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`);
+  }
 }

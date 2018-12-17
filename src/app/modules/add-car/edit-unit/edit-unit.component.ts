@@ -85,4 +85,15 @@ export class EditUnitComponent implements OnInit {
       this._flashMessagesService.show('Выберите марку, модель, модификацию и агрегат автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
+
+  // Удаление выбраннго агрегата
+  public remove() {
+    if (this.carId && this.modelId && this.unitId && this.detailId) {
+      this.apiService.removeUnit(this.carId, this.modelId, this.unitId, this.detailId)
+        .subscribe();
+      this._flashMessagesService.show('Модификация успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
+    } else {
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+    }
+  }
 }

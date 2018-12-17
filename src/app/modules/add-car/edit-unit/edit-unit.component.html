@@ -31,6 +31,7 @@
       <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
     </select>
   </div>
+  <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
   <div class="form-group">
     <p>Внесите новое название агрегата автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="unitName" name="unitName" required>

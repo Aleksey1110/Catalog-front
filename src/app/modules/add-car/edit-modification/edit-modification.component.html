@@ -23,10 +23,10 @@
       <option *ngFor="let modification of modifications" [value]="modification._id">{{modification.modificationName}}</option>
     </select>
   </div>
+  <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
   <div class="form-group">
     <p>Внесите новое название модификации автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="modificationName" name="modificationName" required>
   </div>
   <button class="btn btn-warning" (click)="editModification()" [disabled]="!isConfirmed && !form.valid">Редактировать</button>
 </form>
-

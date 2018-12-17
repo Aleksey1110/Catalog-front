@@ -28,6 +28,7 @@ export class EditDetailAnalogueComponent implements OnInit {
   public analogueName: String;
   public analogueNum: String;
   public anId: String;
+  public isConfirmed = false;
   constructor(
     private apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
@@ -104,6 +105,7 @@ export class EditDetailAnalogueComponent implements OnInit {
   // Получение Id аналога
   public passAnalogueId(event) {
     this.anId = event.target.value;
+    this.isConfirmed = true;
   }
 
   // Создать новый объект для аналога, передать сервису,
@@ -125,5 +127,15 @@ export class EditDetailAnalogueComponent implements OnInit {
     }
   }
 
+  // Удаление аналога
+  public remove() {
+    if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId && this.anId) {
+      this.apiService.removeAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId)
+        .subscribe();
+      this._flashMessagesService.show('Аналог успешно удален', { cssClass: 'alert-success', timeout: 4000 });
+    } else {
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+    }
+  }
 }
 
