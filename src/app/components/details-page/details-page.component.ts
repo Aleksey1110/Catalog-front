@@ -31,5 +31,6 @@ export class DetailsPageComponent implements OnInit {
       this.note = elem.note;
       this.picture = elem.picture;
     });
+    console.log(this.picture);
   }
 }
