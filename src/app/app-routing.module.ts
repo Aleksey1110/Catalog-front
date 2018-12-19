@@ -1,3 +1,5 @@
+import { CatalogPageComponent } from './modules/picture-catalog/catalog-page/catalog-page.component';
+
 import { EditDetailAnalogueComponent } from './modules/add-car/edit-detail-analogue/edit-detail-analogue.component';
 import { EditDetailItemComponent } from './modules/add-car/edit-detail-item/edit-detail-item.component';
 import { EditDetailComponent } from './modules/add-car/edit-detail/edit-detail.component';
@@ -7,7 +9,6 @@ import { EditModelComponent } from './modules/add-car/edit-model/edit-model.comp
 import { EditMarkComponent } from './modules/add-car/edit-mark/edit-mark.component';
 import { AddCarComponent } from './modules/add-car/add-car/add-car.component';
 import { AboutComponent } from './components/about/about.component';
-import { CatalogPageComponent } from './components/catalog-page/catalog-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DetailsPageComponent } from './components/details-page/details-page.component';

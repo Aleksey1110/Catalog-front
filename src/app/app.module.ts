@@ -1,3 +1,4 @@
+import { PictureCatalogModule } from './modules/picture-catalog/picture-catalog.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,9 +11,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DropdownNavigationComponent } from './components/dropdown-navigation/dropdown-navigation.component';
 import { DetailsPageComponent } from './components/details-page/details-page.component';
-import { CatalogPageComponent } from './components/catalog-page/catalog-page.component';
 import { AboutComponent } from './components/about/about.component';
-import { from } from 'rxjs';
 import { AddCarModule } from './modules/add-car/add-car.module';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { AddCarModule } from './modules/add-car/add-car.module';
     NavbarComponent,
     DropdownNavigationComponent,
     DetailsPageComponent,
-    CatalogPageComponent,
     AboutComponent
   ],
   imports: [
@@ -30,7 +28,8 @@ import { AddCarModule } from './modules/add-car/add-car.module';
     HttpClientModule,
     AddCarModule,
     FormsModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    PictureCatalogModule
   ],
   providers: [
     ApiService

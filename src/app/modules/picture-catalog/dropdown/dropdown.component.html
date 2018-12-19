@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col d-flex justify-content-between">
+    <div class="select">
+      <label for="markName">Марка</label>
+      <!-- Передача ID выбранной марки в компонент -->
+      <select id="markName" (change)="passCarId($event)" class="form-control">
+        <option></option>
+        <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
+      </select>
+    </div>
+    <div class="select">
+      <label for="modelName">Модель</label>
+      <!-- Передача ID выбранной модели в компонент -->
+      <select id="modelName" (change)="passModelId($event)" class="form-control">
+        <option></option>
+        <option *ngFor="let model of modelName" [value]="model._id">{{model.modelsName}}</option>
+      </select>
+    </div>
+    <div class="select">
+      <label for="modificationName">Модификация</label>
+      <!-- Передача ID выбранной модификации в компонент -->
+      <select id="modificationName" (change)="passModificationId($event)" class="form-control">
+        <option></option>
+        <option *ngFor="let modification of modifications" [value]="modification._id">{{modification.modificationName}}</option>
+      </select>
+    </div>
+    <div class="select">
+      <label for="detailGroup">Название агрегата</label>
+      <!-- Передача ID выбранного агрегата в компонент -->
+      <select id="detailGroup" (change)="passUnitId($event)" class="form-control">
+        <option></option>
+        <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
+      </select>
+    </div>
+    <div class="select">
+      <label for="detailName">Название детали</label>
+      <!-- Передача ID выбранной детали в компонент -->
+      <select id="detailName" (change)="passDetailId($event)" class="form-control">
+        <option></option>
+        <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
+      </select>
+    </div>
+  </div>
+</div>
