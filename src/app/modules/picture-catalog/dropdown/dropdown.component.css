@@ -1,3 +1,18 @@
 .select {
-    width: 200px;
+    width: 235px;
+}
+
+.img-nav {
+    width: 100%;
+    cursor: pointer;
+}
+
+.img-link {
+    display: block;
+    margin-top: 20px;
+}
+
+.img-name {
+    text-align: center;
+    display: block;
 }

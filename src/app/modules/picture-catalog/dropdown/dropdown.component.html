@@ -32,13 +32,14 @@
         <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
       </select>
     </div>
-    <div class="select">
-      <label for="detailName">Название детали</label>
-      <!-- Передача ID выбранной детали в компонент -->
-      <select id="detailName" (change)="passDetailId($event)" class="form-control">
-        <option></option>
-        <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
-      </select>
-    </div>
+
+  </div>
+</div>
+<div class="row" *ngIf="passedId">
+  <div class="col-lg-3" *ngFor="let item of items">
+    <a class="img-link" (click)="passDetailId(item._id)">
+      <img src="{{item.detailImage}}" class="img-nav">
+      <p class="img-name">{{item.detailName}}</p>
+    </a>
   </div>
 </div>
