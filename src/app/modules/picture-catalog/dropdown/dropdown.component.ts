@@ -22,8 +22,8 @@ export class DropdownComponent implements OnInit {
   public detailId: String;
   public itemId: String;
   public passedId = false;
-  // Выходные данные из компонента (Массив составляющих детали)
-  // @Output() showCar = new EventEmitter<ImgDetail[]>();
+  // Выходные данные из компонента (Массив данных выбранного раздела)
+  @Output() showCar = new EventEmitter<ImgDetail[]>();
   ngOnInit() {
     // Получение списка машин при загрузке страницы
     this.getCars();
@@ -64,7 +64,7 @@ export class DropdownComponent implements OnInit {
       });
   }
 
-  // Получение Id агрегата. Получение списка деталей со схемми. Отправка данных их компонента
+  // Получение Id агрегата. Получение списка деталей со схемами. Отправка данных их компонента
   public passUnitId(event) {
     this.detailId = event.target.value;
     this.apiImageCatalog.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
@@ -73,11 +73,14 @@ export class DropdownComponent implements OnInit {
         console.log(this.items);
       });
       this.passedId = true;
-      console.log(this.items);
   }
 
   public passDetailId(itemId) {
     this.itemId = itemId;
-    console.log(this.itemId);
+    this.apiImageCatalog.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
+      .subscribe(data => {
+        this.items = data;
+        this.showCar.emit(this.items);
+      });
   }
 }
