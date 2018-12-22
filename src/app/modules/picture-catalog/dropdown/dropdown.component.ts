@@ -1,6 +1,7 @@
 import { ApiImgCatalogService } from './../../../services/api-img-catalog.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImgDetail } from 'src/app/models/img-detail';
+import { ImgItems } from 'src/app/models/img-items';
 
 @Component({
   selector: 'app-dropdown',
@@ -22,8 +23,10 @@ export class DropdownComponent implements OnInit {
   public detailId: String;
   public itemId: String;
   public passedId = false;
+  // Выходные данные из компонента (Массив выбранных разделов)
+  @Output() showDetails = new EventEmitter<ImgDetail[]>();
   // Выходные данные из компонента (Массив данных выбранного раздела)
-  @Output() showCar = new EventEmitter<ImgDetail[]>();
+  @Output() showItems = new EventEmitter<ImgItems[]>();
   ngOnInit() {
     // Получение списка машин при загрузке страницы
     this.getCars();
@@ -64,13 +67,13 @@ export class DropdownComponent implements OnInit {
       });
   }
 
-  // Получение Id агрегата. Получение списка деталей со схемами. Отправка данных их компонента
+  // Получение Id агрегата. Получение списка деталей со схемами. Отправка данных из компонента
   public passUnitId(event) {
     this.detailId = event.target.value;
     this.apiImageCatalog.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
-        this.items = data;
-        console.log(this.items);
+        this.details = data;
+        this.showDetails.emit(this.details);
       });
       this.passedId = true;
   }
@@ -80,7 +83,7 @@ export class DropdownComponent implements OnInit {
     this.apiImageCatalog.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe(data => {
         this.items = data;
-        this.showCar.emit(this.items);
+        this.showItems.emit(this.items);
       });
   }
 }

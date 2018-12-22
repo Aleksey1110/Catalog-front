@@ -1,8 +1,7 @@
+import { ImgDetailItems } from './img-detailitems';
+
 export interface ImgItems {
-    itemNumber: Number;
-    itemName: String;
-    itemArticle: Array<String>;
-    itemNote: String;
     itemImage: String;
+    items: Array<ImgDetailItems>;
     _id: String;
 }

@@ -35,7 +35,7 @@
   </div>
 </div>
 <div class="row" *ngIf="passedId">
-  <div class="col-lg-3" *ngFor="let item of items">
+  <div class="col-lg-3" *ngFor="let item of details">
     <a class="img-link" (click)="passDetailId(item._id)">
       <img src="{{item.detailImage}}" class="img-nav">
       <p class="img-name">{{item.detailName}}</p>
