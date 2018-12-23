@@ -23,8 +23,6 @@ export class DropdownComponent implements OnInit {
   public detailId: String;
   public itemId: String;
   public passedId = false;
-  // Выходные данные из компонента (Массив выбранных разделов)
-  @Output() showDetails = new EventEmitter<ImgDetail[]>();
   // Выходные данные из компонента (Массив данных выбранного раздела)
   @Output() showItems = new EventEmitter<ImgItems[]>();
   ngOnInit() {
@@ -73,7 +71,6 @@ export class DropdownComponent implements OnInit {
     this.apiImageCatalog.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
-        this.showDetails.emit(this.details);
       });
       this.passedId = true;
   }

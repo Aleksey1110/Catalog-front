@@ -1,4 +1,4 @@
-<app-dropdown (showItems)="showItems($event)" (showDetails)="showDetails($event)"></app-dropdown>
+<app-dropdown (showItems)="showItems($event)"></app-dropdown>
 <div class="row">
     <div class="col-lg-6">
         <img src="{{itemImage}}">
@@ -14,11 +14,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="table-active" *ngFor="let item of items">
-                    <th scope="row">{{item.itemNumber}}</th>
-                    <td><p *ngFor="let article of itemArticle">{{article}}</p></td>
-                    <td>{{item.itemName}}</td>
-                    <td>{{item.itemNote}}</td>
+                <tr class="table-active" *ngFor="let detail of details">
+                    <th scope="row">{{detail.itemNumber}}</th>
+                    <td><p *ngFor="let article of detail.itemArticle">{{article}}</p></td>
+                    <td>{{detail.itemName}}</td>
+                    <td>{{detail.itemNote}}</td>
                 </tr>
                 <tr>
             </tbody>

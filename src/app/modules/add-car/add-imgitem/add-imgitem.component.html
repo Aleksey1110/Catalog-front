@@ -31,9 +31,17 @@
       <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
     </select>
   </div>
-  <div class="form-group">
-    <p>Внесите название детали автомобиля</p>
-    <input type="text" class="form-control" [(ngModel)]="detailName" name="detailName" required>
+  <div class="select">
+    <label for="detailName">Деталь</label>
+    <!-- Передача ID выбранной детали в компонент -->
+    <select id="detailName" (change)="passDetailId($event)" class="form-control">
+      <option></option>
+      <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
+    </select>
   </div>
-  <button class="btn btn-success" (click)="addDetail()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
+  <div class="form-group">
+    <p>Внесите ссылку на основную схему</p>
+    <input type="text" class="form-control" [(ngModel)]="itemImage" name="itemImage" required>
+  </div>
+  <button class="btn btn-success" (click)="addItems()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
 </form>

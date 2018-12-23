@@ -16,144 +16,145 @@ import { Modifications } from '../models/modifications';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
+  private _url = 'http://localhost:3000';
 
   // Получить список всех марок
   getCars(): Observable<Car[]> {
-    return this.http.get<Car[]>('http://localhost:3000/api');
+    return this.http.get<Car[]>(`${this._url}/api`);
   }
 
   // Получить список моделей
   getModelName(id1): Observable<Models[]> {
-    return this.http.get<Models[]>(`http://localhost:3000/api/${id1}`);
+    return this.http.get<Models[]>(`${this._url}/api/${id1}`);
   }
 
   // Получить список модификаций
   getModificationName(id1, id2): Observable<Modifications[]> {
-    return this.http.get<Modifications[]>(`http://localhost:3000/api/${id1}/${id2}`);
+    return this.http.get<Modifications[]>(`${this._url}/api/${id1}/${id2}`);
   }
 
   // Получить список агрегатов
   getPartsList(id1, id2, id3): Observable<Unit[]> {
-    return this.http.get<Unit[]>(`http://localhost:3000/api/${id1}/${id2}/${id3}`);
+    return this.http.get<Unit[]>(`${this._url}/api/${id1}/${id2}/${id3}`);
   }
 
   // Получить список деталей
   getDetailsItem(id1, id2, id3, id4): Observable<Detail[]> {
-    return this.http.get<Detail[]>(`http://localhost:3000/api/${id1}/${id2}/${id3}/${id4}`);
+    return this.http.get<Detail[]>(`${this._url}/api/${id1}/${id2}/${id3}/${id4}`);
   }
 
   // Получить составляющие выбранной детали
   getItem(id1, id2, id3, id4, id5): Observable<Items[]> {
-    return this.http.get<Items[]>(`http://localhost:3000/api/${id1}/${id2}/${id3}/${id4}/${id5}`);
+    return this.http.get<Items[]>(`${this._url}/api/${id1}/${id2}/${id3}/${id4}/${id5}`);
   }
 
   // Получить аналоги выбранной детали
   getAnalogue(id1, id2, id3, id4, id5, id6): Observable<AnalogueNumber[]> {
-    return this.http.get<AnalogueNumber[]>(`http://localhost:3000/api/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`);
+    return this.http.get<AnalogueNumber[]>(`${this._url}/api/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`);
   }
 
   // Добавить марку авто
   createCar(mark): Observable<Car> {
-    return this.http.post<Car>('http://localhost:3000/add/addCar', mark);
+    return this.http.post<Car>(`${this._url}/add/addCar`, mark);
   }
 
   // Добавить модель авто
   createModel(id1, model): Observable<Models> {
-    return this.http.post<Models>(`http://localhost:3000/add/addCar/${id1}`, model);
+    return this.http.post<Models>(`${this._url}/add/addCar/${id1}`, model);
   }
 
   // Добавить модификацию авто
   createModification(id1, id2, modification): Observable<Modifications> {
-    return this.http.post<Modifications>(`http://localhost:3000/add/addCar/${id1}/${id2}`, modification);
+    return this.http.post<Modifications>(`${this._url}/add/addCar/${id1}/${id2}`, modification);
   }
 
   // Добавить модификацию авто
   createUnit(id1, id2, id3, unit): Observable<Unit> {
-    return this.http.post<Unit>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}`, unit);
+    return this.http.post<Unit>(`${this._url}/add/addCar/${id1}/${id2}/${id3}`, unit);
   }
 
   // Добавить деталь
   createDetail(id1, id2, id3, id4, detail): Observable<Unit> {
-    return this.http.post<Unit>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}/${id4}`, detail);
+    return this.http.post<Unit>(`${this._url}/add/addCar/${id1}/${id2}/${id3}/${id4}`, detail);
   }
 
   // Добавить составляющие детали
   createDetailItem(id1, id2, id3, id4, id5, item): Observable<Items> {
-    return this.http.post<Items>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}/${id4}/${id5}`, item);
+    return this.http.post<Items>(`${this._url}/add/addCar/${id1}/${id2}/${id3}/${id4}/${id5}`, item);
   }
 
   // Добавить аналог
   createAnalogue(id1, id2, id3, id4, id5, id6, analogue): Observable<AnalogueNumber> {
-    return this.http.post<AnalogueNumber>(`http://localhost:3000/add/addCar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, analogue);
+    return this.http.post<AnalogueNumber>(`${this._url}/add/addCar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, analogue);
   }
 
   // Редактировать название марки авто
   editMark(id1, mark): Observable<Car> {
-    return this.http.put<Car>(`http://localhost:3000/edit/editcar/${id1}`, mark);
+    return this.http.put<Car>(`${this._url}/edit/editcar/${id1}`, mark);
   }
 
   // Редактировать название модели авто
   editModel(id1, id2, model): Observable<Models> {
-    return this.http.put<Models>(`http://localhost:3000/edit/editcar/${id1}/${id2}`, model);
+    return this.http.put<Models>(`${this._url}/edit/editcar/${id1}/${id2}`, model);
   }
 
   // Редактировать название модификации авто
   editModification(id1, id2, id3, modification): Observable<Modifications> {
-    return this.http.put<Modifications>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}`, modification);
+    return this.http.put<Modifications>(`${this._url}/edit/editcar/${id1}/${id2}/${id3}`, modification);
   }
 
   // Редактировать название агрегата авто
   editUnit(id1, id2, id3, id4, unit): Observable<Unit> {
-    return this.http.put<Unit>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}/${id4}`, unit);
+    return this.http.put<Unit>(`${this._url}/edit/editcar/${id1}/${id2}/${id3}/${id4}`, unit);
   }
 
   // Редактировать название детали
   editDetail(id1, id2, id3, id4, id5, detail): Observable<Detail> {
-    return this.http.put<Detail>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}`, detail);
+    return this.http.put<Detail>(`${this._url}/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}`, detail);
   }
 
   // Редактировать составляющие детали
   editDetailItems(id1, id2, id3, id4, id5, id6, item): Observable<Detail> {
-    return this.http.put<Detail>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, item);
+    return this.http.put<Detail>(`${this._url}/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, item);
   }
 
   // Редактировать аналог детали
   editAnalogue(id1, id2, id3, id4, id5, id6, id7, analogue): Observable<Detail> {
-    return this.http.put<Detail>(`http://localhost:3000/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`, analogue);
+    return this.http.put<Detail>(`${this._url}/edit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`, analogue);
   }
 
   // Удалить марку
   removeMark(id1): Observable<Car> {
-    return this.http.delete<Car>(`http://localhost:3000/remove/removecar/${id1}`);
+    return this.http.delete<Car>(`${this._url}/remove/removecar/${id1}`);
   }
 
   // Удалить модель
   removeModel(id1, id2): Observable<Models> {
-    return this.http.delete<Models>(`http://localhost:3000/remove/removecar/${id1}/${id2}`);
+    return this.http.delete<Models>(`${this._url}/remove/removecar/${id1}/${id2}`);
   }
 
   // Удалить модификацию
   removeModification(id1, id2, id3): Observable<Modifications> {
-    return this.http.delete<Modifications>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}`);
+    return this.http.delete<Modifications>(`${this._url}/remove/removecar/${id1}/${id2}/${id3}`);
   }
 
   // Удалить агрегат
   removeUnit(id1, id2, id3, id4): Observable<Unit> {
-    return this.http.delete<Unit>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}/${id4}`);
+    return this.http.delete<Unit>(`${this._url}/remove/removecar/${id1}/${id2}/${id3}/${id4}`);
   }
 
   // Удалить деталь
   removeDetail(id1, id2, id3, id4, id5): Observable<Detail> {
-    return this.http.delete<Detail>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}`);
+    return this.http.delete<Detail>(`${this._url}/remove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}`);
   }
 
   // Удалить данные детали
   removeItem(id1, id2, id3, id4, id5, id6): Observable<Items> {
-    return this.http.delete<Items>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`);
+    return this.http.delete<Items>(`${this._url}/remove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`);
   }
 
   // Удалить аналог
   removeAnalogue(id1, id2, id3, id4, id5, id6, id7): Observable<AnalogueNumber> {
-    return this.http.delete<AnalogueNumber>(`http://localhost:3000/remove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`);
+    return this.http.delete<AnalogueNumber>(`${this._url}/remove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`);
   }
 }

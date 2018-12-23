@@ -1,0 +1,33 @@
+<flash-messages></flash-messages>
+<div class="row">
+  <!-- Колонка с роутами для добавления данных -->
+  <div class="col-lg-4">
+    <ul class="nav nav-pills flex-column">
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/editing/addimgmain/mark']">добавить марку</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/editing/addimgmain/model']">Добавить модель</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/editing/addimgmain/modification']">Добавить модификацию</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/editing/addimgmain/unit']">Добавить агрегат</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/editing/addimgmain/detail']">Добавить список разделов</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/editing/addimgmain/item']">Добавить раздел</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/editing/addimgmain/itemdetail']">Добавить составляющие раздела</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-lg-8">
+    <!-- Страницы добавления данных -->
+    <router-outlet></router-outlet>
+  </div>
+</div>

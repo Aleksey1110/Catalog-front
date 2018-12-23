@@ -23,7 +23,7 @@ export class AddCarComponent implements OnInit {
       markName: this.markName
     };
     this.apiService.createCar(car)
-      .subscribe(data => console.log(data));
+      .subscribe();
     this.markName = '';
     this._flashMessagesService.show('Марка машины успешно добавлена', {cssClass: 'alert-success', timeout: 4000});
   }

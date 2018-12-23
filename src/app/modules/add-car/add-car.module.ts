@@ -22,6 +22,22 @@ import { EditUnitComponent } from './edit-unit/edit-unit.component';
 import { EditDetailComponent } from './edit-detail/edit-detail.component';
 import { EditDetailItemComponent } from './edit-detail-item/edit-detail-item.component';
 import { EditDetailAnalogueComponent } from './edit-detail-analogue/edit-detail-analogue.component';
+import { AddImgmainComponent } from './add-imgmain/add-imgmain.component';
+import { AddImgmodelComponent } from './add-imgmodel/add-imgmodel.component';
+import { AddImgmarkComponent } from './add-imgmark/add-imgmark.component';
+import { AddImgmodificationComponent } from './add-imgmodification/add-imgmodification.component';
+import { AddImgunitComponent } from './add-imgunit/add-imgunit.component';
+import { AddImgdetailComponent } from './add-imgdetail/add-imgdetail.component';
+import { AddImgitemComponent } from './add-imgitem/add-imgitem.component';
+import { AddImgitemdetailComponent } from './add-imgitemdetail/add-imgitemdetail.component';
+import { EditImgmainComponent } from './edit-imgmain/edit-imgmain.component';
+import { EditImgmarkComponent } from './edit-imgmark/edit-imgmark.component';
+import { EditImgmodelComponent } from './edit-imgmodel/edit-imgmodel.component';
+import { EditImgmodificationComponent } from './edit-imgmodification/edit-imgmodification.component';
+import { EditImgunitComponent } from './edit-imgunit/edit-imgunit.component';
+import { EditImgdetailComponent } from './edit-imgdetail/edit-imgdetail.component';
+import { EditImgitemComponent } from './edit-imgitem/edit-imgitem.component';
+import { EditImgitemdetailComponent } from './edit-imgitemdetail/edit-imgitemdetail.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +57,23 @@ import { EditDetailAnalogueComponent } from './edit-detail-analogue/edit-detail-
     EditUnitComponent,
     EditDetailComponent,
     EditDetailItemComponent,
-    EditDetailAnalogueComponent
+    EditDetailAnalogueComponent,
+    AddImgmainComponent,
+    AddImgmodelComponent,
+    AddImgmarkComponent,
+    AddImgmodificationComponent,
+    AddImgunitComponent,
+    AddImgdetailComponent,
+    AddImgitemComponent,
+    AddImgitemdetailComponent,
+    EditImgmainComponent,
+    EditImgmarkComponent,
+    EditImgmodelComponent,
+    EditImgmodificationComponent,
+    EditImgunitComponent,
+    EditImgdetailComponent,
+    EditImgitemComponent,
+    EditImgitemdetailComponent
   ],
   imports: [
     CommonModule,

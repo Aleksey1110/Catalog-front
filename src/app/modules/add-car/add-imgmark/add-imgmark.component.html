@@ -1,0 +1,7 @@
+<form #form="ngForm">
+  <div class="form-group">
+    <p>Внесите название марки автомобиля</p>
+    <input type="text" class="form-control" [(ngModel)]="markName" name="markName" required>
+  </div>
+  <button class="btn btn-success" (click)="addCar()" [disabled]="!form.valid">Добавить</button>
+</form>

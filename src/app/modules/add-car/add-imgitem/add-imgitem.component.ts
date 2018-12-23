@@ -1,13 +1,13 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { ApiService } from './../../../services/api.service';
+import { ApiImgCatalogService } from './../../../services/api-img-catalog.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-add-detail-item',
-  templateUrl: './add-detail-item.component.html',
-  styleUrls: ['./add-detail-item.component.css']
+  selector: 'app-add-imgitem',
+  templateUrl: './add-imgitem.component.html',
+  styleUrls: ['./add-imgitem.component.css']
 })
-export class AddDetailItemComponent implements OnInit {
+export class AddImgitemComponent implements OnInit {
   public markName = [];
   public modelName = [];
   public modifications = [];
@@ -22,8 +22,9 @@ export class AddDetailItemComponent implements OnInit {
   public unitId: String;
   public detailId: String;
   public itemId: String;
+  public itemImage: String;
   constructor(
-    private apiService: ApiService,
+    private _apiImgCatalogService: ApiImgCatalogService,
     private _flashMessagesService: FlashMessagesService
   ) { }
 
@@ -34,7 +35,7 @@ export class AddDetailItemComponent implements OnInit {
 
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiImgCatalogService.getCars()
       .subscribe(data => {
         this.markName = data;
       });
@@ -43,7 +44,7 @@ export class AddDetailItemComponent implements OnInit {
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
+    this._apiImgCatalogService.getModel(this.carId)
       .subscribe(data => {
         this.modelName = data;
       });
@@ -52,7 +53,7 @@ export class AddDetailItemComponent implements OnInit {
   // Получение Id выбранной модели. Получение списка модификаций
   public passModelId(event): void {
     this.modelId = event.target.value;
-    this.apiService.getModificationName(this.carId, this.modelId)
+    this._apiImgCatalogService.getModification(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
       });
@@ -61,7 +62,7 @@ export class AddDetailItemComponent implements OnInit {
   // Получение Id выбранной модификации. Получение списка агрегатов
   public passModificationId(event): void {
     this.unitId = event.target.value;
-    this.apiService.getPartsList(this.carId, this.modelId, this.unitId)
+    this._apiImgCatalogService.getUnit(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
       });
@@ -70,7 +71,7 @@ export class AddDetailItemComponent implements OnInit {
   // Получение Id выбранного агрегата. Получение списка деталей
   public passUnitId(event) {
     this.detailId = event.target.value;
-    this.apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
+    this._apiImgCatalogService.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
       });
@@ -79,7 +80,7 @@ export class AddDetailItemComponent implements OnInit {
   // Получение Id детали. Получение списка составляющих детали.
   public passDetailId(event) {
     this.itemId = event.target.value;
-    this.apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
+    this._apiImgCatalogService.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe();
   }
 
@@ -87,17 +88,13 @@ export class AddDetailItemComponent implements OnInit {
   //  отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
   public addItems() {
     const item = {
-      originalNumber: this.originalNumber,
-      note: this.note,
-      picture: this.picture
+      itemImage: this.itemImage
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
-      this.apiService.createDetailItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, item)
+      this._apiImgCatalogService.createDetailItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, item)
         .subscribe();
-      this.originalNumber = [];
-      this.note = '';
-      this.picture = '';
-      this._flashMessagesService.show('Данные детали успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
+      this.itemImage = '';
+      this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       // tslint:disable-next-line:max-line-length
       this._flashMessagesService.show('Выберите марку, модель, модификацию, агрегат и название детали автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

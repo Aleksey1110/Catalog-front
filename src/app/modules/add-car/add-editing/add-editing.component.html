@@ -1,9 +1,15 @@
 <ul class="nav nav-pills">
   <li class="nav-item" [routerLinkActive]="['active']">
-    <a class="nav-link" [routerLink]="['/editing/addmain']">Страница добавления данных</a>
+    <a class="nav-link" [routerLink]="['/editing/addmain']">Добавление данных (Home)</a>
   </li>
   <li class="nav-item" [routerLinkActive]="['active']">
-    <a class="nav-link" [routerLink]="['/editing/editmain']">Страница редактирования данных</a>
+    <a class="nav-link" [routerLink]="['/editing/editmain']">Редактирование данных (Home)</a>
+  </li>
+  <li class="nav-item" [routerLinkActive]="['active']">
+    <a class="nav-link" [routerLink]="['/editing/addimgmain']">Добавление данных (Catalogs)</a>
+  </li>
+  <li class="nav-item" [routerLinkActive]="['active']">
+    <a class="nav-link" [routerLink]="['/editing/editimgmain']">Редактирование данных (Catalogs)</a>
   </li>
 </ul>
 <router-outlet></router-outlet>

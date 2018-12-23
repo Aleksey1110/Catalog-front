@@ -1,0 +1,16 @@
+<form #form="ngForm">
+  <div class="select">
+    <label for="markName">Марка</label>
+    <!-- Передача ID выбранной марки в компонент -->
+    <select id="markName" (change)="passCarId($event)" class="form-control" required>
+      <option></option>
+      <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <p>Внесите название модели автомобиля</p>
+    <input type="text" class="form-control" [(ngModel)]="modelsName" name="modelsName" required>
+  </div>
+  <button class="btn btn-success" (click)="addModel()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
+  </form>
+  

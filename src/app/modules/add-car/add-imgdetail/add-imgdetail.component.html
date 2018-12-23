@@ -32,7 +32,11 @@
     </select>
   </div>
   <div class="form-group">
-    <p>Внесите название детали автомобиля</p>
+    <p>Внесите ссылку на схему</p>
+    <input type="text" class="form-control" [(ngModel)]="detailImage" name="detailImage" required>
+  </div>
+  <div class="form-group">
+    <p>Внесите название схемы</p>
     <input type="text" class="form-control" [(ngModel)]="detailName" name="detailName" required>
   </div>
   <button class="btn btn-success" (click)="addDetail()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
