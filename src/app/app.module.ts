@@ -13,6 +13,7 @@ import { DropdownNavigationComponent } from './components/dropdown-navigation/dr
 import { DetailsPageComponent } from './components/details-page/details-page.component';
 import { AboutComponent } from './components/about/about.component';
 import { AddCarModule } from './modules/add-car/add-car.module';
+import { TestService } from './services/test.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AddCarModule } from './modules/add-car/add-car.module';
     PictureCatalogModule
   ],
   providers: [
-    ApiService
+    ApiService,
+    TestService
   ],
   bootstrap: [AppComponent]
 })

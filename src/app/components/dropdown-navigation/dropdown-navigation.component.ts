@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Items } from 'src/app/models/items';
+import { TestService } from 'src/app/services/test.service';
 
 @Component({
   selector: 'app-dropdown-navigation',
@@ -9,7 +10,7 @@ import { Items } from 'src/app/models/items';
 })
 export class DropdownNavigationComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  constructor(private _apiService: ApiService, private _testServise: TestService) { }
 
   public markName = [];
   public modelName = [];
@@ -31,18 +32,25 @@ export class DropdownNavigationComponent implements OnInit {
     this.getCars();
   }
 
+  // // Получение списка машин
+  // public getCars(): void {
+  //   this._apiService.getCars()
+  //     .subscribe(data => {
+  //       this.markName = data;
+  //     });
+  // }
+
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
-      .subscribe(data => {
-        this.markName = data;
-      });
+    this._testServise.test(this.markName);
+    console.log(this.markName);
   }
+
 
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
+    this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
       });
@@ -51,7 +59,7 @@ export class DropdownNavigationComponent implements OnInit {
   // Получение Id выбранной модели. Получение списка модификаций
   public passModelId(event): void {
     this.modelId = event.target.value;
-    this.apiService.getModificationName(this.carId, this.modelId)
+    this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
       });
@@ -60,7 +68,7 @@ export class DropdownNavigationComponent implements OnInit {
   // Получение Id выбранной модификации. Получение списка агрегатов
   public passModificationId(event): void {
     this.unitId = event.target.value;
-    this.apiService.getPartsList(this.carId, this.modelId, this.unitId)
+    this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
       });
@@ -69,7 +77,7 @@ export class DropdownNavigationComponent implements OnInit {
   // Получение Id выбранного агрегата. Получение списка деталей
   public passUnitId(event) {
     this.detailId = event.target.value;
-    this.apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
+    this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
       });
@@ -78,7 +86,7 @@ export class DropdownNavigationComponent implements OnInit {
   // Получение Id детали. Получение списка составляющих детали. Отправка данных их компонента
   public passDetailId(event) {
     this.itemId = event.target.value;
-    this.apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
+    this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe(data => {
         this.items = data;
         this.showCar.emit(this.items);
