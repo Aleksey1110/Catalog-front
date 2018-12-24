@@ -1,4 +1,3 @@
-import { Car } from './../../../models/car';
 import { ApiService } from 'src/app/services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -9,11 +8,13 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./add-car.component.css']
 })
 export class AddCarComponent implements OnInit {
+
   public markName: String;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
-  ) {  }
+  ) { }
 
   ngOnInit() {
   }
@@ -22,9 +23,9 @@ export class AddCarComponent implements OnInit {
     const car = {
       markName: this.markName
     };
-    this.apiService.createCar(car)
+    this._apiService.createCar(car)
       .subscribe();
     this.markName = '';
-    this._flashMessagesService.show('Марка машины успешно добавлена', {cssClass: 'alert-success', timeout: 4000});
+    this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
   }
 }

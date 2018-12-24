@@ -8,17 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-detail-analogue.component.css']
 })
 export class EditDetailAnalogueComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public modifications = [];
   public units = [];
   public details = [];
-  public items = [];
-  public originalNumber = [];
   public analogues = [];
   public ans = [];
-  public note: String;
-  public picture: String;
   public carId: String;
   public modelId: String;
   public unitId: String;
@@ -29,8 +26,9 @@ export class EditDetailAnalogueComponent implements OnInit {
   public analogueNum: String;
   public anId: String;
   public isConfirmed = false;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
   ) { }
 
@@ -41,7 +39,7 @@ export class EditDetailAnalogueComponent implements OnInit {
 
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
       });
@@ -50,7 +48,7 @@ export class EditDetailAnalogueComponent implements OnInit {
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
+    this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
       });
@@ -59,7 +57,7 @@ export class EditDetailAnalogueComponent implements OnInit {
   // Получение Id выбранной модели. Получение списка модификаций
   public passModelId(event): void {
     this.modelId = event.target.value;
-    this.apiService.getModificationName(this.carId, this.modelId)
+    this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
       });
@@ -68,7 +66,7 @@ export class EditDetailAnalogueComponent implements OnInit {
   // Получение Id выбранной модификации. Получение списка агрегатов
   public passModificationId(event): void {
     this.unitId = event.target.value;
-    this.apiService.getPartsList(this.carId, this.modelId, this.unitId)
+    this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
       });
@@ -77,7 +75,7 @@ export class EditDetailAnalogueComponent implements OnInit {
   // Получение Id выбранного агрегата. Получение списка деталей
   public passUnitId(event) {
     this.detailId = event.target.value;
-    this.apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
+    this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
       });
@@ -86,7 +84,7 @@ export class EditDetailAnalogueComponent implements OnInit {
   // Получение Id детали. Получение списка составляющих детали.
   public passDetailId(event) {
     this.itemId = event.target.value;
-    this.apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
+    this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe(data => {
         this.analogues = data;
       });
@@ -95,7 +93,7 @@ export class EditDetailAnalogueComponent implements OnInit {
   // Получение Id оригинального номера. Получение списка составляющих аналогов.
   public passOriginalId(event) {
     this.originalId = event.target.value;
-    this.apiService.getAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId)
+    this._apiService.getAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId)
       .subscribe(data => {
         this.ans = data;
       });
@@ -116,21 +114,20 @@ export class EditDetailAnalogueComponent implements OnInit {
       analogueNum: this.analogueNum
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId && this.anId) {
-      this.apiService.editAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId, analogue)
+      this._apiService.editAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId, analogue)
         .subscribe();
       this.analogueName = '';
       this.analogueNum = '';
       this._flashMessagesService.show('Аналог успешно изменен', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      // tslint:disable-next-line:max-line-length
-      this._flashMessagesService.show('Выберите все данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 
   // Удаление аналога
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId && this.anId) {
-      this.apiService.removeAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId)
+      this._apiService.removeAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId)
         .subscribe();
       this._flashMessagesService.show('Аналог успешно удален', { cssClass: 'alert-success', timeout: 4000 });
     } else {

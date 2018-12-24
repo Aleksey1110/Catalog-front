@@ -1,13 +1,13 @@
-import { PictureCatalogModule } from './modules/picture-catalog/picture-catalog.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './services/api.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { ApiService } from './services/api.service';
+import { PictureCatalogModule } from './modules/picture-catalog/picture-catalog.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DropdownNavigationComponent } from './components/dropdown-navigation/dropdown-navigation.component';
 import { DetailsPageComponent } from './components/details-page/details-page.component';

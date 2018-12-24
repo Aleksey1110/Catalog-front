@@ -8,16 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-imgmodification.component.css']
 })
 export class AddImgmodificationComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public carId: String;
   public modelId: String;
   public modificationlName: String;
   public isConfirmed = false;
+
   constructor(
     private _apiImgCatalogService: ApiImgCatalogService,
     private _flashMessagesService: FlashMessagesService
-    ) { }
+  ) { }
 
   ngOnInit() {
     // Получение списка машин при загрузке страницы
@@ -46,8 +48,8 @@ export class AddImgmodificationComponent implements OnInit {
     this.isConfirmed = true;
   }
 
-    // Создать новый объект модификации, передать название модификации,
-    //  отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
+  // Создать новый объект модификации, передать название модификации,
+  //  отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
   public addModification() {
     const model = {
       modificationName: this.modificationlName
@@ -58,7 +60,7 @@ export class AddImgmodificationComponent implements OnInit {
       this.modificationlName = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите марку и модель автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 }

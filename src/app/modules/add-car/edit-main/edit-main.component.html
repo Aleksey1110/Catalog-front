@@ -1,33 +1,33 @@
 <flash-messages></flash-messages>
 <div class="row">
-  <!-- Колонка с роутами для редактирования данных -->
-  <div class="col-lg-4">
-    <ul class="nav nav-pills flex-column">
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/editing/editmain/mark']">Редактировать марку</a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/editing/editmain/model']">Редактировать модель</a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/editing/editmain/modification']">Редактировать модификацию</a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/editing/editmain/unit']">Редактировать агрегат</a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/editing/editmain/detail']">Редактировать деталь</a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/editing/editmain/item']">Редактировать составляющие детали</a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/editing/editmain/analogue']">Редактировать аналог</a>
-      </li>
-    </ul>
-  </div>
-  <div class="col-lg-8">
-    <!-- Страницы редактирования данных -->
-    <router-outlet></router-outlet>
-  </div>
+    <!-- Колонка с роутами для редактирования данных -->
+    <div class="col-lg-4">
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/editing/editmain/mark']">Редактировать марку</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/editing/editmain/model']">Редактировать модель</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/editing/editmain/modification']">Редактировать модификацию</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/editing/editmain/unit']">Редактировать агрегат</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/editing/editmain/detail']">Редактировать деталь</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/editing/editmain/item']">Редактировать составляющие детали</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/editing/editmain/analogue']">Редактировать аналог</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-lg-8">
+        <!-- Страницы редактирования данных -->
+        <router-outlet></router-outlet>
+    </div>
 </div>

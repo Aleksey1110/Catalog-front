@@ -47,6 +47,7 @@
       <option *ngFor="let analogue of analogues" [value]="analogue._id">{{analogue.originalNumber}}</option>
     </select>
   </div>
+  <!-- Блок добавления данных -->
   <div class="form-group">
     <p>Внесите данные аналога</p>
     <input type="text" class="form-control" [(ngModel)]="analogueName" name="analogueName" required placeholder="Внесите название аналога">

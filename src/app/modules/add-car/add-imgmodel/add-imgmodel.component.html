@@ -7,10 +7,10 @@
       <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
     </select>
   </div>
+  <!-- Блок добавления данных -->
   <div class="form-group">
     <p>Внесите название модели автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="modelsName" name="modelsName" required>
   </div>
   <button class="btn btn-success" (click)="addModel()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
-  </form>
-  
+</form>

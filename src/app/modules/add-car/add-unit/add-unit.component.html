@@ -23,6 +23,7 @@
       <option *ngFor="let modification of modifications" [value]="modification._id">{{modification.modificationName}}</option>
     </select>
   </div>
+  <!-- Блок внесения данных -->
   <div class="form-group">
     <p>Внесите название агрегата автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="unitName" name="unitlName" required>

@@ -39,11 +39,12 @@
       <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
     </select>
   </div>
+  <!-- Блок внесения данных -->
   <div class="form-group">
-    <p>Внесите данные для детали автомобиля</p>
+    <p>Внесите данные</p>
     <input type="text" class="form-control" [(ngModel)]="originalNumber" name="originalNumber" required placeholder="Внесите оригинальные номера через запятую">
     <textarea type="text" class="form-control" [(ngModel)]="note" name="note" required placeholder="Добавьте примечание"></textarea>
-    <input type="text" class="form-control" [(ngModel)]="picture" name="picture" required>
+    <input type="text" class="form-control" [(ngModel)]="picture" name="picture" required placeholder="Внесите ссылку на изображение">
   </div>
   <button class="btn btn-success" (click)="addItems()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
 </form>

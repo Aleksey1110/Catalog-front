@@ -1,3 +1,17 @@
-<p>
-  edit-imgmark works!
-</p>
+<form #form="ngForm">
+  <div class="select">
+    <label for="markName">Марка</label>
+    <!-- Передача ID выбранной марки в компонент -->
+    <select id="markName" (change)="passCarId($event)" class="form-control" required>
+      <option></option>
+      <option *ngFor="let carItem of marksName" [value]="carItem._id">{{carItem.markName}}</option>
+    </select>
+  </div>
+  <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
+  <!-- Блок внесения данных -->
+  <div class="form-group">
+    <p>Внесите новое название модели автомобиля</p>
+    <input type="text" class="form-control" [(ngModel)]="markName" name="markName" required>
+  </div>
+  <button class="btn btn-warning" (click)="editMark()" [disabled]="!isConfirmed && form.invalid">Редактировать</button>
+</form>

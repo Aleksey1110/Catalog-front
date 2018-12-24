@@ -31,6 +31,7 @@
       <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
     </select>
   </div>
+  <!-- Блок добавления данных -->
   <div class="form-group">
     <p>Внесите название детали автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="detailName" name="detailName" required>

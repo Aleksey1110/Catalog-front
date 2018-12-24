@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Items } from 'src/app/models/items';
 
@@ -10,11 +9,11 @@ import { Items } from 'src/app/models/items';
 export class DetailsPageComponent implements OnInit {
 
   public items = [];
-  public item = {};
   public originalNumber = [];
   public analogueNumber = [];
   public note: String;
   public picture: String;
+  public isPassedId = false;
 
   constructor() { }
 
@@ -24,6 +23,7 @@ export class DetailsPageComponent implements OnInit {
 
   // Получение данных из компонента dropdown-navigation. Присвоение значений
   showCar(items: Items[]) {
+    this.isPassedId = true;
     this.items = items;
     this.items.forEach(elem => {
       this.originalNumber = elem.originalNumber;

@@ -24,6 +24,7 @@
     </select>
   </div>
   <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
+  <!-- Блок добавления данных -->
   <div class="form-group">
     <p>Внесите новое название модификации автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="modificationName" name="modificationName" required>

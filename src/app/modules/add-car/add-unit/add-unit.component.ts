@@ -8,6 +8,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./add-unit.component.css']
 })
 export class AddUnitComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public modifications = [];
@@ -16,8 +17,9 @@ export class AddUnitComponent implements OnInit {
   public unitId: String;
   public unitName: String;
   public isConfirmed = false;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
   ) { }
 
@@ -28,7 +30,7 @@ export class AddUnitComponent implements OnInit {
 
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
       });
@@ -37,7 +39,7 @@ export class AddUnitComponent implements OnInit {
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
+    this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
       });
@@ -46,7 +48,7 @@ export class AddUnitComponent implements OnInit {
   // Получение Id выбранной модели. Получение списка модификаций
   public passModelId(event): void {
     this.modelId = event.target.value;
-    this.apiService.getModificationName(this.carId, this.modelId)
+    this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
       });
@@ -65,12 +67,12 @@ export class AddUnitComponent implements OnInit {
       unitName: this.unitName
     };
     if (this.carId && this.modelId && this.unitId) {
-      this.apiService.createUnit(this.carId, this.modelId, this.unitId, unit)
+      this._apiService.createUnit(this.carId, this.modelId, this.unitId, unit)
         .subscribe();
       this.unitName = '';
       this._flashMessagesService.show('Агрегат успешно добавлен', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите марку, модель и модификацию автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 }

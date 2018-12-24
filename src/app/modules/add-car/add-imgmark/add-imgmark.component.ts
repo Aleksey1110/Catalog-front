@@ -8,7 +8,9 @@ import { ApiImgCatalogService } from 'src/app/services/api-img-catalog.service';
   styleUrls: ['./add-imgmark.component.css']
 })
 export class AddImgmarkComponent implements OnInit {
+
   private markName: String;
+
   constructor(
     private _apiImgCatalogServise: ApiImgCatalogService,
     private _flashMessagesService: FlashMessagesService

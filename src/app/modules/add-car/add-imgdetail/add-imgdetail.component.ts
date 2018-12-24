@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-imgdetail.component.css']
 })
 export class AddImgdetailComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public modifications = [];
@@ -19,6 +20,7 @@ export class AddImgdetailComponent implements OnInit {
   public detailName: String;
   public detailImage: String;
   public isConfirmed = false;
+
   constructor(
     private _apiImgcatalogService: ApiImgCatalogService,
     private _flashMessagesService: FlashMessagesService
@@ -69,7 +71,7 @@ export class AddImgdetailComponent implements OnInit {
     this.isConfirmed = true;
   }
 
-  // Создать новый объект детали, передать название детали,
+  // Создать новый объект схемы, передать данные,
   //  отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
   public addDetail() {
     const detail = {
@@ -80,10 +82,10 @@ export class AddImgdetailComponent implements OnInit {
       this._apiImgcatalogService.createDetail(this.carId, this.modelId, this.unitId, this.detailId, detail)
         .subscribe();
       this.detailName = '';
+      this.detailImage = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      // tslint:disable-next-line:max-line-length
-      this._flashMessagesService.show('Выберите марку, модель, модификацию и агрегат автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 }

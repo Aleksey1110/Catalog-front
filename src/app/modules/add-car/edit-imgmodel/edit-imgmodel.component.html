@@ -1,3 +1,25 @@
-<p>
-  edit-imgmodel works!
-</p>
+<form #form="ngForm">
+  <div class="select">
+    <label for="markName">Марка</label>
+    <!-- Передача ID выбранной марки в компонент -->
+    <select id="markName" (change)="passCarId($event)" class="form-control">
+      <option></option>
+      <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
+    </select>
+  </div>
+  <div class="select">
+    <label for="modelName">Модель</label>
+    <!-- Передача ID выбранной модели в компонент -->
+    <select id="modelName" (change)="passModelId($event)" class="form-control">
+      <option></option>
+      <option *ngFor="let model of modelsName" [value]="model._id">{{model.modelsName}}</option>
+    </select>
+  </div>
+  <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
+  <!-- Блок внесения данных -->
+  <div class="form-group">
+    <p>Внесите новое название модели автомобиля</p>
+    <input type="text" class="form-control" [(ngModel)]="modelName" name="modelName" required>
+  </div>
+  <button class="btn btn-warning" (click)="editModel()" [disabled]="!isConfirmed && !form.valid">Редактировать</button>
+</form>

@@ -8,16 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-analogue.component.css']
 })
 export class AddAnalogueComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public modifications = [];
   public units = [];
   public details = [];
-  public items = [];
-  public originalNumber = [];
   public analogues = [];
-  public note: String;
-  public picture: String;
   public carId: String;
   public modelId: String;
   public unitId: String;
@@ -26,8 +23,9 @@ export class AddAnalogueComponent implements OnInit {
   public originalId: String;
   public analogueName: String;
   public analogueNum: String;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
   ) { }
 
@@ -38,7 +36,7 @@ export class AddAnalogueComponent implements OnInit {
 
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
       });
@@ -47,7 +45,7 @@ export class AddAnalogueComponent implements OnInit {
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
+    this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
       });
@@ -56,7 +54,7 @@ export class AddAnalogueComponent implements OnInit {
   // Получение Id выбранной модели. Получение списка модификаций
   public passModelId(event): void {
     this.modelId = event.target.value;
-    this.apiService.getModificationName(this.carId, this.modelId)
+    this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
       });
@@ -65,7 +63,7 @@ export class AddAnalogueComponent implements OnInit {
   // Получение Id выбранной модификации. Получение списка агрегатов
   public passModificationId(event): void {
     this.unitId = event.target.value;
-    this.apiService.getPartsList(this.carId, this.modelId, this.unitId)
+    this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
       });
@@ -74,7 +72,7 @@ export class AddAnalogueComponent implements OnInit {
   // Получение Id выбранного агрегата. Получение списка деталей
   public passUnitId(event) {
     this.detailId = event.target.value;
-    this.apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
+    this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
       });
@@ -83,7 +81,7 @@ export class AddAnalogueComponent implements OnInit {
   // Получение Id детали. Получение списка составляющих детали.
   public passDetailId(event) {
     this.itemId = event.target.value;
-    this.apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
+    this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe(data => {
         this.analogues = data;
       });
@@ -94,7 +92,7 @@ export class AddAnalogueComponent implements OnInit {
     this.originalId = event.target.value;
   }
 
-  // Создать новый объект для дынных детали, передать сервису,
+  // Создать новый объект для аналогов детали, передать сервису,
   //  отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
   public addItems() {
     const analogue = {
@@ -102,14 +100,13 @@ export class AddAnalogueComponent implements OnInit {
       analogueNum: this.analogueNum
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId) {
-      this.apiService.createAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, analogue)
+      this._apiService.createAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, analogue)
         .subscribe();
       this.analogueName = '';
       this.analogueNum = '';
       this._flashMessagesService.show('Аналог успешно добавлен', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      // tslint:disable-next-line:max-line-length
-      this._flashMessagesService.show('Выберите марку, модель, модификацию, агрегат и название детали автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 

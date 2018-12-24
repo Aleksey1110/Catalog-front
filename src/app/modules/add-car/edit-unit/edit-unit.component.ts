@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-unit.component.css']
 })
 export class EditUnitComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public modifications = [];
@@ -16,11 +17,11 @@ export class EditUnitComponent implements OnInit {
   public modelId: String;
   public unitId: String;
   public detailId: String;
-  public detailName: String;
   public isConfirmed = false;
   public unitName: String;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
   ) { }
 
@@ -30,7 +31,7 @@ export class EditUnitComponent implements OnInit {
   }
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
       });
@@ -39,7 +40,7 @@ export class EditUnitComponent implements OnInit {
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
+    this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
       });
@@ -48,7 +49,7 @@ export class EditUnitComponent implements OnInit {
   // Получение Id выбранной модели. Получение списка модификаций
   public passModelId(event): void {
     this.modelId = event.target.value;
-    this.apiService.getModificationName(this.carId, this.modelId)
+    this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
       });
@@ -57,7 +58,7 @@ export class EditUnitComponent implements OnInit {
   // Получение Id выбранной модификации. Получение списка агрегатов
   public passModificationId(event): void {
     this.unitId = event.target.value;
-    this.apiService.getPartsList(this.carId, this.modelId, this.unitId)
+    this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
       });
@@ -76,20 +77,19 @@ export class EditUnitComponent implements OnInit {
       unitName: this.unitName
     };
     if (this.carId && this.modelId && this.unitId && this.detailId) {
-      this.apiService.editUnit(this.carId, this.modelId, this.unitId, this.detailId, unit)
+      this._apiService.editUnit(this.carId, this.modelId, this.unitId, this.detailId, unit)
         .subscribe();
       this.unitName = '';
-      this._flashMessagesService.show('Название агрегата успешно изменено', { cssClass: 'alert-success', timeout: 4000 });
+      this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      // tslint:disable-next-line:max-line-length
-      this._flashMessagesService.show('Выберите марку, модель, модификацию и агрегат автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 
   // Удаление выбраннго агрегата
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId) {
-      this.apiService.removeUnit(this.carId, this.modelId, this.unitId, this.detailId)
+      this._apiService.removeUnit(this.carId, this.modelId, this.unitId, this.detailId)
         .subscribe();
       this._flashMessagesService.show('Модификация успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {

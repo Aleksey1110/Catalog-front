@@ -1,6 +1,5 @@
 import { ApiImgCatalogService } from './../../../services/api-img-catalog.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ImgDetail } from 'src/app/models/img-detail';
 import { ImgItems } from 'src/app/models/img-items';
 
 @Component({
@@ -11,6 +10,7 @@ import { ImgItems } from 'src/app/models/img-items';
 export class DropdownComponent implements OnInit {
 
   constructor(private apiImageCatalog: ApiImgCatalogService) { }
+
   public markName = [];
   public modelName = [];
   public modifications = [];
@@ -23,8 +23,10 @@ export class DropdownComponent implements OnInit {
   public detailId: String;
   public itemId: String;
   public passedId = false;
+
   // Выходные данные из компонента (Массив данных выбранного раздела)
   @Output() showItems = new EventEmitter<ImgItems[]>();
+
   ngOnInit() {
     // Получение списка машин при загрузке страницы
     this.getCars();
@@ -65,16 +67,17 @@ export class DropdownComponent implements OnInit {
       });
   }
 
-  // Получение Id агрегата. Получение списка деталей со схемами. Отправка данных из компонента
+  // Получение Id агрегата. Получение списка деталей со схемами.
   public passUnitId(event) {
     this.detailId = event.target.value;
     this.apiImageCatalog.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
       });
-      this.passedId = true;
+    this.passedId = true;
   }
 
+  // Получение Id схемы. передача данных из компонента.
   public passDetailId(itemId) {
     this.itemId = itemId;
     this.apiImageCatalog.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)

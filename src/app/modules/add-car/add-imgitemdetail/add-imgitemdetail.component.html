@@ -32,7 +32,7 @@
     </select>
   </div>
   <div class="select">
-    <label for="detailName">Деталь</label>
+    <label for="detailName">Схема</label>
     <!-- Передача ID выбранной схемы в компонент -->
     <select id="detailName" (change)="passDetailId($event)" class="form-control">
       <option></option>
@@ -40,13 +40,14 @@
     </select>
   </div>
   <div class="select">
-    <label for="analogueName">Оригинальный номер</label>
-    <!-- Передача ID выбранных деталей схемы в компонент -->
+    <label for="analogueName">Основная схема раздела</label>
+    <!-- Передача ID выбранной основной схемы в компонент -->
     <select id="analogueName" (change)="passOriginalId($event)" class="form-control">
       <option></option>
       <option *ngFor="let analogue of analogues" [value]="analogue._id">{{analogue.itemImage}}</option>
     </select>
   </div>
+  <!-- Блок внесения данных -->
   <div class="form-group">
     <p>Внесите данные</p>
     <input type="text" class="form-control" [(ngModel)]="itemNumber" name="itemNumber" required placeholder="Внесите порядковый номер">

@@ -16,9 +16,10 @@
     </select>
   </div>
   <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
+  <!-- Блок добавления данных -->
   <div class="form-group">
     <p>Внесите новое название модели автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="modelName" name="modelName" required>
   </div>
   <button class="btn btn-warning" (click)="editModel()" [disabled]="!isConfirmed && !form.valid">Редактировать</button>
-  </form>
+</form>

@@ -1,6 +1,7 @@
 <!-- Передача объекта детали в компонент -->
 <app-dropdown-navigation (showCar)="showCar($event)"></app-dropdown-navigation>
-<div class="columns d-flex justify-content-between">
+<!-- Вывод данных детали авто -->
+<div class="columns d-flex justify-content-between" *ngIf="isPassedId">
   <div class="column-item">
     <h5>
       Оригинальный артикул

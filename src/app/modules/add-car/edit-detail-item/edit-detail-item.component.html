@@ -48,11 +48,12 @@
     </select>
   </div>
   <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
+  <!-- Блок внесения данных -->
   <div class="form-group">
     <p>Внесите новые данные для детали автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="originalNumber" name="originalNumber" required placeholder="Внесите оригинальные номера через запятую">
     <textarea type="text" class="form-control" [(ngModel)]="note" name="note" required placeholder="Добавьте примечание"></textarea>
-    <input type="text" class="form-control" [(ngModel)]="picture" name="picture" required>
+    <input type="text" class="form-control" [(ngModel)]="picture" name="picture" required placeholder="Внесите ссылку на изображение">
   </div>
   <button class="btn btn-warning" (click)="editItems()" [disabled]="!isConfirmed && !form.valid">Редактировать</button>
 </form>

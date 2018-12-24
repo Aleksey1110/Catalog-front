@@ -8,12 +8,14 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./add-model.component.css']
 })
 export class AddModelComponent implements OnInit {
+
   public markName = [];
   public carId: String;
   public modelName: String;
   public isConfirmed = false;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
   ) { }
 
@@ -24,7 +26,7 @@ export class AddModelComponent implements OnInit {
 
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
       });
@@ -42,7 +44,7 @@ export class AddModelComponent implements OnInit {
       modelsName: this.modelName
     };
     if (this.carId) {
-      this.apiService.createModel(this.carId, model)
+      this._apiService.createModel(this.carId, model)
         .subscribe();
       this.modelName = '';
       this._flashMessagesService.show('Модель успешно добавлена', { cssClass: 'alert-success', timeout: 4000 });

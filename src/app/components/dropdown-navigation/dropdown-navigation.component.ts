@@ -8,7 +8,9 @@ import { Items } from 'src/app/models/items';
   styleUrls: ['./dropdown-navigation.component.css']
 })
 export class DropdownNavigationComponent implements OnInit {
+
   constructor(private apiService: ApiService) { }
+
   public markName = [];
   public modelName = [];
   public modifications = [];
@@ -20,8 +22,10 @@ export class DropdownNavigationComponent implements OnInit {
   public unitId: String;
   public detailId: String;
   public itemId: String;
+
   // Выходные данные из компонента (Массив составляющих детали)
   @Output() showCar = new EventEmitter<Items[]>();
+
   ngOnInit() {
     // Получение списка машин при загрузке страницы
     this.getCars();

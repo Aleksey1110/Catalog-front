@@ -31,13 +31,11 @@
       <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
     </select>
   </div>
+  <!-- Блок добавления данных -->
   <div class="form-group">
-    <p>Внесите ссылку на схему</p>
-    <input type="text" class="form-control" [(ngModel)]="detailImage" name="detailImage" required>
-  </div>
-  <div class="form-group">
-    <p>Внесите название схемы</p>
-    <input type="text" class="form-control" [(ngModel)]="detailName" name="detailName" required>
+    <p>Внесите данные</p>
+    <input type="text" class="form-control" [(ngModel)]="detailImage" name="detailImage" required placeholder="Внесите ссылку на схему">
+    <input type="text" class="form-control" [(ngModel)]="detailName" name="detailName" required placeholder="Внесите название схемы">
   </div>
   <button class="btn btn-success" (click)="addDetail()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
 </form>

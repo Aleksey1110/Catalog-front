@@ -56,6 +56,7 @@
     </select>
   </div>
   <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
+  <!-- Блок добавления данных -->
   <div class="form-group">
     <p>Внесите данные аналога</p>
     <input type="text" class="form-control" [(ngModel)]="analogueName" name="analogueName" required placeholder="Внесите название аналога">

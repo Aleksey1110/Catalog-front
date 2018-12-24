@@ -8,15 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-detail.component.css']
 })
 export class EditDetailComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public modifications = [];
   public units = [];
   public details = [];
-  public items = [];
-  public originalNumber = [];
-  public note: String;
-  public picture: String;
   public carId: String;
   public modelId: String;
   public unitId: String;
@@ -24,8 +21,9 @@ export class EditDetailComponent implements OnInit {
   public itemId: String;
   public detailName: String;
   public isConfirmed = false;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
   ) { }
 
@@ -36,7 +34,7 @@ export class EditDetailComponent implements OnInit {
 
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
       });
@@ -45,7 +43,7 @@ export class EditDetailComponent implements OnInit {
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
+    this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
       });
@@ -54,7 +52,7 @@ export class EditDetailComponent implements OnInit {
   // Получение Id выбранной модели. Получение списка модификаций
   public passModelId(event): void {
     this.modelId = event.target.value;
-    this.apiService.getModificationName(this.carId, this.modelId)
+    this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
       });
@@ -63,7 +61,7 @@ export class EditDetailComponent implements OnInit {
   // Получение Id выбранной модификации. Получение списка агрегатов
   public passModificationId(event): void {
     this.unitId = event.target.value;
-    this.apiService.getPartsList(this.carId, this.modelId, this.unitId)
+    this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
       });
@@ -72,7 +70,7 @@ export class EditDetailComponent implements OnInit {
   // Получение Id выбранного агрегата. Получение списка деталей
   public passUnitId(event) {
     this.detailId = event.target.value;
-    this.apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
+    this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
       });
@@ -82,7 +80,7 @@ export class EditDetailComponent implements OnInit {
   public passDetailId(event) {
     this.isConfirmed = true;
     this.itemId = event.target.value;
-    this.apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
+    this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe();
   }
 
@@ -93,20 +91,19 @@ export class EditDetailComponent implements OnInit {
       detailName: this.detailName
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
-      this.apiService.editDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, detail)
+      this._apiService.editDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, detail)
         .subscribe();
       this.detailName = '';
       this._flashMessagesService.show('Данные детали успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      // tslint:disable-next-line:max-line-length
-      this._flashMessagesService.show('Выберите марку, модель, модификацию, агрегат и название детали автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 
   // Удаление выбранной детали
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
-      this.apiService.removeDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
+      this._apiService.removeDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
         .subscribe();
       this._flashMessagesService.show('Деталь успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {

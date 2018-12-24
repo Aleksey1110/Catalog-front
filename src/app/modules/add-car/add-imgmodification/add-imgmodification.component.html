@@ -15,10 +15,10 @@
       <option *ngFor="let model of modelName" [value]="model._id">{{model.modelsName}}</option>
     </select>
   </div>
+  <!-- Блок внесения данных -->
   <div class="form-group">
     <p>Внесите модификацию автомобиля</p>
     <input type="text" class="form-control" [(ngModel)]="modificationlName" name="modificationlName" required>
   </div>
   <button class="btn btn-success" (click)="addModification()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
-  </form>
-  
+</form>

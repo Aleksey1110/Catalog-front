@@ -8,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-mark.component.css']
 })
 export class EditMarkComponent implements OnInit {
+
   public marksName = [];
   public markName: String;
   public carId: String;
   public isConfirmed = false;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
   ) { }
 
@@ -24,7 +26,7 @@ export class EditMarkComponent implements OnInit {
 
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiService.getCars()
       .subscribe(data => {
         this.marksName = data;
       });
@@ -43,19 +45,19 @@ export class EditMarkComponent implements OnInit {
       markName: this.markName
     };
     if (this.carId) {
-      this.apiService.editMark(this.carId, mark)
+      this._apiService.editMark(this.carId, mark)
         .subscribe();
       this.markName = '';
-      this._flashMessagesService.show('Марка успешно отредактирована', { cssClass: 'alert-success', timeout: 4000 });
+      this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите марку автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 
   // Удаление выбранной марки
   public remove() {
     if (this.carId) {
-      this.apiService.removeMark(this.carId)
+      this._apiService.removeMark(this.carId)
         .subscribe();
       this._flashMessagesService.show('Марка успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {

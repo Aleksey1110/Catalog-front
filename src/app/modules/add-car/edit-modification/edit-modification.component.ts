@@ -8,17 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-modification.component.css']
 })
 export class EditModificationComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public modifications = [];
   public carId: String;
   public modelId: String;
   public unitId: String;
-  public unitName: String;
   public isConfirmed = false;
   public modificationName: String;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
   ) { }
 
@@ -29,7 +30,7 @@ export class EditModificationComponent implements OnInit {
 
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
       });
@@ -38,7 +39,7 @@ export class EditModificationComponent implements OnInit {
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
+    this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
       });
@@ -47,7 +48,7 @@ export class EditModificationComponent implements OnInit {
   // Получение Id выбранной модели. Получение списка модификаций
   public passModelId(event): void {
     this.modelId = event.target.value;
-    this.apiService.getModificationName(this.carId, this.modelId)
+    this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
       });
@@ -66,19 +67,19 @@ export class EditModificationComponent implements OnInit {
       modificationName: this.modificationName
     };
     if (this.carId && this.modelId && this.unitId) {
-      this.apiService.editModification(this.carId, this.modelId, this.unitId, modification)
+      this._apiService.editModification(this.carId, this.modelId, this.unitId, modification)
         .subscribe();
       this.modificationName = '';
-      this._flashMessagesService.show('Модификация успешно изменена', { cssClass: 'alert-success', timeout: 4000 });
+      this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите марку, модель и модификацию автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 
   // Удаление выбранной модификации
   public remove() {
     if (this.carId && this.modelId && this.unitId) {
-      this.apiService.removeModification(this.carId, this.modelId, this.unitId)
+      this._apiService.removeModification(this.carId, this.modelId, this.unitId)
         .subscribe();
       this._flashMessagesService.show('Модификация успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {

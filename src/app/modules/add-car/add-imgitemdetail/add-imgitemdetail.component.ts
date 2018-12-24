@@ -8,16 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-imgitemdetail.component.css']
 })
 export class AddImgitemdetailComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public modifications = [];
   public units = [];
   public details = [];
-  public items = [];
-  public originalNumber = [];
   public analogues = [];
-  public note: String;
-  public picture: String;
   public carId: String;
   public modelId: String;
   public unitId: String;
@@ -28,6 +25,7 @@ export class AddImgitemdetailComponent implements OnInit {
   public itemName: String;
   public itemArticle: Array<String>;
   public itemNote: String;
+
   constructor(
     private _apiImgCatalogService: ApiImgCatalogService,
     private _flashMessagesService: FlashMessagesService
@@ -73,7 +71,7 @@ export class AddImgitemdetailComponent implements OnInit {
       });
   }
 
-  // Получение Id выбранного агрегата. Получение списка деталей
+  // Получение Id выбранного агрегата. Получение списка разделов
   public passUnitId(event) {
     this.detailId = event.target.value;
     this._apiImgCatalogService.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
@@ -82,7 +80,7 @@ export class AddImgitemdetailComponent implements OnInit {
       });
   }
 
-  // Получение Id детали. Получение списка составляющих детали.
+  // Получение Id раздела. Получение основной схемы раздела.
   public passDetailId(event) {
     this.itemId = event.target.value;
     this._apiImgCatalogService.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
@@ -91,12 +89,12 @@ export class AddImgitemdetailComponent implements OnInit {
       });
   }
 
-  // Получение Id оригинального номера.
+  // Получение Id основной схемы раздела.
   public passOriginalId(event) {
     this.originalId = event.target.value;
   }
 
-  // Создать новый объект для дынных детали, передать сервису,
+  // Создать новый объект для дынных раздела, передать сервису,
   //  отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
   public addItems() {
     const items = {
@@ -113,8 +111,7 @@ export class AddImgitemdetailComponent implements OnInit {
       this.itemNote = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      // tslint:disable-next-line:max-line-length
-      this._flashMessagesService.show('Выберите марку, модель, модификацию, агрегат и название детали автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 

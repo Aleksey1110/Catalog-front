@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-imgunit.component.css']
 })
 export class AddImgunitComponent implements OnInit {
+
   public markName = [];
   public modelName = [];
   public modifications = [];
@@ -16,6 +17,7 @@ export class AddImgunitComponent implements OnInit {
   public unitId: String;
   public unitName: String;
   public isConfirmed = false;
+
   constructor(
     private _apiImgCatalogService: ApiImgCatalogService,
     private _flashMessagesService: FlashMessagesService
@@ -70,7 +72,7 @@ export class AddImgunitComponent implements OnInit {
       this.unitName = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите марку, модель и модификацию автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 }

@@ -8,17 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-model.component.css']
 })
 export class EditModelComponent implements OnInit {
+
   public markName = [];
   public modelsName = [];
   public carId: String;
   public modelId: String;
-  public modificationlName: String;
   public isConfirmed = false;
   public modelName: String;
+
   constructor(
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _flashMessagesService: FlashMessagesService
-    ) { }
+  ) { }
 
   ngOnInit() {
     // Получение списка машин при загрузке страницы
@@ -26,7 +27,7 @@ export class EditModelComponent implements OnInit {
   }
   // Получение списка машин
   public getCars(): void {
-    this.apiService.getCars()
+    this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
       });
@@ -35,7 +36,7 @@ export class EditModelComponent implements OnInit {
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.apiService.getModelName(this.carId)
+    this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelsName = data;
       });
@@ -47,26 +48,26 @@ export class EditModelComponent implements OnInit {
     this.isConfirmed = true;
   }
 
-    // Создать новый объект модели, передать название модели,
-    //  отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
+  // Создать новый объект модели, передать название модели,
+  //  отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
   public editModel() {
     const model = {
       modelsName: this.modelName
     };
     if (this.carId && this.modelId) {
-      this.apiService.editModel(this.carId, this.modelId, model)
+      this._apiService.editModel(this.carId, this.modelId, model)
         .subscribe();
       this.modelName = '';
-      this._flashMessagesService.show('Модель успешно изменена', { cssClass: 'alert-success', timeout: 4000 });
+      this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите марку и модель автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
 
   // Удаление выбранной модели
   public remove() {
     if (this.carId && this.modelId) {
-      this.apiService.removeModel(this.carId, this.modelId)
+      this._apiService.removeModel(this.carId, this.modelId)
         .subscribe();
       this._flashMessagesService.show('Модель успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {

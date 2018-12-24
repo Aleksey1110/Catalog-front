@@ -32,16 +32,17 @@
     </select>
   </div>
   <div class="select">
-    <label for="detailName">Деталь</label>
-    <!-- Передача ID выбранной детали в компонент -->
+    <label for="detailName">Схема</label>
+    <!-- Передача ID выбранной схемы в компонент -->
     <select id="detailName" (change)="passDetailId($event)" class="form-control">
       <option></option>
       <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
     </select>
   </div>
+  <!-- Блок добавления данных -->
   <div class="form-group">
-    <p>Внесите ссылку на основную схему</p>
-    <input type="text" class="form-control" [(ngModel)]="itemImage" name="itemImage" required>
+    <p>Внесите данные</p>
+    <input type="text" class="form-control" [(ngModel)]="itemImage" name="itemImage" required placeholder="Внесите ссылку на основную схему">
   </div>
   <button class="btn btn-success" (click)="addItems()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
 </form>
