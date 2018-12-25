@@ -10,11 +10,12 @@ export class TestService {
   public markName = [];
   constructor(private _apiServise: ApiService) { }
 
-  test(markName) {
-    this._apiServise.getCars()
+  test(marksName) {
+    return this._apiServise.getCars()
       .subscribe(data => {
         this.markName = data;
-        return markName = this.markName;
+        marksName = this.markName;
+        console.log(marksName);
       });
 
   }
