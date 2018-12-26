@@ -45,8 +45,9 @@ export class AddImgitemdetailComponent implements OnInit {
   }
 
   // Получение Id выбранной машины. Получение списка моделей
-  public passCarId(event): void {
-    this.carId = event.target.value;
+  public passCarId(value): void {
+    // this.carId = value;
+    console.log(this.carId);
     this._apiImgCatalogService.getModel(this.carId)
       .subscribe(data => {
         this.modelName = data;

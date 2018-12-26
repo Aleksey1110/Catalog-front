@@ -3,8 +3,8 @@
     <div class="select">
       <label for="markName">Марка</label>
       <!-- Передача ID выбранной марки в компонент -->
-      <select id="markName" (change)="passCarId($event)" class="form-control">
-        <option></option>
+      <select id="markName" (change)="passCarId($event)" class="custom-select">
+        <option selected></option>
         <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
       </select>
     </div>
