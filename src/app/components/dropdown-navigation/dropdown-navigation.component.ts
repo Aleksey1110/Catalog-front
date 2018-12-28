@@ -32,19 +32,19 @@ export class DropdownNavigationComponent implements OnInit {
     this.getCars();
   }
 
-  // // Получение списка машин
-  // public getCars(): void {
-  //   this._apiService.getCars()
-  //     .subscribe(data => {
-  //       this.markName = data;
-  //     });
-  // }
-
   // Получение списка машин
   public getCars(): void {
-    this._testServise.test(this.markName);
-    console.log(this.markName);
+    this._apiService.getCars()
+      .subscribe(data => {
+        this.markName = data;
+      });
   }
+
+  // // Получение списка машин
+  // public getCars(): void {
+  //   this._testServise.test(this.markName);
+  //   console.log(this.markName);
+  // }
 
 
   // Получение Id выбранной машины. Получение списка моделей
