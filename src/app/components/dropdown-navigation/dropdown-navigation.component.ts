@@ -40,12 +40,6 @@ export class DropdownNavigationComponent implements OnInit {
       });
   }
 
-  // // Получение списка машин
-  // public getCars(): void {
-  //   this._testServise.test(this.markName);
-  //   console.log(this.markName);
-  // }
-
 
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(event): void {

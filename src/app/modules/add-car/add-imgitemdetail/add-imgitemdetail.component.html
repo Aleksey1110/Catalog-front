@@ -1,59 +1,62 @@
 <form #form="ngForm">
-  <div class="select">
-    <label for="markName">Марка</label>
+  <div class="form-group">
     <!-- Передача ID выбранной марки в компонент -->
-    <select id="markName" (change)="passCarId($event)" class="form-control">
-      <option></option>
-      <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
+    <select #mark="ngModel" (change)="passCarId(mark.value)" (blur)="passCarId(mark.value)" class="custom-select" 
+    name="mark" ngModel [class.is-invalid]="mark.invalid && mark.touched">
+      <option value="default">Марка</option>
+      <option *ngFor="let mark of markName" [value]="mark._id">{{mark.markName}}</option>
+    </select>
+  </div>
+  {{form.value | json}}
+  <div class="form-group">
+    <select ngModel #marks="ngModel" [class.is-invalid]="marks.invalid && marks.touched" 
+    name="test" class="form-control" [(ngModel)]="carId" required>
+      <option value="default">default</option>
+      <option *ngFor="let marks of markName" [value]="marks._id">{{marks.markName}}</option>
     </select>
   </div>
   <div class="select">
-    <label for="modelName">Модель</label>
     <!-- Передача ID выбранной модели в компонент -->
-    <select id="modelName" (change)="passModelId($event)" class="form-control">
-      <option></option>
+    <select id="modelName" (change)="passModelId($event)" class="custom-select" name="modelName" ngModel required>
+      <option value="">Модель</option>
       <option *ngFor="let model of modelName" [value]="model._id">{{model.modelsName}}</option>
     </select>
   </div>
   <div class="select">
-    <label for="modificationName">Модификация</label>
     <!-- Передача ID выбранной модификации в компонент -->
-    <select id="modificationName" (change)="passModificationId($event)" class="form-control">
-      <option></option>
+    <select id="modificationName" (change)="passModificationId($event)" class="custom-select" name="modificationName" ngModel required>
+      <option value="">Модификация</option>
       <option *ngFor="let modification of modifications" [value]="modification._id">{{modification.modificationName}}</option>
     </select>
   </div>
   <div class="select">
-    <label for="detailGroup">Агрегат</label>
     <!-- Передача ID выбранного агрегата в компонент -->
-    <select id="detailGroup" (change)="passUnitId($event)" class="form-control">
-      <option></option>
+    <select id="detailGroup" (change)="passUnitId($event)" class="custom-select" name="detailGroup" ngModel required>
+      <option value="">Агрегат</option>
       <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
     </select>
   </div>
   <div class="select">
-    <label for="detailName">Схема</label>
     <!-- Передача ID выбранной схемы в компонент -->
-    <select id="detailName" (change)="passDetailId($event)" class="form-control">
-      <option></option>
+    <select id="detailName" (change)="passDetailId($event)" class="custom-select" name="detailName" ngModel required>
+      <option value="">Схема</option>
       <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
     </select>
   </div>
   <div class="select">
-    <label for="analogueName">Основная схема раздела</label>
     <!-- Передача ID выбранной основной схемы в компонент -->
-    <select id="analogueName" (change)="passOriginalId($event)" class="form-control">
-      <option></option>
+    <select id="analogueName" (change)="passOriginalId($event)" class="custom-select" name="analogueName" ngModel required>
+      <option value="">Основная схема раздела</option>
       <option *ngFor="let analogue of analogues" [value]="analogue._id">{{analogue.itemImage}}</option>
     </select>
   </div>
   <!-- Блок внесения данных -->
   <div class="form-group">
     <p>Внесите данные</p>
-    <input type="text" class="form-control" [(ngModel)]="itemNumber" name="itemNumber" required placeholder="Внесите порядковый номер">
-    <input type="text" class="form-control" [(ngModel)]="itemName" name="itemName" required placeholder="Внесите название детали">
-    <input type="text" class="form-control" [(ngModel)]="itemArticle" name="itemArticle" required placeholder="Внесите артикулы через запятую">
+    <input type="text" class="form-control" [(ngModel)]="itemNumber" name="itemNumber" required placeholder="Внесите порядковый номер" required>
+    <input type="text" class="form-control" [(ngModel)]="itemName" name="itemName" required placeholder="Внесите название детали" required>
+    <input type="text" class="form-control" [(ngModel)]="itemArticle" name="itemArticle" required placeholder="Внесите артикулы через запятую" required>
     <textarea [(ngModel)]="itemNote" name="itemNote" placeholder="Внесите примечание" class="form-control"></textarea>
   </div>
-  <button class="btn btn-success" (click)="addItems()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
+  <button type="submit" class="btn btn-success" (click)="addItems()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
 </form>
