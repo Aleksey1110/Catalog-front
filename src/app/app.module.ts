@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 
 import { HomePageModule } from './modules/home-page/home-page.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { AddCarModule } from './modules/add-car/add-car.module';
 import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { AboutComponent } from './components/about/about.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AddCarModule,
     FormsModule,
     FlashMessagesModule.forRoot(),
     HomePageModule

@@ -1,7 +1,4 @@
 import { ApiImgCatalogService } from './../../services/api-img-catalog.service';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -16,9 +13,6 @@ import { PictureCatalogRoutingModule } from './picture-catalog-routing.module';
   ],
   imports: [
     CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
     PictureCatalogRoutingModule
   ],
   providers: [ApiImgCatalogService]

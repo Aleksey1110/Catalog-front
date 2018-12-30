@@ -89,7 +89,7 @@ const addEditingRoutes: Routes = [
 
 // Основные роуты модуля
 const addEditRoutes: Routes = [
-    { path: 'editing', component: AddEditingComponent, children: addEditingRoutes }
+    { path: '', component: AddEditingComponent, children: addEditingRoutes }
 ];
 
 @NgModule({

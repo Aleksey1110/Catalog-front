@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AddCarRoutingModule } from './add-car-routing.module';
 import { AddCarComponent } from './add-car/add-car.component';
@@ -78,7 +77,6 @@ import { EditImgitemdetailComponent } from './edit-imgitemdetail/edit-imgitemdet
   imports: [
     CommonModule,
     FormsModule,
-    BrowserModule,
     FlashMessagesModule.forRoot(),
     AddCarRoutingModule
   ]
