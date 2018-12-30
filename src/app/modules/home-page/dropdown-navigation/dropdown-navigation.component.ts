@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Items } from 'src/app/models/items';
-import { TestService } from 'src/app/services/test.service';
 
 @Component({
   selector: 'app-dropdown-navigation',
@@ -10,7 +9,7 @@ import { TestService } from 'src/app/services/test.service';
 })
 export class DropdownNavigationComponent implements OnInit {
 
-  constructor(private _apiService: ApiService, private _testServise: TestService) { }
+  constructor(private _apiService: ApiService) { }
 
   public markName = [];
   public modelName = [];

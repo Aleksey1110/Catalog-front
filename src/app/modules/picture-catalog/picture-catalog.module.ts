@@ -1,3 +1,4 @@
+import { ApiImgCatalogService } from './../../services/api-img-catalog.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -6,6 +7,7 @@ import { CommonModule } from '@angular/common';
 
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
+import { PictureCatalogRoutingModule } from './picture-catalog-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { CatalogPageComponent } from './catalog-page/catalog-page.component';
     CommonModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+    PictureCatalogRoutingModule
+  ],
+  providers: [ApiImgCatalogService]
 })
 export class PictureCatalogModule { }

@@ -1,7 +1,6 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiService } from './../../../services/api.service';
 import { Component, OnInit } from '@angular/core';
-import { TestService } from 'src/app/services/test.service';
 
 @Component({
   selector: 'app-add-detail-item',

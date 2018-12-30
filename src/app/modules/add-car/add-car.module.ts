@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 
+import { AddCarRoutingModule } from './add-car-routing.module';
 import { AddCarComponent } from './add-car/add-car.component';
 import { AddModelComponent } from './add-model/add-model.component';
 import { AddModificationComponent } from './add-modification/add-modification.component';
@@ -79,8 +79,8 @@ import { EditImgitemdetailComponent } from './edit-imgitemdetail/edit-imgitemdet
     CommonModule,
     FormsModule,
     BrowserModule,
-    AppRoutingModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    AddCarRoutingModule
   ]
 })
 export class AddCarModule { }
