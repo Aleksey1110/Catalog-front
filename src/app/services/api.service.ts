@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 import { AnalogueNumber } from './../models/analogueNumber';
 import { Detail } from './../models/detail';
@@ -14,14 +16,20 @@ import { Modifications } from '../models/modifications';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiService {
 
   constructor(private http: HttpClient) { }
   private _url = 'http://localhost:3000';
 
+  errorHandler(error: HttpErrorResponse) {
+    return Observable.throw(error.message || 'Server error');
+  }
+
   // Получить список всех марок
   getCars(): Observable<Car[]> {
-    return this.http.get<Car[]>(`${this._url}/api`);
+    return this.http.get<Car[]>(`${this._url}/api`)
+      .catch(this.errorHandler);
   }
 
   // Получить список моделей
