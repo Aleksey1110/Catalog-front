@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiImgCatalogService } from './../../../services/api-img-catalog.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-add-imgitemdetail',
@@ -25,10 +26,12 @@ export class AddImgitemdetailComponent implements OnInit {
   public itemName: String;
   public itemArticle: Array<String>;
   public itemNote: String;
+  public errMsg;
 
   constructor(
     private _apiImgCatalogService: ApiImgCatalogService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -41,18 +44,25 @@ export class AddImgitemdetailComponent implements OnInit {
     this._apiImgCatalogService.getCars()
       .subscribe(data => {
         this.markName = data;
-        console.log(this.markName);
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
   public passCarId(value): void {
-    // this.carId = value;
-    console.log(this.carId);
     this._apiImgCatalogService.getModel(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -61,7 +71,12 @@ export class AddImgitemdetailComponent implements OnInit {
     this._apiImgCatalogService.getModification(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
@@ -70,7 +85,12 @@ export class AddImgitemdetailComponent implements OnInit {
     this._apiImgCatalogService.getUnit(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранного агрегата. Получение списка разделов
@@ -79,7 +99,12 @@ export class AddImgitemdetailComponent implements OnInit {
     this._apiImgCatalogService.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id раздела. Получение основной схемы раздела.
@@ -88,7 +113,12 @@ export class AddImgitemdetailComponent implements OnInit {
     this._apiImgCatalogService.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe(data => {
         this.analogues = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id основной схемы раздела.
@@ -107,7 +137,10 @@ export class AddImgitemdetailComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId) {
       this._apiImgCatalogService.createItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, items)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.itemName = '';
       this.itemArticle = [];
       this.itemNote = '';

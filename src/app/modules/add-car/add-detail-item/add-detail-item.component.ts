@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiService } from './../../../services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-add-detail-item',
@@ -22,10 +23,12 @@ export class AddDetailItemComponent implements OnInit {
   public unitId: String;
   public detailId: String;
   public itemId: String;
+  public errMsg;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -38,7 +41,12 @@ export class AddDetailItemComponent implements OnInit {
     this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
@@ -47,7 +55,12 @@ export class AddDetailItemComponent implements OnInit {
     this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -56,7 +69,12 @@ export class AddDetailItemComponent implements OnInit {
     this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
@@ -65,7 +83,12 @@ export class AddDetailItemComponent implements OnInit {
     this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранного агрегата. Получение списка деталей
@@ -74,14 +97,22 @@ export class AddDetailItemComponent implements OnInit {
     this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id детали. Получение списка составляющих детали.
   public passDetailId(event) {
     this.itemId = event.target.value;
     this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
-      .subscribe();
+      .subscribe(error => {
+        this.errMsg = error;
+        this._flashErrorService.showError(this.errMsg);
+      });
   }
 
   // Создать новый объект для дынных детали, передать сервису,
@@ -94,7 +125,10 @@ export class AddDetailItemComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiService.createDetailItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, item)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.originalNumber = [];
       this.note = '';
       this.picture = '';

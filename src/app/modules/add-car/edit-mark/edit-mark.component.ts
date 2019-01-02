@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiService } from './../../../services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-edit-mark',
@@ -13,10 +14,12 @@ export class EditMarkComponent implements OnInit {
   public markName: String;
   public carId: String;
   public isConfirmed = false;
+  public errMsg;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -29,7 +32,12 @@ export class EditMarkComponent implements OnInit {
     this._apiService.getCars()
       .subscribe(data => {
         this.marksName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины.
@@ -46,7 +54,10 @@ export class EditMarkComponent implements OnInit {
     };
     if (this.carId) {
       this._apiService.editMark(this.carId, mark)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.markName = '';
       this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
@@ -58,7 +69,10 @@ export class EditMarkComponent implements OnInit {
   public remove() {
     if (this.carId) {
       this._apiService.removeMark(this.carId)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this._flashMessagesService.show('Марка успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите марку автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

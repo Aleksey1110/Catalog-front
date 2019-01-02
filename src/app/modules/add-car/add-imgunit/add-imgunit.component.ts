@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiImgCatalogService } from './../../../services/api-img-catalog.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-add-imgunit',
@@ -17,10 +18,12 @@ export class AddImgunitComponent implements OnInit {
   public unitId: String;
   public unitName: String;
   public isConfirmed = false;
+  public errMsg;
 
   constructor(
     private _apiImgCatalogService: ApiImgCatalogService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -33,7 +36,12 @@ export class AddImgunitComponent implements OnInit {
     this._apiImgCatalogService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
@@ -42,7 +50,12 @@ export class AddImgunitComponent implements OnInit {
     this._apiImgCatalogService.getModel(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -51,7 +64,12 @@ export class AddImgunitComponent implements OnInit {
     this._apiImgCatalogService.getModification(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации.
@@ -68,7 +86,10 @@ export class AddImgunitComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId) {
       this._apiImgCatalogService.createUnit(this.carId, this.modelId, this.unitId, unit)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.unitName = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {

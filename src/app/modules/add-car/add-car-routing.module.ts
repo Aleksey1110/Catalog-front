@@ -102,3 +102,38 @@ const addEditRoutes: Routes = [
 })
 
 export class AddCarRoutingModule { }
+export const routingComponents = [
+    AddEditingComponent,
+    EditImgmainComponent,
+    AddImgmainComponent,
+    EditMainComponent,
+    AddMainComponent,
+    EditImgitemdetailComponent,
+    EditImgitemComponent,
+    EditImgdetailComponent,
+    EditImgunitComponent,
+    EditImgmodificationComponent,
+    EditImgmodelComponent,
+    EditImgmarkComponent,
+    AddImgitemdetailComponent,
+    AddImgitemComponent,
+    AddImgdetailComponent,
+    AddImgunitComponent,
+    AddImgmodificationComponent,
+    AddImgmodelComponent,
+    AddImgmarkComponent,
+    EditDetailAnalogueComponent,
+    EditDetailItemComponent,
+    EditDetailComponent,
+    EditUnitComponent,
+    EditModificationComponent,
+    EditModelComponent,
+    EditMarkComponent,
+    AddAnalogueComponent,
+    AddDetailItemComponent,
+    AddDetailComponent,
+    AddUnitComponent,
+    AddModificationComponent,
+    AddModelComponent,
+    AddCarComponent
+];

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-add-modification',
@@ -15,10 +16,12 @@ export class AddModificationComponent implements OnInit {
   public modelId: String;
   public modificationlName: String;
   public isConfirmed = false;
+  public errMsg;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -30,7 +33,12 @@ export class AddModificationComponent implements OnInit {
     this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
@@ -39,7 +47,12 @@ export class AddModificationComponent implements OnInit {
     this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели.
@@ -56,7 +69,10 @@ export class AddModificationComponent implements OnInit {
     };
     if (this.carId && this.modelId) {
       this._apiService.createModification(this.carId, this.modelId, model)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.modificationlName = '';
       this._flashMessagesService.show('Модификация успешно добавлена', { cssClass: 'alert-success', timeout: 4000 });
     } else {

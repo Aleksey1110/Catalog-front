@@ -5,7 +5,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 
 // Основные роуты модуля
 const homeRoutes: Routes = [
-    {path: '', component: DetailsPageComponent},
+    { path: '', component: DetailsPageComponent }
 ];
 
 @NgModule({

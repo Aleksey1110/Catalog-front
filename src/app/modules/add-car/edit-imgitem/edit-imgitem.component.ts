@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiImgCatalogService } from 'src/app/services/api-img-catalog.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-edit-imgitem',
@@ -23,10 +24,12 @@ export class EditImgitemComponent implements OnInit {
   public originalId: String;
   public itemImage: String;
   public isConfirmed = false;
+  public errMsg;
 
   constructor(
     private _apiImgCatalogService: ApiImgCatalogService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -39,7 +42,12 @@ export class EditImgitemComponent implements OnInit {
     this._apiImgCatalogService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной марки. Получение списка моделей
@@ -48,7 +56,12 @@ export class EditImgitemComponent implements OnInit {
     this._apiImgCatalogService.getModel(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -57,7 +70,12 @@ export class EditImgitemComponent implements OnInit {
     this._apiImgCatalogService.getModification(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
@@ -66,7 +84,12 @@ export class EditImgitemComponent implements OnInit {
     this._apiImgCatalogService.getUnit(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранного агрегата. Получение списка разделов
@@ -75,7 +98,12 @@ export class EditImgitemComponent implements OnInit {
     this._apiImgCatalogService.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id раздела. Получение списка составляющих раздела.
@@ -84,7 +112,12 @@ export class EditImgitemComponent implements OnInit {
     this._apiImgCatalogService.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe(data => {
         this.analogues = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id основной схемы раздела.
@@ -101,7 +134,10 @@ export class EditImgitemComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId) {
       this._apiImgCatalogService.editDetailItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, item)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.itemImage = '';
       this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
@@ -113,7 +149,10 @@ export class EditImgitemComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId) {
       this._apiImgCatalogService.removeItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this._flashMessagesService.show('Данные успешно удалены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

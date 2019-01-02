@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiService } from './../../../services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-edit-modification',
@@ -17,10 +18,12 @@ export class EditModificationComponent implements OnInit {
   public unitId: String;
   public isConfirmed = false;
   public modificationName: String;
+  public errMsg;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -33,7 +36,12 @@ export class EditModificationComponent implements OnInit {
     this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
@@ -42,7 +50,12 @@ export class EditModificationComponent implements OnInit {
     this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -51,7 +64,12 @@ export class EditModificationComponent implements OnInit {
     this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации.
@@ -68,7 +86,10 @@ export class EditModificationComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId) {
       this._apiService.editModification(this.carId, this.modelId, this.unitId, modification)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.modificationName = '';
       this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
@@ -80,7 +101,10 @@ export class EditModificationComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId) {
       this._apiService.removeModification(this.carId, this.modelId, this.unitId)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this._flashMessagesService.show('Модификация успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

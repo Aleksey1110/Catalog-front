@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiImgCatalogService } from './../../../services/api-img-catalog.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-add-imgitem',
@@ -20,10 +21,12 @@ export class AddImgitemComponent implements OnInit {
   public detailId: String;
   public itemId: String;
   public itemImage: String;
+  public errMsg;
 
   constructor(
     private _apiImgCatalogService: ApiImgCatalogService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -36,7 +39,12 @@ export class AddImgitemComponent implements OnInit {
     this._apiImgCatalogService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
@@ -45,7 +53,12 @@ export class AddImgitemComponent implements OnInit {
     this._apiImgCatalogService.getModel(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -54,7 +67,12 @@ export class AddImgitemComponent implements OnInit {
     this._apiImgCatalogService.getModification(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
@@ -63,7 +81,12 @@ export class AddImgitemComponent implements OnInit {
     this._apiImgCatalogService.getUnit(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранного агрегата. Получение списка схем
@@ -72,14 +95,22 @@ export class AddImgitemComponent implements OnInit {
     this._apiImgCatalogService.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id схемы. Получение составляющих схемы.
   public passDetailId(event) {
     this.itemId = event.target.value;
     this._apiImgCatalogService.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
-      .subscribe();
+      .subscribe(error => {
+        this.errMsg = error;
+        this._flashErrorService.showError(this.errMsg);
+      });
   }
 
   // Создать новый объект для основного изображения схемы, передать сервису,
@@ -90,7 +121,10 @@ export class AddImgitemComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiImgCatalogService.createDetailItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, item)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.itemImage = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {

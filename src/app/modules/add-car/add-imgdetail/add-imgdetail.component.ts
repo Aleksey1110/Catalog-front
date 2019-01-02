@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiImgCatalogService } from './../../../services/api-img-catalog.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-add-imgdetail',
@@ -20,10 +21,12 @@ export class AddImgdetailComponent implements OnInit {
   public detailName: String;
   public detailImage: String;
   public isConfirmed = false;
+  public errMsg;
 
   constructor(
     private _apiImgcatalogService: ApiImgCatalogService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -35,7 +38,12 @@ export class AddImgdetailComponent implements OnInit {
     this._apiImgcatalogService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
@@ -44,7 +52,12 @@ export class AddImgdetailComponent implements OnInit {
     this._apiImgcatalogService.getModel(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -53,7 +66,12 @@ export class AddImgdetailComponent implements OnInit {
     this._apiImgcatalogService.getModification(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
@@ -62,7 +80,12 @@ export class AddImgdetailComponent implements OnInit {
     this._apiImgcatalogService.getUnit(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранного агрегата.
@@ -80,7 +103,10 @@ export class AddImgdetailComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId) {
       this._apiImgcatalogService.createDetail(this.carId, this.modelId, this.unitId, this.detailId, detail)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.detailName = '';
       this.detailImage = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });

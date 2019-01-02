@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiService } from './../../../services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-edit-detail',
@@ -21,10 +22,12 @@ export class EditDetailComponent implements OnInit {
   public itemId: String;
   public detailName: String;
   public isConfirmed = false;
+  public errMsg;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -37,7 +40,12 @@ export class EditDetailComponent implements OnInit {
     this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
@@ -46,7 +54,12 @@ export class EditDetailComponent implements OnInit {
     this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -55,7 +68,12 @@ export class EditDetailComponent implements OnInit {
     this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
@@ -64,7 +82,12 @@ export class EditDetailComponent implements OnInit {
     this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранного агрегата. Получение списка деталей
@@ -73,7 +96,12 @@ export class EditDetailComponent implements OnInit {
     this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id детали. Получение списка составляющих детали.
@@ -81,7 +109,10 @@ export class EditDetailComponent implements OnInit {
     this.isConfirmed = true;
     this.itemId = event.target.value;
     this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
-      .subscribe();
+      .subscribe(error => {
+        this.errMsg = error;
+        this._flashErrorService.showError(this.errMsg);
+      });
   }
 
   // Создать новый объект для детали, передать сервису,
@@ -92,7 +123,10 @@ export class EditDetailComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiService.editDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, detail)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.detailName = '';
       this._flashMessagesService.show('Данные детали успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
@@ -104,7 +138,10 @@ export class EditDetailComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiService.removeDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this._flashMessagesService.show('Деталь успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

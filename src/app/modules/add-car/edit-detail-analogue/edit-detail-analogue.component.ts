@@ -1,6 +1,7 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ApiService } from './../../../services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-edit-detail-analogue',
@@ -26,10 +27,12 @@ export class EditDetailAnalogueComponent implements OnInit {
   public analogueNum: String;
   public anId: String;
   public isConfirmed = false;
+  public errMsg;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -42,7 +45,12 @@ export class EditDetailAnalogueComponent implements OnInit {
     this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
@@ -51,7 +59,12 @@ export class EditDetailAnalogueComponent implements OnInit {
     this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -60,7 +73,12 @@ export class EditDetailAnalogueComponent implements OnInit {
     this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
@@ -69,7 +87,12 @@ export class EditDetailAnalogueComponent implements OnInit {
     this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранного агрегата. Получение списка деталей
@@ -78,7 +101,12 @@ export class EditDetailAnalogueComponent implements OnInit {
     this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id детали. Получение списка составляющих детали.
@@ -87,7 +115,12 @@ export class EditDetailAnalogueComponent implements OnInit {
     this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe(data => {
         this.analogues = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id оригинального номера. Получение списка составляющих аналогов.
@@ -96,7 +129,12 @@ export class EditDetailAnalogueComponent implements OnInit {
     this._apiService.getAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId)
       .subscribe(data => {
         this.ans = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
 
   }
 
@@ -115,7 +153,10 @@ export class EditDetailAnalogueComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId && this.anId) {
       this._apiService.editAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId, analogue)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.analogueName = '';
       this.analogueNum = '';
       this._flashMessagesService.show('Аналог успешно изменен', { cssClass: 'alert-success', timeout: 4000 });
@@ -128,7 +169,10 @@ export class EditDetailAnalogueComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId && this.anId) {
       this._apiService.removeAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this._flashMessagesService.show('Аналог успешно удален', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-add-model',
@@ -13,10 +14,12 @@ export class AddModelComponent implements OnInit {
   public carId: String;
   public modelName: String;
   public isConfirmed = false;
+  public errMsg;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private _flashErrorService: FlashErrorService
   ) { }
 
   ngOnInit() {
@@ -29,7 +32,12 @@ export class AddModelComponent implements OnInit {
     this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины.
@@ -45,7 +53,10 @@ export class AddModelComponent implements OnInit {
     };
     if (this.carId) {
       this._apiService.createModel(this.carId, model)
-        .subscribe();
+        .subscribe(error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
       this.modelName = '';
       this._flashMessagesService.show('Модель успешно добавлена', { cssClass: 'alert-success', timeout: 4000 });
     } else {

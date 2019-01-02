@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Items } from 'src/app/models/items';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { FlashErrorService } from 'src/app/services/flash-error.service';
 
 @Component({
   selector: 'app-dropdown-navigation',
@@ -9,7 +11,10 @@ import { Items } from 'src/app/models/items';
 })
 export class DropdownNavigationComponent implements OnInit {
 
-  constructor(private _apiService: ApiService) { }
+  constructor(
+    private _apiService: ApiService,
+    private _flashErrorService: FlashErrorService
+  ) { }
 
   public markName = [];
   public modelName = [];
@@ -22,6 +27,7 @@ export class DropdownNavigationComponent implements OnInit {
   public unitId: String;
   public detailId: String;
   public itemId: String;
+  public errMsg;
 
   // Выходные данные из компонента (Массив составляющих детали)
   @Output() showCar = new EventEmitter<Items[]>();
@@ -36,7 +42,12 @@ export class DropdownNavigationComponent implements OnInit {
     this._apiService.getCars()
       .subscribe(data => {
         this.markName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
 
@@ -46,7 +57,12 @@ export class DropdownNavigationComponent implements OnInit {
     this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
@@ -55,7 +71,12 @@ export class DropdownNavigationComponent implements OnInit {
     this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
@@ -64,7 +85,12 @@ export class DropdownNavigationComponent implements OnInit {
     this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранного агрегата. Получение списка деталей
@@ -73,7 +99,12 @@ export class DropdownNavigationComponent implements OnInit {
     this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data;
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id детали. Получение списка составляющих детали. Отправка данных их компонента
@@ -83,6 +114,11 @@ export class DropdownNavigationComponent implements OnInit {
       .subscribe(data => {
         this.items = data;
         this.showCar.emit(this.items);
-      });
+      },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 }
