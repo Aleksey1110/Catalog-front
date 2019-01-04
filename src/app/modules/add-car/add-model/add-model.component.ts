@@ -13,7 +13,6 @@ export class AddModelComponent implements OnInit {
   public markName = [];
   public carId: String;
   public modelName: String;
-  public isConfirmed = false;
   public errMsg;
 
   constructor(
@@ -43,7 +42,6 @@ export class AddModelComponent implements OnInit {
   // Получение Id выбранной машины.
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.isConfirmed = true;
   }
 
   // Создать новый объект модели, передать название модели, отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
@@ -53,10 +51,11 @@ export class AddModelComponent implements OnInit {
     };
     if (this.carId) {
       this._apiService.createModel(this.carId, model)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.modelName = '';
       this._flashMessagesService.show('Модель успешно добавлена', { cssClass: 'alert-success', timeout: 4000 });
     } else {

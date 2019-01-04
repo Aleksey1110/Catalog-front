@@ -9,3 +9,13 @@ select {
 textarea {
     margin-bottom: 7px;
 }
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+small {
+    color: #d9534f;
+    margin-bottom: 7px;
+    display: block;
+}

@@ -10,7 +10,7 @@ import { FlashErrorService } from 'src/app/services/flash-error.service';
 })
 export class AddImgmarkComponent implements OnInit {
 
-  private markName: String;
+  public markName: String;
   public errMsg;
 
   constructor(
@@ -28,10 +28,11 @@ export class AddImgmarkComponent implements OnInit {
       markName: this.markName
     };
     this._apiImgCatalogServise.createCar(car)
-      .subscribe(error => {
-        this.errMsg = error;
-        this._flashErrorService.showError(this.errMsg);
-      });
+      .subscribe(data => { },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
     this.markName = '';
     this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
   }

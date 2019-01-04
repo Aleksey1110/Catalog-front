@@ -28,10 +28,11 @@ export class AddCarComponent implements OnInit {
       markName: this.markName
     };
     this._apiService.createCar(car)
-      .subscribe(error => {
-        this.errMsg = error;
-        this._flashErrorService.showError(this.errMsg);
-      });
+      .subscribe(data => { },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
     this.markName = '';
     this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
   }

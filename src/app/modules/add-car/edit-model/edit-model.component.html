@@ -1,16 +1,16 @@
-<form #form="ngForm">
-  <div class="select">
-    <label for="markName">Марка</label>
+<form #form="ngForm" novalidate>
+  <div class="form-group">
+    <label>Марка</label>
     <!-- Передача ID выбранной марки в компонент -->
-    <select id="markName" (change)="passCarId($event)" class="form-control">
+    <select (change)="passCarId($event)" class="custom-select" name="carItem" ngModel required>
       <option></option>
       <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
     </select>
   </div>
-  <div class="select">
-    <label for="modelName">Модель</label>
+  <div class="form-group">
+    <label>Модель</label>
     <!-- Передача ID выбранной модели в компонент -->
-    <select id="modelName" (change)="passModelId($event)" class="form-control">
+    <select (change)="passModelId($event)" class="custom-select" name="model" ngModel required>
       <option></option>
       <option *ngFor="let model of modelsName" [value]="model._id">{{model.modelsName}}</option>
     </select>
@@ -18,8 +18,10 @@
   <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
   <!-- Блок добавления данных -->
   <div class="form-group">
-    <p>Внесите новое название модели автомобиля</p>
-    <input type="text" class="form-control" [(ngModel)]="modelName" name="modelName" required>
+    <label>Внесите новое название модели автомобиля</label>
+    <input type="text" class="form-control" [(ngModel)]="modelName" name="modelName" required #name="ngModel"
+      [class.is-invalid]="name.invalid && name.touched">
+    <small *ngIf="name.invalid && name.touched">Заполните форму</small>
   </div>
-  <button class="btn btn-warning" (click)="editModel()" [disabled]="!isConfirmed && !form.valid">Редактировать</button>
+  <button class="btn btn-warning" (click)="editModel()" [disabled]="form.form.invalid">Редактировать</button>
 </form>

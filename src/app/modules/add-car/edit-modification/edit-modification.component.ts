@@ -86,10 +86,11 @@ export class EditModificationComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId) {
       this._apiService.editModification(this.carId, this.modelId, this.unitId, modification)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.modificationName = '';
       this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
@@ -101,10 +102,11 @@ export class EditModificationComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId) {
       this._apiService.removeModification(this.carId, this.modelId, this.unitId)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this._flashMessagesService.show('Модификация успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

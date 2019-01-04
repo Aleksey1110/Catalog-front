@@ -12,7 +12,6 @@ export class AddImgmodelComponent implements OnInit {
 
   public markName = [];
   public carId: String;
-  public isConfirmed = false;
   public modelsName: String;
   public errMsg;
 
@@ -43,7 +42,6 @@ export class AddImgmodelComponent implements OnInit {
   // Получение Id выбранной машины.
   public passCarId(event): void {
     this.carId = event.target.value;
-    this.isConfirmed = true;
   }
 
   // Создать новый объект модели, передать название модели, отправить на сервер, очистить форму, вывести сообщение об успехе или неудаче
@@ -53,10 +51,11 @@ export class AddImgmodelComponent implements OnInit {
     };
     if (this.carId) {
       this._apiImgCatalogServce.createModel(this.carId, model)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.modelsName = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {

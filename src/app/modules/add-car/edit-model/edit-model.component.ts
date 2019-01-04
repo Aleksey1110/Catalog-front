@@ -69,7 +69,8 @@ export class EditModelComponent implements OnInit {
     };
     if (this.carId && this.modelId) {
       this._apiService.editModel(this.carId, this.modelId, model)
-        .subscribe(error => {
+        .subscribe(data => { },
+          error => {
             this.errMsg = error;
             this._flashErrorService.showError(this.errMsg);
           });
@@ -84,10 +85,11 @@ export class EditModelComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId) {
       this._apiService.removeModel(this.carId, this.modelId)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this._flashMessagesService.show('Модель успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

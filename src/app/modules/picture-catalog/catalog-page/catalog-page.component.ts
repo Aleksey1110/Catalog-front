@@ -19,6 +19,11 @@ export class CatalogPageComponent implements OnInit {
 
   }
 
+  // Функция сортировки данных
+  private _compare(detailsA, detailsB) {
+    return detailsA.itemNumber - detailsB.itemNumber;
+  }
+
   // Получение данных из компонента dropdown. Присвоение значений
   showItems(items: ImgItems[]) {
     this.isPassedId = true;
@@ -27,6 +32,7 @@ export class CatalogPageComponent implements OnInit {
       this.details = elem.items;
       this.itemImage = elem.itemImage;
     });
+    this.details.sort(this._compare);
   }
 
 }

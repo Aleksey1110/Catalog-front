@@ -54,10 +54,11 @@ export class EditMarkComponent implements OnInit {
     };
     if (this.carId) {
       this._apiService.editMark(this.carId, mark)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.markName = '';
       this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
@@ -69,10 +70,11 @@ export class EditMarkComponent implements OnInit {
   public remove() {
     if (this.carId) {
       this._apiService.removeMark(this.carId)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this._flashMessagesService.show('Марка успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите марку автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

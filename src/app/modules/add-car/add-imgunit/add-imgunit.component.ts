@@ -17,7 +17,6 @@ export class AddImgunitComponent implements OnInit {
   public modelId: String;
   public unitId: String;
   public unitName: String;
-  public isConfirmed = false;
   public errMsg;
 
   constructor(
@@ -75,7 +74,6 @@ export class AddImgunitComponent implements OnInit {
   // Получение Id выбранной модификации.
   public passModificationId(event): void {
     this.unitId = event.target.value;
-    this.isConfirmed = true;
   }
 
   // Создать новый объект агрегата, передать название агрегата,
@@ -86,10 +84,11 @@ export class AddImgunitComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId) {
       this._apiImgCatalogService.createUnit(this.carId, this.modelId, this.unitId, unit)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.unitName = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {

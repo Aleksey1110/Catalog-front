@@ -1,8 +1,10 @@
-<form #form="ngForm">
+<form #form="ngForm" novalidate (ngSubmit)="addCar()">
   <!-- Блок добавления данных -->
   <div class="form-group">
-    <p>Внесите название марки автомобиля</p>
-    <input type="text" class="form-control" [(ngModel)]="markName" name="markName" required>
+    <label>Внесите название марки автомобиля</label>
+    <input type="text" class="form-control" [(ngModel)]="markName" name="markName" required #name="ngModel"
+      [class.is-invalid]="name.invalid && name.touched">
+    <small *ngIf="name.invalid && name.touched">Заполните форму</small>
   </div>
-  <button class="btn btn-success" (click)="addCar()" [disabled]="!form.valid">Добавить</button>
+  <button type="submit" class="btn btn-success" [disabled]="form.form.invalid">Добавить</button>
 </form>

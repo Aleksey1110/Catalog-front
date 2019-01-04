@@ -109,10 +109,11 @@ export class EditDetailComponent implements OnInit {
     this.isConfirmed = true;
     this.itemId = event.target.value;
     this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
-      .subscribe(error => {
-        this.errMsg = error;
-        this._flashErrorService.showError(this.errMsg);
-      });
+      .subscribe(data => { },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
   }
 
   // Создать новый объект для детали, передать сервису,
@@ -123,10 +124,11 @@ export class EditDetailComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiService.editDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, detail)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.detailName = '';
       this._flashMessagesService.show('Данные детали успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
@@ -138,10 +140,11 @@ export class EditDetailComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiService.removeDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this._flashMessagesService.show('Деталь успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

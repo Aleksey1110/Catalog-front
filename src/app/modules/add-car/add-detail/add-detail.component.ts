@@ -19,7 +19,6 @@ export class AddDetailComponent implements OnInit {
   public unitId: String;
   public detailId: String;
   public detailName: String;
-  public isConfirmed = false;
   public errMsg;
 
   constructor(
@@ -91,7 +90,6 @@ export class AddDetailComponent implements OnInit {
   // Получение Id выбранного агрегата.
   public passUnitId(event) {
     this.detailId = event.target.value;
-    this.isConfirmed = true;
   }
 
   // Создать новый объект детали, передать название детали,
@@ -102,10 +100,11 @@ export class AddDetailComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId) {
       this._apiService.createDetail(this.carId, this.modelId, this.unitId, this.detailId, detail)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.detailName = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {

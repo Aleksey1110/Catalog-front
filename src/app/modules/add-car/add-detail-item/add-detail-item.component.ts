@@ -109,10 +109,11 @@ export class AddDetailItemComponent implements OnInit {
   public passDetailId(event) {
     this.itemId = event.target.value;
     this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
-      .subscribe(error => {
-        this.errMsg = error;
-        this._flashErrorService.showError(this.errMsg);
-      });
+      .subscribe(data => { },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
   }
 
   // Создать новый объект для дынных детали, передать сервису,
@@ -125,10 +126,11 @@ export class AddDetailItemComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiService.createDetailItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, item)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.originalNumber = [];
       this.note = '';
       this.picture = '';

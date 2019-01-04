@@ -134,10 +134,11 @@ export class AddAnalogueComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId) {
       this._apiService.createAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, analogue)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.analogueName = '';
       this.analogueNum = '';
       this._flashMessagesService.show('Аналог успешно добавлен', { cssClass: 'alert-success', timeout: 4000 });

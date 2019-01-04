@@ -1,48 +1,48 @@
-<form #form="ngForm">
-  <div class="select">
-    <label for="markName">Марка</label>
+<form #form="ngForm" novalidate>
+  <div class="form-group">
+    <label>Марка</label>
     <!-- Передача ID выбранной марки в компонент -->
-    <select id="markName" (change)="passCarId($event)" class="form-control">
+    <select (change)="passCarId($event)" class="custom-select" name="carItem" ngModel required>
       <option></option>
       <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
     </select>
   </div>
-  <div class="select">
-    <label for="modelName">Модель</label>
+  <div class="form-group">
+    <label>Модель</label>
     <!-- Передача ID выбранной модели в компонент -->
-    <select id="modelName" (change)="passModelId($event)" class="form-control">
+    <select (change)="passModelId($event)" class="custom-select" name="model" ngModel required>
       <option></option>
       <option *ngFor="let model of modelName" [value]="model._id">{{model.modelsName}}</option>
     </select>
   </div>
-  <div class="select">
-    <label for="modificationName">Модификация</label>
+  <div class="form-group">
+    <label>Модификация</label>
     <!-- Передача ID выбранной модификации в компонент -->
-    <select id="modificationName" (change)="passModificationId($event)" class="form-control">
+    <select (change)="passModificationId($event)" class="custom-select" name="modification" ngModel required>
       <option></option>
       <option *ngFor="let modification of modifications" [value]="modification._id">{{modification.modificationName}}</option>
     </select>
   </div>
-  <div class="select">
-    <label for="detailGroup">Агрегат</label>
+  <div class="form-group">
+    <label>Агрегат</label>
     <!-- Передача ID выбранного агрегата в компонент -->
-    <select id="detailGroup" (change)="passUnitId($event)" class="form-control">
+    <select (change)="passUnitId($event)" class="custom-select" name="unit" ngModel required>
       <option></option>
       <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
     </select>
   </div>
-  <div class="select">
-    <label for="detailName">Раздел</label>
+  <div class="form-group">
+    <label>Раздел</label>
     <!-- Передача ID выбранного раздела в компонент -->
-    <select id="detailName" (change)="passDetailId($event)" class="form-control">
+    <select (change)="passDetailId($event)" class="custom-select" name="detail" ngModel required>
       <option></option>
       <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
     </select>
   </div>
-  <div class="select">
-    <label for="analogueName">Ссылка на главную схему</label>
+  <div class="form-group">
+    <label>Ссылка на главную схему</label>
     <!-- Передача ID в компонент -->
-    <select id="analogueName" (change)="passOriginalId($event)" class="form-control">
+    <select (change)="passOriginalId($event)" class="custom-select" name="analogue" ngModel required>
       <option></option>
       <option *ngFor="let analogue of analogues" [value]="analogue._id">{{analogue.itemImage}}</option>
     </select>
@@ -50,8 +50,10 @@
   <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
   <!-- Блок добавления данных -->
   <div class="form-group">
-    <p>Внесите новую ссылку на главную схему</p>
-    <input type="text" class="form-control" [(ngModel)]="itemImage" name="itemImage" required>
+    <label>Внесите новую ссылку на главную схему</label>
+    <input type="text" class="form-control" [(ngModel)]="itemImage" name="itemImage" required #name="ngModel"
+      [class.is-invalid]="name.invalid && name.touched">
+    <small *ngIf="name.invalid && name.touched">Заполните форму</small>
   </div>
-  <button class="btn btn-warning" (click)="editItems()" [disabled]="!isConfirmed && !form.valid">Редактировать</button>
+  <button class="btn btn-warning" (click)="editItems()" [disabled]="form.form.invalid">Редактировать</button>
 </form>

@@ -1,8 +1,8 @@
-<form #form="ngForm">
-  <div class="select">
-    <label for="markName">Марка</label>
+<form #form="ngForm" novalidate>
+  <div class="form-group">
+    <label>Марка</label>
     <!-- Передача ID выбранной марки в компонент -->
-    <select id="markName" (change)="passCarId($event)" class="form-control" required>
+    <select (change)="passCarId($event)" class="form-control" required name="carItem" ngModel>
       <option></option>
       <option *ngFor="let carItem of marksName" [value]="carItem._id">{{carItem.markName}}</option>
     </select>
@@ -10,8 +10,10 @@
   <button class="btn btn-danger" (click)="remove()" [disabled]="!isConfirmed">Удалить</button>
   <!-- Блок внесения данных -->
   <div class="form-group">
-    <p>Внесите новое название модели автомобиля</p>
-    <input type="text" class="form-control" [(ngModel)]="markName" name="markName" required>
+    <label>Внесите новое название модели автомобиля</label>
+    <input type="text" class="form-control" [(ngModel)]="markName" name="markName" required #name="ngModel"
+      [class.is-invalid]="name.invalid && name.touched">
+    <small *ngIf="name.invalid && name.touched">Заполните форму</small>
   </div>
-  <button class="btn btn-warning" (click)="editMark()" [disabled]="!isConfirmed && form.invalid">Редактировать</button>
+  <button class="btn btn-warning" (click)="editMark()" [disabled]="form.form.invalid">Редактировать</button>
 </form>

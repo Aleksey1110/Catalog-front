@@ -34,11 +34,11 @@ export class EditImgmodelComponent implements OnInit {
       .subscribe(data => {
         this.markName = data;
       },
-      error => {
-        this.errMsg = error;
-        this._flashErrorService.showError(this.errMsg);
-      }
-    );
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины. Получение списка моделей
@@ -48,11 +48,11 @@ export class EditImgmodelComponent implements OnInit {
       .subscribe(data => {
         this.modelsName = data;
       },
-      error => {
-        this.errMsg = error;
-        this._flashErrorService.showError(this.errMsg);
-      }
-    );
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной модели.
@@ -69,7 +69,8 @@ export class EditImgmodelComponent implements OnInit {
     };
     if (this.carId && this.modelId) {
       this._apiImgCatalogService.editModel(this.carId, this.modelId, model)
-        .subscribe(error => {
+        .subscribe(data => { },
+          error => {
             this.errMsg = error;
             this._flashErrorService.showError(this.errMsg);
           });
@@ -84,7 +85,8 @@ export class EditImgmodelComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId) {
       this._apiImgCatalogService.removeModel(this.carId, this.modelId)
-        .subscribe(error => {
+        .subscribe(data => { },
+          error => {
             this.errMsg = error;
             this._flashErrorService.showError(this.errMsg);
           });

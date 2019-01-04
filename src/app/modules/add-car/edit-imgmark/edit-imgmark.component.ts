@@ -33,11 +33,11 @@ export class EditImgmarkComponent implements OnInit {
       .subscribe(data => {
         this.marksName = data;
       },
-      error => {
-        this.errMsg = error;
-        this._flashErrorService.showError(this.errMsg);
-      }
-    );
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        }
+      );
   }
 
   // Получение Id выбранной машины.
@@ -54,7 +54,8 @@ export class EditImgmarkComponent implements OnInit {
     };
     if (this.carId) {
       this._apiImgcatalogService.editMark(this.carId, mark)
-        .subscribe(error => {
+        .subscribe(data => { },
+          error => {
             this.errMsg = error;
             this._flashErrorService.showError(this.errMsg);
           });
@@ -69,7 +70,8 @@ export class EditImgmarkComponent implements OnInit {
   public remove() {
     if (this.carId) {
       this._apiImgcatalogService.removeMark(this.carId)
-        .subscribe(error => {
+        .subscribe(data => { },
+          error => {
             this.errMsg = error;
             this._flashErrorService.showError(this.errMsg);
           });

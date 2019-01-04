@@ -38,11 +38,11 @@ export class EditImgunitComponent implements OnInit {
             .subscribe(data => {
                 this.markName = data;
             },
-            error => {
-              this.errMsg = error;
-              this._flashErrorService.showError(this.errMsg);
-            }
-          );
+                error => {
+                    this.errMsg = error;
+                    this._flashErrorService.showError(this.errMsg);
+                }
+            );
     }
 
     // Получение Id выбранной машины. Получение списка моделей
@@ -52,11 +52,11 @@ export class EditImgunitComponent implements OnInit {
             .subscribe(data => {
                 this.modelName = data;
             },
-            error => {
-              this.errMsg = error;
-              this._flashErrorService.showError(this.errMsg);
-            }
-          );
+                error => {
+                    this.errMsg = error;
+                    this._flashErrorService.showError(this.errMsg);
+                }
+            );
     }
 
     // Получение Id выбранной модели. Получение списка модификаций
@@ -66,11 +66,11 @@ export class EditImgunitComponent implements OnInit {
             .subscribe(data => {
                 this.modifications = data;
             },
-            error => {
-              this.errMsg = error;
-              this._flashErrorService.showError(this.errMsg);
-            }
-          );
+                error => {
+                    this.errMsg = error;
+                    this._flashErrorService.showError(this.errMsg);
+                }
+            );
     }
 
     // Получение Id выбранной модификации. Получение списка агрегатов
@@ -80,11 +80,11 @@ export class EditImgunitComponent implements OnInit {
             .subscribe(data => {
                 this.units = data;
             },
-            error => {
-              this.errMsg = error;
-              this._flashErrorService.showError(this.errMsg);
-            }
-          );
+                error => {
+                    this.errMsg = error;
+                    this._flashErrorService.showError(this.errMsg);
+                }
+            );
     }
 
     // Получение Id выбранного агрегата.
@@ -101,9 +101,10 @@ export class EditImgunitComponent implements OnInit {
         };
         if (this.carId && this.modelId && this.unitId && this.detailId) {
             this._apiImgCatalogService.editUnit(this.carId, this.modelId, this.unitId, this.detailId, unit)
-                .subscribe(error => {
-                      this.errMsg = error;
-                      this._flashErrorService.showError(this.errMsg);
+                .subscribe(data => { },
+                    error => {
+                        this.errMsg = error;
+                        this._flashErrorService.showError(this.errMsg);
                     });
             this.unitName = '';
             this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
@@ -117,9 +118,10 @@ export class EditImgunitComponent implements OnInit {
     public remove() {
         if (this.carId && this.modelId && this.unitId && this.detailId) {
             this._apiImgCatalogService.removeUnit(this.carId, this.modelId, this.unitId, this.detailId)
-                .subscribe(error => {
-                      this.errMsg = error;
-                      this._flashErrorService.showError(this.errMsg);
+                .subscribe(data => { },
+                    error => {
+                        this.errMsg = error;
+                        this._flashErrorService.showError(this.errMsg);
                     });
             this._flashMessagesService.show('Модификация успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
         } else {

@@ -158,16 +158,17 @@ export class EditImgitemdetailComponent implements OnInit {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId && this.anId) {
       // tslint:disable-next-line:max-line-length
       this._apiImgCatalogService.editItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId, analogue)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
+      this.itemNumber = null;
       this.itemName = '';
       this.itemArticle = [];
       this.itemNote = '';
       this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      // tslint:disable-next-line:max-line-length
       this._flashMessagesService.show('Выберите все данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
     }
   }
@@ -176,10 +177,11 @@ export class EditImgitemdetailComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId && this.anId) {
       this._apiImgCatalogService.removeItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this._flashMessagesService.show('Данные успешно удалены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
       this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });

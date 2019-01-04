@@ -20,7 +20,6 @@ export class AddImgdetailComponent implements OnInit {
   public detailId: String;
   public detailName: String;
   public detailImage: String;
-  public isConfirmed = false;
   public errMsg;
 
   constructor(
@@ -91,7 +90,6 @@ export class AddImgdetailComponent implements OnInit {
   // Получение Id выбранного агрегата.
   public passUnitId(event) {
     this.detailId = event.target.value;
-    this.isConfirmed = true;
   }
 
   // Создать новый объект схемы, передать данные,
@@ -103,10 +101,11 @@ export class AddImgdetailComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId) {
       this._apiImgcatalogService.createDetail(this.carId, this.modelId, this.unitId, this.detailId, detail)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.detailName = '';
       this.detailImage = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });

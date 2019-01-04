@@ -53,7 +53,8 @@ export class AddImgitemdetailComponent implements OnInit {
   }
 
   // Получение Id выбранной машины. Получение списка моделей
-  public passCarId(value): void {
+  public passCarId(event): void {
+    this.carId = event.target.value;
     this._apiImgCatalogService.getModel(this.carId)
       .subscribe(data => {
         this.modelName = data;
@@ -137,10 +138,12 @@ export class AddImgitemdetailComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId) {
       this._apiImgCatalogService.createItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, items)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
+      this.itemNumber = null;
       this.itemName = '';
       this.itemArticle = [];
       this.itemNote = '';

@@ -107,10 +107,11 @@ export class AddImgitemComponent implements OnInit {
   public passDetailId(event) {
     this.itemId = event.target.value;
     this._apiImgCatalogService.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
-      .subscribe(error => {
-        this.errMsg = error;
-        this._flashErrorService.showError(this.errMsg);
-      });
+      .subscribe(data => { },
+        error => {
+          this.errMsg = error;
+          this._flashErrorService.showError(this.errMsg);
+        });
   }
 
   // Создать новый объект для основного изображения схемы, передать сервису,
@@ -121,10 +122,11 @@ export class AddImgitemComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiImgCatalogService.createDetailItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, item)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.itemImage = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {

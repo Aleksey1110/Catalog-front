@@ -1,32 +1,34 @@
-<form #form="ngForm">
-  <div class="select">
-    <label for="markName">Марка</label>
+<form #form="ngForm" novalidate (ngSubmit)="addUnit()">
+  <div class="form-group">
+    <label>Марка</label>
     <!-- Передача ID выбранной марки в компонент -->
-    <select id="markName" (change)="passCarId($event)" class="form-control">
+    <select (change)="passCarId($event)" class="custom-select" name="carItem" ngModel required>
       <option></option>
       <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
     </select>
   </div>
-  <div class="select">
-    <label for="modelName">Модель</label>
+  <div class="form-group">
+    <label>Модель</label>
     <!-- Передача ID выбранной модели в компонент -->
-    <select id="modelName" (change)="passModelId($event)" class="form-control">
+    <select (change)="passModelId($event)" class="custom-select" name="model" ngModel required>
       <option></option>
       <option *ngFor="let model of modelName" [value]="model._id">{{model.modelsName}}</option>
     </select>
   </div>
-  <div class="select">
-    <label for="modificationName">Модификация</label>
+  <div class="form-group">
+    <label>Модификация</label>
     <!-- Передача ID выбранной модификации в компонент -->
-    <select id="modificationName" (change)="passModificationId($event)" class="form-control">
+    <select (change)="passModificationId($event)" class="custom-select" name="modification" ngModel required>
       <option></option>
       <option *ngFor="let modification of modifications" [value]="modification._id">{{modification.modificationName}}</option>
     </select>
   </div>
   <!-- Блок внесения данных -->
   <div class="form-group">
-    <p>Внесите название агрегата автомобиля</p>
-    <input type="text" class="form-control" [(ngModel)]="unitName" name="unitlName" required>
+    <label>Внесите название агрегата автомобиля</label>
+    <input type="text" class="form-control" [(ngModel)]="unitName" name="unitlName" required #name="ngModel"
+      [class.is-invalid]="name.invalid && name.touched">
+    <small *ngIf="name.invalid && name.touched">Заполните форму</small>
   </div>
-  <button class="btn btn-success" (click)="addUnit()" [disabled]="!isConfirmed && !form.valid">Добавить</button>
+  <button type="submit" class="btn btn-success" [disabled]="form.form.invalid">Добавить</button>
 </form>

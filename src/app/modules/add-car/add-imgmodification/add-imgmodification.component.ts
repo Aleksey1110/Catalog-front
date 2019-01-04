@@ -15,7 +15,6 @@ export class AddImgmodificationComponent implements OnInit {
   public carId: String;
   public modelId: String;
   public modificationlName: String;
-  public isConfirmed = false;
   public errMsg;
 
   constructor(
@@ -58,7 +57,6 @@ export class AddImgmodificationComponent implements OnInit {
   // Получение Id выбранной модели.
   public passModelId(event): void {
     this.modelId = event.target.value;
-    this.isConfirmed = true;
   }
 
   // Создать новый объект модификации, передать название модификации,
@@ -69,10 +67,11 @@ export class AddImgmodificationComponent implements OnInit {
     };
     if (this.carId && this.modelId) {
       this._apiImgCatalogService.createModification(this.carId, this.modelId, model)
-        .subscribe(error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+        .subscribe(data => { },
+          error => {
+            this.errMsg = error;
+            this._flashErrorService.showError(this.errMsg);
+          });
       this.modificationlName = '';
       this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
