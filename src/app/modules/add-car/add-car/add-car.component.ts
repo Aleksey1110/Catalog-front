@@ -1,21 +1,24 @@
 import { ApiService } from 'src/app/services/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
 
 @Component({
   selector: 'app-add-car',
   templateUrl: './add-car.component.html',
   styleUrls: ['./add-car.component.css']
 })
-export class AddCarComponent implements OnInit {
+export class AddCarComponent implements OnInit, OnDestroy {
 
   public markName: String;
   public errMsg;
+  public a;
+  b = false;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService,
+    private _flashMessagesService: FlashMessageService,
     private _flashErrorService: FlashErrorService
   ) { }
 
@@ -27,13 +30,17 @@ export class AddCarComponent implements OnInit {
     const car = {
       markName: this.markName
     };
-    this._apiService.createCar(car)
-      .subscribe(data => { },
-        error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
-        });
+    // this._apiService.createCar(car)
+    //   .subscribe(data => { },
+    //     error => {
+    //       this.errMsg = error;
+    //       this._flashErrorService.showError(this.errMsg);
+    //     });
     this.markName = '';
-    this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
+    this.a = this._flashMessagesService.showMessage('success', 'success');
+    // console.log(this.a);
+  }
+
+  ngOnDestroy(): void {
   }
 }

@@ -33,7 +33,6 @@ export class ApiService {
       .pipe(catchError(this.errorHandler));
   }
 
-
   // Получить список моделей
   getModelName(id1): Observable<Models[]> {
     return this.http.get<Models[]>(`${this._url}/api/${id1}`)
