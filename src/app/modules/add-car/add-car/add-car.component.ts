@@ -13,7 +13,7 @@ export class AddCarComponent implements OnInit, OnDestroy {
 
   public markName: String;
   public errMsg;
-  public a;
+  public a = {};
   b = false;
 
   constructor(
@@ -37,8 +37,8 @@ export class AddCarComponent implements OnInit, OnDestroy {
     //       this._flashErrorService.showError(this.errMsg);
     //     });
     this.markName = '';
-    this.a = this._flashMessagesService.showMessage('success', 'success');
-    // console.log(this.a);
+    this._flashMessagesService.showMessage('success', 'success').subscribe(data => this.a = data);
+    this.b = true;
   }
 
   ngOnDestroy(): void {

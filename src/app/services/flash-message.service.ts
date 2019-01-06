@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Message } from '../models/message';
-import { Observable, observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { timeout } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,8 @@ export class FlashMessageService {
   a;
   constructor() { }
 
-  showMessage(type: string = 'danger', text: string) {
-    this.message = { text, type };
-    window.setTimeout(() => {
-      this.message = { text: '', type: '' };
-    }, 2000);
-
-    return this.message;
-    console.log(this.message);
+  showMessage(type: string = 'danger', text: string): Observable<any> {
+    this.message = { type, text };
+    return of(this.message).pipe(timeout(1000));
   }
 }
