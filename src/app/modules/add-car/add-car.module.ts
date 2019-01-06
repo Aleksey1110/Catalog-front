@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AddCarRoutingModule, routingComponents } from './add-car-routing.module';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { FlashErrorService } from 'src/app/services/flash-error.service';
     AddCarRoutingModule
   ],
   providers: [
-    FlashErrorService
+    FlashMessageService
   ]
 })
 export class AddCarModule { }

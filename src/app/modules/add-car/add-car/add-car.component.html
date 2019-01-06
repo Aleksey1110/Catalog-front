@@ -1,4 +1,6 @@
-<div class="alert alert-{{a.type}}" *ngIf="b">{{a.text}}</div>
+<!-- Вывод флеш-сщщбщений -->
+<div class="alert alert-{{message.type}}" *ngIf="message">{{message.text}}</div>
+<!-- Форма -->
 <form #form="ngForm" novalidate (ngSubmit)="addCar()">
   <!-- Блок добавления данных -->
   <div class="form-group">

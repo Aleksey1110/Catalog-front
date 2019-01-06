@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Items } from 'src/app/models/items';
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
+import { Message } from 'src/app/models/message';
 
 @Component({
   selector: 'app-dropdown-navigation',
@@ -13,7 +13,7 @@ export class DropdownNavigationComponent implements OnInit {
 
   constructor(
     private _apiService: ApiService,
-    private _flashErrorService: FlashErrorService
+    private _flashMessagesService: FlashMessageService
   ) { }
 
   public markName = [];
@@ -27,7 +27,7 @@ export class DropdownNavigationComponent implements OnInit {
   public unitId: String;
   public detailId: String;
   public itemId: String;
-  public errMsg;
+  public message: Message;
 
   // Выходные данные из компонента (Массив составляющих детали)
   @Output() showCar = new EventEmitter<Items[]>();
@@ -44,8 +44,7 @@ export class DropdownNavigationComponent implements OnInit {
         this.markName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -59,8 +58,7 @@ export class DropdownNavigationComponent implements OnInit {
         this.modelName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -73,8 +71,7 @@ export class DropdownNavigationComponent implements OnInit {
         this.modifications = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -87,8 +84,7 @@ export class DropdownNavigationComponent implements OnInit {
         this.units = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -101,8 +97,7 @@ export class DropdownNavigationComponent implements OnInit {
         this.details = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -116,8 +111,7 @@ export class DropdownNavigationComponent implements OnInit {
         this.showCar.emit(this.items);
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }

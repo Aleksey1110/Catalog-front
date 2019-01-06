@@ -5,8 +5,7 @@ import { CommonModule } from '@angular/common';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 import { PictureCatalogRoutingModule } from './picture-catalog-routing.module';
-import { FlashMessagesModule } from 'angular2-flash-messages';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
 
 @NgModule({
   declarations: [
@@ -15,12 +14,11 @@ import { FlashErrorService } from 'src/app/services/flash-error.service';
   ],
   imports: [
     CommonModule,
-    PictureCatalogRoutingModule,
-    FlashMessagesModule.forRoot()
+    PictureCatalogRoutingModule
   ],
   providers: [
     ApiImgCatalogService,
-    FlashErrorService
+    FlashMessageService
   ]
 })
 export class PictureCatalogModule { }

@@ -5,8 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { DropdownNavigationComponent } from './dropdown-navigation/dropdown-navigation.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
-import { FlashMessagesModule } from 'angular2-flash-messages';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
 
 @NgModule({
     declarations: [
@@ -15,12 +14,11 @@ import { FlashErrorService } from 'src/app/services/flash-error.service';
     ],
     imports: [
         CommonModule,
-        HomePageRoutingModule,
-        FlashMessagesModule.forRoot()
+        HomePageRoutingModule
     ],
     providers: [
         ApiService,
-        FlashErrorService
+        FlashMessageService
     ]
 })
 

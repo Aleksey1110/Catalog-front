@@ -1,8 +1,7 @@
 import { ApiService } from 'src/app/services/api.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
 import { FlashMessageService } from 'src/app/services/flash-message.service';
+import { Message } from 'src/app/models/message';
 
 @Component({
   selector: 'app-add-car',
@@ -13,32 +12,31 @@ export class AddCarComponent implements OnInit, OnDestroy {
 
   public markName: String;
   public errMsg;
-  public a = {};
-  b = false;
+  public message: Message;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessageService,
-    private _flashErrorService: FlashErrorService
+    private _flashMessagesService: FlashMessageService
   ) { }
 
   ngOnInit() {
   }
 
-  // Создать новый объект машины, передать название марки, отправить на сервер, очистить форму, вывести сообщение об успехе
+  // Создать новый объект машины, передать название марки, отправить на сервер, очистить форму, вывести сообщение
   addCar() {
     const car = {
       markName: this.markName
     };
-    // this._apiService.createCar(car)
-    //   .subscribe(data => { },
-    //     error => {
-    //       this.errMsg = error;
-    //       this._flashErrorService.showError(this.errMsg);
-    //     });
+    this._apiService.createCar(car)
+      .subscribe(data => {
+        this._flashMessagesService.showMessage('success', 'success', 3000).subscribe(msg => {
+          this.message = msg;
+        });
+      },
+        error => {
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
+        });
     this.markName = '';
-    this._flashMessagesService.showMessage('success', 'success').subscribe(data => this.a = data);
-    this.b = true;
   }
 
   ngOnDestroy(): void {

@@ -1,7 +1,8 @@
 import { ApiImgCatalogService } from './../../../services/api-img-catalog.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImgItems } from 'src/app/models/img-items';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { Message } from 'src/app/models/message';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -12,7 +13,7 @@ export class DropdownComponent implements OnInit {
 
   constructor(
     private apiImageCatalog: ApiImgCatalogService,
-    private _flashErrorService: FlashErrorService
+    private _flashMessagesService: FlashMessageService
   ) { }
 
   public markName = [];
@@ -27,7 +28,7 @@ export class DropdownComponent implements OnInit {
   public detailId: String;
   public itemId: String;
   public passedId = false;
-  public errMsg;
+  public message: Message;
 
   // Выходные данные из компонента (Массив данных выбранного раздела)
   @Output() showItems = new EventEmitter<ImgItems[]>();
@@ -44,8 +45,7 @@ export class DropdownComponent implements OnInit {
         this.markName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -58,8 +58,7 @@ export class DropdownComponent implements OnInit {
         this.modelName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -72,8 +71,7 @@ export class DropdownComponent implements OnInit {
         this.modifications = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -86,8 +84,7 @@ export class DropdownComponent implements OnInit {
         this.units = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -101,8 +98,7 @@ export class DropdownComponent implements OnInit {
       }
         ,
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         });
     this.passedId = true;
   }
@@ -116,8 +112,7 @@ export class DropdownComponent implements OnInit {
         this.showItems.emit(this.items);
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
         );
   }

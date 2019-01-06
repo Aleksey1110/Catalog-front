@@ -1,4 +1,6 @@
 <div class="row">
+  <!-- Вывод флеш-сщщбщений -->
+  <div class="alert alert-{{message.type}}" *ngIf="message">{{message.text}}</div>
   <div class="col d-flex justify-content-between">
     <div class="select">
       <label for="markName">Марка</label>
