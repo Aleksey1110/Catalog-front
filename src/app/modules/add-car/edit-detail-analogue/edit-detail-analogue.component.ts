@@ -1,7 +1,7 @@
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { ApiService } from './../../../services/api.service';
 import { Component, OnInit } from '@angular/core';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { ApiService } from './../../../services/api.service';
+import { Message } from 'src/app/models/message';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
 
 @Component({
   selector: 'app-edit-detail-analogue',
@@ -27,12 +27,11 @@ export class EditDetailAnalogueComponent implements OnInit {
   public analogueNum: String;
   public anId: String;
   public isConfirmed = false;
-  public errMsg;
+  public message: Message;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService,
-    private _flashErrorService: FlashErrorService
+    private _flashMessagesService: FlashMessageService
   ) { }
 
   ngOnInit() {
@@ -47,8 +46,7 @@ export class EditDetailAnalogueComponent implements OnInit {
         this.markName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -61,8 +59,7 @@ export class EditDetailAnalogueComponent implements OnInit {
         this.modelName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -75,8 +72,7 @@ export class EditDetailAnalogueComponent implements OnInit {
         this.modifications = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -89,8 +85,7 @@ export class EditDetailAnalogueComponent implements OnInit {
         this.units = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -103,8 +98,7 @@ export class EditDetailAnalogueComponent implements OnInit {
         this.details = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -117,8 +111,7 @@ export class EditDetailAnalogueComponent implements OnInit {
         this.analogues = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -131,8 +124,7 @@ export class EditDetailAnalogueComponent implements OnInit {
         this.ans = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
 
@@ -153,16 +145,18 @@ export class EditDetailAnalogueComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId && this.anId) {
       this._apiService.editAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId, analogue)
-        .subscribe(data => { },
+        .subscribe(data => {
+          this._flashMessagesService.showMessage('Данные успешно добавлены', 'success', 3000).subscribe(msg => {
+            this.message = msg;
+          });
+        },
           error => {
-            this.errMsg = error;
-            this._flashErrorService.showError(this.errMsg);
+            this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
           });
       this.analogueName = '';
       this.analogueNum = '';
-      this._flashMessagesService.show('Аналог успешно изменен', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.showMessage('Выберите данные автомобиля').subscribe(data => this.message = data);
     }
   }
 
@@ -170,14 +164,16 @@ export class EditDetailAnalogueComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId && this.anId) {
       this._apiService.removeAnalogue(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, this.anId)
-        .subscribe(data => { },
-          error => {
-            this.errMsg = error;
-            this._flashErrorService.showError(this.errMsg);
+        .subscribe(data => {
+          this._flashMessagesService.showMessage('Данные успешно удалены', 'success', 3000).subscribe(msg => {
+            this.message = msg;
           });
-      this._flashMessagesService.show('Аналог успешно удален', { cssClass: 'alert-success', timeout: 4000 });
+        },
+          error => {
+            this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
+          });
     } else {
-      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.showMessage('Выберите данные автомобиля').subscribe(data => this.message = data);
     }
   }
 }

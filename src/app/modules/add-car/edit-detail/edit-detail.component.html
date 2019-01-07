@@ -1,3 +1,5 @@
+<!-- Вывод флеш-сообщений -->
+<div class="alert alert-{{message.type}}" *ngIf="message">{{message.text}}</div>
 <form #form="ngForm" novalidate>
   <div class="form-group">
     <label>Марка</label>

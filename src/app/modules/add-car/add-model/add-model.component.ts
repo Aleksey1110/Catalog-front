@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { Message } from 'src/app/models/message';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
 
 @Component({
   selector: 'app-add-model',
@@ -13,12 +13,11 @@ export class AddModelComponent implements OnInit {
   public markName = [];
   public carId: String;
   public modelName: String;
-  public errMsg;
+  public message: Message;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService,
-    private _flashErrorService: FlashErrorService
+    private _flashMessagesService: FlashMessageService
   ) { }
 
   ngOnInit() {
@@ -33,8 +32,7 @@ export class AddModelComponent implements OnInit {
         this.markName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -51,15 +49,17 @@ export class AddModelComponent implements OnInit {
     };
     if (this.carId) {
       this._apiService.createModel(this.carId, model)
-        .subscribe(data => { },
+        .subscribe(data => {
+          this._flashMessagesService.showMessage('Данные успешно добавлены', 'success', 3000).subscribe(msg => {
+            this.message = msg;
+          });
+        },
           error => {
-            this.errMsg = error;
-            this._flashErrorService.showError(this.errMsg);
+            this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
           });
       this.modelName = '';
-      this._flashMessagesService.show('Модель успешно добавлена', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите марку автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.showMessage('Выберите данные автомобиля').subscribe(data => this.message = data);
     }
   }
 }

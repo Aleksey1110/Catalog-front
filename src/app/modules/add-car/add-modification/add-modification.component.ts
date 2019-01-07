@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { Message } from 'src/app/models/message';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
 
 @Component({
   selector: 'app-add-modification',
@@ -15,12 +15,11 @@ export class AddModificationComponent implements OnInit {
   public carId: String;
   public modelId: String;
   public modificationlName: String;
-  public errMsg;
+  public message: Message;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService,
-    private _flashErrorService: FlashErrorService
+    private _flashMessagesService: FlashMessageService
   ) { }
 
   ngOnInit() {
@@ -34,8 +33,7 @@ export class AddModificationComponent implements OnInit {
         this.markName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -48,8 +46,7 @@ export class AddModificationComponent implements OnInit {
         this.modelName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -67,15 +64,17 @@ export class AddModificationComponent implements OnInit {
     };
     if (this.carId && this.modelId) {
       this._apiService.createModification(this.carId, this.modelId, model)
-        .subscribe(data => { },
+        .subscribe(data => {
+          this._flashMessagesService.showMessage('Данные успешно добавлены', 'success', 3000).subscribe(msg => {
+            this.message = msg;
+          });
+        },
           error => {
-            this.errMsg = error;
-            this._flashErrorService.showError(this.errMsg);
+            this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
           });
       this.modificationlName = '';
-      this._flashMessagesService.show('Модификация успешно добавлена', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.showMessage('Выберите данные автомобиля').subscribe(data => this.message = data);
     }
   }
 }

@@ -1,7 +1,7 @@
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { Component, OnInit } from '@angular/core';
 import { ApiImgCatalogService } from 'src/app/services/api-img-catalog.service';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { Message } from 'src/app/models/message';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
 
 @Component({
   selector: 'app-add-imgmark',
@@ -11,12 +11,11 @@ import { FlashErrorService } from 'src/app/services/flash-error.service';
 export class AddImgmarkComponent implements OnInit {
 
   public markName: String;
-  public errMsg;
+  public message: Message;
 
   constructor(
     private _apiImgCatalogServise: ApiImgCatalogService,
-    private _flashMessagesService: FlashMessagesService,
-    private _flashErrorService: FlashErrorService
+    private _flashMessagesService: FlashMessageService
   ) { }
 
   ngOnInit() {
@@ -28,12 +27,14 @@ export class AddImgmarkComponent implements OnInit {
       markName: this.markName
     };
     this._apiImgCatalogServise.createCar(car)
-      .subscribe(data => { },
+      .subscribe(data => {
+        this._flashMessagesService.showMessage('Данные успешно добавлены', 'success', 3000).subscribe(msg => {
+          this.message = msg;
+        });
+      },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         });
     this.markName = '';
-    this._flashMessagesService.show('Данные успешно добавлены', { cssClass: 'alert-success', timeout: 4000 });
   }
 }

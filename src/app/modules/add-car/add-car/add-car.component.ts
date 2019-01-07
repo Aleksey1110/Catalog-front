@@ -11,7 +11,6 @@ import { Message } from 'src/app/models/message';
 export class AddCarComponent implements OnInit, OnDestroy {
 
   public markName: String;
-  public errMsg;
   public message: Message;
 
   constructor(
@@ -29,7 +28,7 @@ export class AddCarComponent implements OnInit, OnDestroy {
     };
     this._apiService.createCar(car)
       .subscribe(data => {
-        this._flashMessagesService.showMessage('success', 'success', 3000).subscribe(msg => {
+        this._flashMessagesService.showMessage('Данные успешно добавлены', 'success', 3000).subscribe(msg => {
           this.message = msg;
         });
       },

@@ -1,7 +1,7 @@
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { ApiService } from './../../../services/api.service';
 import { Component, OnInit } from '@angular/core';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
+import { Message } from 'src/app/models/message';
+import { ApiService } from './../../../services/api.service';
 
 @Component({
   selector: 'app-edit-detail-item',
@@ -26,12 +26,11 @@ export class EditDetailItemComponent implements OnInit {
   public itemId: String;
   public originalId: String;
   public isConfirmed = false;
-  public errMsg;
+  public message: Message;
 
   constructor(
     private _apiService: ApiService,
-    private _flashMessagesService: FlashMessagesService,
-    private _flashErrorService: FlashErrorService
+    private _flashMessagesService: FlashMessageService
   ) { }
 
   ngOnInit() {
@@ -46,8 +45,7 @@ export class EditDetailItemComponent implements OnInit {
         this.markName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -60,8 +58,7 @@ export class EditDetailItemComponent implements OnInit {
         this.modelName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -74,8 +71,7 @@ export class EditDetailItemComponent implements OnInit {
         this.modifications = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -88,8 +84,7 @@ export class EditDetailItemComponent implements OnInit {
         this.units = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -102,8 +97,7 @@ export class EditDetailItemComponent implements OnInit {
         this.details = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -116,8 +110,7 @@ export class EditDetailItemComponent implements OnInit {
         this.analogues = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -138,17 +131,19 @@ export class EditDetailItemComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId) {
       this._apiService.editDetailItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId, item)
-        .subscribe(data => { },
+        .subscribe(data => {
+          this._flashMessagesService.showMessage('Данные успешно обновлены', 'success', 3000).subscribe(msg => {
+            this.message = msg;
+          });
+        },
           error => {
-            this.errMsg = error;
-            this._flashErrorService.showError(this.errMsg);
+            this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
           });
       this.originalNumber = [];
       this.note = '';
       this.picture = '';
-      this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.showMessage('Выберите данные автомобиля').subscribe(data => this.message = data);
     }
   }
 
@@ -156,14 +151,16 @@ export class EditDetailItemComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId && this.originalId) {
       this._apiService.removeItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, this.originalId)
-        .subscribe(data => { },
-          error => {
-            this.errMsg = error;
-            this._flashErrorService.showError(this.errMsg);
+        .subscribe(data => {
+          this._flashMessagesService.showMessage('Данные успешно удалены', 'success', 3000).subscribe(msg => {
+            this.message = msg;
           });
-      this._flashMessagesService.show('Данные успешно удалены', { cssClass: 'alert-success', timeout: 4000 });
+        },
+          error => {
+            this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
+          });
     } else {
-      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.showMessage('Выберите данные автомобиля').subscribe(data => this.message = data);
     }
   }
 }

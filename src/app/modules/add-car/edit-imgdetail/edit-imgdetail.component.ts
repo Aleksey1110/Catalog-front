@@ -1,7 +1,7 @@
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { ApiImgCatalogService } from 'src/app/services/api-img-catalog.service';
+import { FlashMessageService } from 'src/app/services/flash-message.service';
+import { Message } from 'src/app/models/message';
 import { Component, OnInit } from '@angular/core';
-import { FlashErrorService } from 'src/app/services/flash-error.service';
+import { ApiImgCatalogService } from 'src/app/services/api-img-catalog.service';
 
 @Component({
   selector: 'app-edit-imgdetail',
@@ -23,12 +23,11 @@ export class EditImgdetailComponent implements OnInit {
   public detailName: String;
   public detailImage: String;
   public isConfirmed = false;
-  public errMsg;
+  public message: Message;
 
   constructor(
     private _apiImgCatalogService: ApiImgCatalogService,
-    private _flashMessagesService: FlashMessagesService,
-    private _flashErrorService: FlashErrorService
+    private _flashMessagesService: FlashMessageService
   ) { }
 
   ngOnInit() {
@@ -43,8 +42,7 @@ export class EditImgdetailComponent implements OnInit {
         this.markName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -57,8 +55,7 @@ export class EditImgdetailComponent implements OnInit {
         this.modelName = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -71,8 +68,7 @@ export class EditImgdetailComponent implements OnInit {
         this.modifications = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -85,8 +81,7 @@ export class EditImgdetailComponent implements OnInit {
         this.units = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -99,8 +94,7 @@ export class EditImgdetailComponent implements OnInit {
         this.details = data;
       },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         }
       );
   }
@@ -112,8 +106,7 @@ export class EditImgdetailComponent implements OnInit {
     this._apiImgCatalogService.getItems(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe(data => { },
         error => {
-          this.errMsg = error;
-          this._flashErrorService.showError(this.errMsg);
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
         });
   }
 
@@ -126,17 +119,18 @@ export class EditImgdetailComponent implements OnInit {
     };
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiImgCatalogService.editDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId, detail)
-        .subscribe(data => { },
+        .subscribe(data => {
+          this._flashMessagesService.showMessage('Данные успешно обновлены', 'success', 3000).subscribe(msg => {
+            this.message = msg;
+          });
+        },
           error => {
-            this.errMsg = error;
-            this._flashErrorService.showError(this.errMsg);
+            this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
           });
       this.detailName = '';
       this.detailImage = '';
-      this._flashMessagesService.show('Данные успешно обновлены', { cssClass: 'alert-success', timeout: 4000 });
     } else {
-      // tslint:disable-next-line:max-line-length
-      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.showMessage('Выберите данные автомобиля').subscribe(data => this.message = data);
     }
   }
 
@@ -144,14 +138,16 @@ export class EditImgdetailComponent implements OnInit {
   public remove() {
     if (this.carId && this.modelId && this.unitId && this.detailId && this.itemId) {
       this._apiImgCatalogService.removeDetail(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
-        .subscribe(data => { },
-          error => {
-            this.errMsg = error;
-            this._flashErrorService.showError(this.errMsg);
+        .subscribe(data => {
+          this._flashMessagesService.showMessage('Данные успешно удалены', 'success', 3000).subscribe(msg => {
+            this.message = msg;
           });
-      this._flashMessagesService.show('Деталь успешно удалена', { cssClass: 'alert-success', timeout: 4000 });
+        },
+          error => {
+            this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
+          });
     } else {
-      this._flashMessagesService.show('Выберите данные автомобиля', { cssClass: 'alert-danger', timeout: 4000 });
+      this._flashMessagesService.showMessage('Выберите данные автомобиля').subscribe(data => this.message = data);
     }
   }
 }

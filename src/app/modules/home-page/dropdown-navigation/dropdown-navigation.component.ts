@@ -1,3 +1,4 @@
+import { browser } from 'protractor';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Items } from 'src/app/models/items';
@@ -37,11 +38,26 @@ export class DropdownNavigationComponent implements OnInit {
     this.getCars();
   }
 
+  // Функция сортировки данных по марке авто
+  private _compareMark(detailsA, detailsB) {
+    return ('' + detailsA.markName).localeCompare(detailsB.markName);
+  }
+
+  // Функция сортировки данных по названию агрегата
+  private _compareUnit(detailsA, detailsB) {
+    return ('' + detailsA.unitName).localeCompare(detailsB.unitName);
+  }
+
+  // Функция сортировки данных по названию детали
+  private _compareDetail(detailsA, detailsB) {
+    return ('' + detailsA.detailName).localeCompare(detailsB.detailName);
+  }
+
   // Получение списка машин
   public getCars(): void {
     this._apiService.getCars()
       .subscribe(data => {
-        this.markName = data;
+        this.markName = data.sort(this._compareMark);
       },
         error => {
           this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
@@ -81,7 +97,7 @@ export class DropdownNavigationComponent implements OnInit {
     this.unitId = event.target.value;
     this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
-        this.units = data;
+        this.units = data.sort(this._compareUnit);
       },
         error => {
           this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
@@ -94,7 +110,7 @@ export class DropdownNavigationComponent implements OnInit {
     this.detailId = event.target.value;
     this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
-        this.details = data;
+        this.details = data.sort(this._compareDetail);
       },
         error => {
           this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
