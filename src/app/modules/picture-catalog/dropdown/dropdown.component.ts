@@ -38,11 +38,21 @@ export class DropdownComponent implements OnInit {
     this.getCars();
   }
 
+  // Функция сортировки данных по марке авто
+  private _compareMark(detailsA, detailsB) {
+    return ('' + detailsA.markName).localeCompare(detailsB.markName);
+  }
+
+  // Функция сортировки данных по названию агрегата
+  private _compareUnit(detailsA, detailsB) {
+    return ('' + detailsA.unitName).localeCompare(detailsB.unitName);
+  }
+
   // Получение списка машин
   public getCars(): void {
     this.apiImageCatalog.getCars()
       .subscribe(data => {
-        this.markName = data;
+        this.markName = data.sort(this._compareMark);
       },
         error => {
           this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
@@ -94,7 +104,7 @@ export class DropdownComponent implements OnInit {
     this.detailId = event.target.value;
     this.apiImageCatalog.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
-        this.details = data;
+        this.details = data.sort(this._compareUnit);
       }
         ,
         error => {
