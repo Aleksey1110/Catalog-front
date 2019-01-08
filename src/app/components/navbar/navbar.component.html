@@ -10,13 +10,19 @@
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" [routerLink]="['/catalog']">Catalogs</a>
       </li>
-      <!-- Ссылка на страницу о сайте -->
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/about']">About</a>
-      </li>
       <!-- Ссылка на страницу редактирования машин -->
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" [routerLink]="['/editing']">Editing car</a>
+      </li>
+    </ul>
+    <!-- Ссылка на страницу Login -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/login']">Login</a>
+      </li>
+      <!-- Ссылка на страницу о сайте -->
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/about']">About</a>
       </li>
     </ul>
   </div>

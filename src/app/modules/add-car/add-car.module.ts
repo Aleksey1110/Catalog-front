@@ -5,6 +5,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AddCarRoutingModule, routingComponents } from './add-car-routing.module';
 import { FlashMessageService } from 'src/app/services/flash-message.service';
+import { AuthGuard } from 'src/app/services/auth.guard';
 
 @NgModule({
   declarations: [
