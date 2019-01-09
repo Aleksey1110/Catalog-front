@@ -1,4 +1,3 @@
-import { browser } from 'protractor';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Items } from 'src/app/models/items';

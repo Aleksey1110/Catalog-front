@@ -69,128 +69,107 @@ export class ApiImgCatalogService {
 
   // Создать новую марку авто
   createCar(car): Observable<ImgCar[]> {
-    return this.http.post<ImgCar[]>(`${this._url}/imgadd/addCar`, car)
-      .pipe(catchError(this.errorHandler));
+    return this.http.post<ImgCar[]>(`${this._url}/imgadd/addCar`, car);
   }
 
   // Создать новую модель
   createModel(id1, model): Observable<ImgModels[]> {
-    return this.http.post<ImgModels[]>(`${this._url}/imgadd/addCar/${id1}`, model)
-      .pipe(catchError(this.errorHandler));
+    return this.http.post<ImgModels[]>(`${this._url}/imgadd/addCar/${id1}`, model);
   }
 
   // Создать новую модификацию
   createModification(id1, id2, modification): Observable<ImgModifications[]> {
-    return this.http.post<ImgModifications[]>(`${this._url}/imgadd/addCar/${id1}/${id2}`, modification)
-      .pipe(catchError(this.errorHandler));
+    return this.http.post<ImgModifications[]>(`${this._url}/imgadd/addCar/${id1}/${id2}`, modification);
   }
 
   // Создать новую агрегат
   createUnit(id1, id2, id3, unit): Observable<ImgUnits[]> {
-    return this.http.post<ImgUnits[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}`, unit)
-      .pipe(catchError(this.errorHandler));
+    return this.http.post<ImgUnits[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}`, unit);
   }
 
   // Создать новую схему
   createDetail(id1, id2, id3, id4, detail): Observable<ImgDetail[]> {
-    return this.http.post<ImgDetail[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}/${id4}`, detail)
-      .pipe(catchError(this.errorHandler));
+    return this.http.post<ImgDetail[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}/${id4}`, detail);
   }
 
   // Создать новую основную схему
   createDetailItem(id1, id2, id3, id4, id5, item): Observable<ImgItems[]> {
-    return this.http.post<ImgItems[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}/${id4}/${id5}`, item)
-      .pipe(catchError(this.errorHandler));
+    return this.http.post<ImgItems[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}/${id4}/${id5}`, item);
   }
 
   // Создать новые детали
   createItems(id1, id2, id3, id4, id5, id6, item): Observable<ImgDetailItems[]> {
-    return this.http.post<ImgDetailItems[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, item)
-      .pipe(catchError(this.errorHandler));
+    return this.http.post<ImgDetailItems[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, item);
   }
 
   // Редактировать название марки авто
   editMark(id1, mark): Observable<ImgCar> {
-    return this.http.put<ImgCar>(`${this._url}/imgedit/editcar/${id1}`, mark)
-      .pipe(catchError(this.errorHandler));
+    return this.http.put<ImgCar>(`${this._url}/imgedit/editcar/${id1}`, mark);
   }
 
   // Редактировать название модели авто
   editModel(id1, id2, model): Observable<ImgModels> {
-    return this.http.put<ImgModels>(`${this._url}/imgedit/editcar/${id1}/${id2}`, model)
-      .pipe(catchError(this.errorHandler));
+    return this.http.put<ImgModels>(`${this._url}/imgedit/editcar/${id1}/${id2}`, model);
   }
 
   // Редактировать название модификации авто
   editModification(id1, id2, id3, modification): Observable<ImgModifications> {
-    return this.http.put<ImgModifications>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}`, modification)
-      .pipe(catchError(this.errorHandler));
+    return this.http.put<ImgModifications>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}`, modification);
   }
 
   // Редактировать название агрегата авто
   editUnit(id1, id2, id3, id4, unit): Observable<ImgUnits> {
-    return this.http.put<ImgUnits>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}`, unit)
-      .pipe(catchError(this.errorHandler));
+    return this.http.put<ImgUnits>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}`, unit);
   }
 
   // Редактировать название раздел
   editDetail(id1, id2, id3, id4, id5, detail): Observable<ImgDetail> {
-    return this.http.put<ImgDetail>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}`, detail)
-      .pipe(catchError(this.errorHandler));
+    return this.http.put<ImgDetail>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}`, detail);
   }
 
   // Редактировать ссылку на схему раздела
   editDetailItems(id1, id2, id3, id4, id5, id6, item): Observable<ImgItems> {
-    return this.http.put<ImgItems>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, item)
-      .pipe(catchError(this.errorHandler));
+    return this.http.put<ImgItems>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, item);
   }
 
   // Редактировать детали раздела
   editItems(id1, id2, id3, id4, id5, id6, id7, item): Observable<ImgDetailItems> {
-    return this.http.put<ImgDetailItems>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`, item)
-      .pipe(catchError(this.errorHandler));
+    return this.http.put<ImgDetailItems>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`, item);
   }
 
   // Удалить марку
   removeMark(id1): Observable<ImgCar> {
-    return this.http.delete<ImgCar>(`${this._url}/imgremove/removecar/${id1}`)
-      .pipe(catchError(this.errorHandler));
+    return this.http.delete<ImgCar>(`${this._url}/imgremove/removecar/${id1}`);
   }
 
   // Удалить модель
   removeModel(id1, id2): Observable<ImgModels> {
-    return this.http.delete<ImgModels>(`${this._url}/imgremove/removecar/${id1}/${id2}`)
-      .pipe(catchError(this.errorHandler));
+    return this.http.delete<ImgModels>(`${this._url}/imgremove/removecar/${id1}/${id2}`);
   }
 
   // Удалить модификацию
   removeModification(id1, id2, id3): Observable<ImgModifications> {
-    return this.http.delete<ImgModifications>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}`)
-      .pipe(catchError(this.errorHandler));
+    return this.http.delete<ImgModifications>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}`);
   }
 
   // Удалить агрегат
   removeUnit(id1, id2, id3, id4): Observable<ImgUnits> {
-    return this.http.delete<ImgUnits>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}`)
-      .pipe(catchError(this.errorHandler));
+    return this.http.delete<ImgUnits>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}`);
   }
 
   // Удалить раздел
   removeDetail(id1, id2, id3, id4, id5): Observable<ImgDetail> {
-    return this.http.delete<ImgDetail>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}`)
-      .pipe(catchError(this.errorHandler));
+    return this.http.delete<ImgDetail>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}`);
   }
 
   // Удалить ссылку на схему раздела
   removeItem(id1, id2, id3, id4, id5, id6): Observable<ImgItems> {
-    return this.http.delete<ImgItems>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`)
-      .pipe(catchError(this.errorHandler));
+    return this.http.delete<ImgItems>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`);
   }
 
   // Удалить данные раздела
   removeItems(id1, id2, id3, id4, id5, id6, id7): Observable<ImgDetailItems> {
-    return this.http.delete<ImgDetailItems>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`)
-      .pipe(catchError(this.errorHandler));
+    return this.http.delete<ImgDetailItems>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`);
   }
 }
 
