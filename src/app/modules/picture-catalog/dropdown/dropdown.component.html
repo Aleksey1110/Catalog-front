@@ -1,35 +1,35 @@
 <div class="row">
-  <!-- Вывод флеш-сщщбщений -->
+  <!-- Вывод флеш-сообщений -->
   <div class="alert alert-{{message.type}}" *ngIf="message">{{message.text}}</div>
   <div class="col d-flex justify-content-between">
-    <div class="select">
+    <div class="form-group">
       <label for="markName">Марка</label>
       <!-- Передача ID выбранной марки в компонент -->
-      <select id="markName" (change)="passCarId($event)" class="form-control">
+      <select id="markName" (change)="passCarId($event)" class="custom-select">
         <option></option>
         <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
       </select>
     </div>
-    <div class="select">
+    <div class="form-group">
       <label for="modelName">Модель</label>
       <!-- Передача ID выбранной модели в компонент -->
-      <select id="modelName" (change)="passModelId($event)" class="form-control">
+      <select id="modelName" (change)="passModelId($event)" class="custom-select">
         <option></option>
         <option *ngFor="let model of modelName" [value]="model._id">{{model.modelsName}}</option>
       </select>
     </div>
-    <div class="select">
+    <div class="form-group">
       <label for="modificationName">Модификация</label>
       <!-- Передача ID выбранной модификации в компонент -->
-      <select id="modificationName" (change)="passModificationId($event)" class="form-control">
+      <select id="modificationName" (change)="passModificationId($event)" class="custom-select">
         <option></option>
         <option *ngFor="let modification of modifications" [value]="modification._id">{{modification.modificationName}}</option>
       </select>
     </div>
-    <div class="select">
+    <div class="form-group">
       <label for="detailGroup">Название агрегата</label>
       <!-- Передача ID выбранного агрегата в компонент -->
-      <select id="detailGroup" (change)="passUnitId($event)" class="form-control">
+      <select id="detailGroup" (change)="passUnitId($event)" class="custom-select">
         <option></option>
         <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
       </select>
