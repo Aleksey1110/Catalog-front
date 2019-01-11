@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private _loginService: LoginService) { }
+  constructor(public _loginService: LoginService) { }
 
   ngOnInit() {
   }

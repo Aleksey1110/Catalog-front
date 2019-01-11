@@ -1,15 +1,17 @@
-import { AboutComponent } from './components/about/about.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginComponent } from './modules/login/login/login.component';
 import { AuthGuard } from './services/auth.guard';
+import { AboutComponent } from './modules/core/about/about.component';
+import { PageNotFoundComponent } from './modules/core/page-not-found/page-not-found.component';
+import { StartPageComponent } from './modules/core/start-page/start-page.component';
 
 
 
 // Основные роуты сайта
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/start', pathMatch: 'full' },
+  { path: 'start', component: StartPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', loadChildren: './modules/home-page/home-page.module#HomePageModule' },
   { path: 'catalog', loadChildren: './modules/picture-catalog/picture-catalog.module#PictureCatalogModule' },

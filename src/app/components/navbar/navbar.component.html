@@ -1,32 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" [routerLink]="['/home']">Щит cars</a>
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <!-- Ссылка на главную страницу -->
-      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-        <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <!-- Ссылка на страницу каталогов -->
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/catalog']">Catalogs</a>
-      </li>
-      <!-- Ссылка на страницу редактирования машин -->
-      <li class="nav-item" [routerLinkActive]="['active']" *ngIf="_loginService.loggedIn()">
-        <a class="nav-link" [routerLink]="['/editing']">Editing car</a>
-      </li>
-    </ul>
-    <!-- Ссылка на страницу Login -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item" [routerLinkActive]="['active']" *ngIf="!_loginService.loggedIn()">
-        <a class="nav-link" [routerLink]="['/login']">Login</a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']" *ngIf="_loginService.loggedIn()">
-        <a class="nav-link" [routerLink]="['/login']" (click)="_loginService.logOut()">Logout</a>
-      </li>
-      <!-- Ссылка на страницу о сайте -->
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/about']">About</a>
-      </li>
-    </ul>
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/start']">Щит cars</a>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <!-- Ссылка на главную страницу -->
+        <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" [routerLink]="['/home']">Fast catalogs<span class="sr-only">(current)</span></a>
+        </li>
+        <!-- Ссылка на страницу каталогов -->
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" [routerLink]="['/catalog']">Picture catalogs</a>
+        </li>
+        <!-- Ссылка на страницу редактирования машин -->
+        <li class="nav-item" [routerLinkActive]="['active']" *ngIf="_loginService.loggedIn()">
+          <a class="nav-link" [routerLink]="['/editing']">Editing car</a>
+        </li>
+      </ul>
+      <!-- Ссылка на страницу Login -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" [routerLinkActive]="['active']" *ngIf="!_loginService.loggedIn()">
+          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']" *ngIf="_loginService.loggedIn()">
+          <a class="nav-link" [routerLink]="['/login']" (click)="_loginService.logOut()">Logout</a>
+        </li>
+        <!-- Ссылка на страницу о сайте -->
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" [routerLink]="['/about']">About</a>
+        </li>
+      </ul>
+    </div>
   </div>
+
 </nav>

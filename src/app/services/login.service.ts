@@ -17,15 +17,9 @@ export class LoginService {
 
   private _url = 'http://localhost:3000/login';
 
-  // Обработчик ошибок сервера
-  errorHandler(error: HttpErrorResponse) {
-    return throwError(error.message || 'Server error');
-  }
-
   // Функция логина пользователя
   loginUser(user): Observable<User> {
-    return this._http.post<User>(this._url, user)
-      .pipe(catchError(this.errorHandler));
+    return this._http.post<User>(this._url, user);
   }
 
   // Проверка наличия токена
