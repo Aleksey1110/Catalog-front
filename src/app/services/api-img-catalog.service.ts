@@ -29,7 +29,7 @@ export class ApiImgCatalogService {
   getCars(): Observable<ImgCar[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get<ImgCar[]>(`${this._url}/catalogs/piccat`, { headers: headers })
+    return this.http.get<ImgCar[]>(`catalogs/piccat`, { headers: headers })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -37,7 +37,7 @@ export class ApiImgCatalogService {
   getModel(id1): Observable<ImgModels[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get<ImgModels[]>(`${this._url}/catalogs/piccat/${id1}`, { headers: headers })
+    return this.http.get<ImgModels[]>(`catalogs/piccat/${id1}`, { headers: headers })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -45,7 +45,7 @@ export class ApiImgCatalogService {
   getModification(id1, id2): Observable<ImgModifications[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get<ImgModifications[]>(`${this._url}/catalogs/piccat/${id1}/${id2}`, { headers: headers })
+    return this.http.get<ImgModifications[]>(`catalogs/piccat/${id1}/${id2}`, { headers: headers })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -53,7 +53,7 @@ export class ApiImgCatalogService {
   getUnit(id1, id2, id3): Observable<ImgUnits[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get<ImgUnits[]>(`${this._url}/catalogs/piccat/${id1}/${id2}/${id3}`, { headers: headers })
+    return this.http.get<ImgUnits[]>(`catalogs/piccat/${id1}/${id2}/${id3}`, { headers: headers })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -61,7 +61,7 @@ export class ApiImgCatalogService {
   getDetail(id1, id2, id3, id4): Observable<ImgDetail[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get<ImgDetail[]>(`${this._url}/catalogs/piccat/${id1}/${id2}/${id3}/${id4}`, { headers: headers })
+    return this.http.get<ImgDetail[]>(`catalogs/piccat/${id1}/${id2}/${id3}/${id4}`, { headers: headers })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -69,7 +69,7 @@ export class ApiImgCatalogService {
   getItems(id1, id2, id3, id4, id5): Observable<ImgItems[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get<ImgItems[]>(`${this._url}/catalogs/piccat/${id1}/${id2}/${id3}/${id4}/${id5}`, { headers: headers })
+    return this.http.get<ImgItems[]>(`catalogs/piccat/${id1}/${id2}/${id3}/${id4}/${id5}`, { headers: headers })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -77,7 +77,7 @@ export class ApiImgCatalogService {
   getDetailItems(id1, id2, id3, id4, id5, id6): Observable<ImgDetailItems[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get<ImgDetailItems[]>(`${this._url}/catalogs/piccat/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, { headers: headers })
+    return this.http.get<ImgDetailItems[]>(`catalogs/piccat/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, { headers: headers })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -85,49 +85,49 @@ export class ApiImgCatalogService {
   createCar(car): Observable<ImgCar[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<ImgCar[]>(`${this._url}/imgadd/addCar`, car, { headers: headers });
+    return this.http.post<ImgCar[]>(`imgadd/addCar`, car, { headers: headers });
   }
 
   // Создать новую модель
   createModel(id1, model): Observable<ImgModels[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<ImgModels[]>(`${this._url}/imgadd/addCar/${id1}`, model, { headers: headers });
+    return this.http.post<ImgModels[]>(`imgadd/addCar/${id1}`, model, { headers: headers });
   }
 
   // Создать новую модификацию
   createModification(id1, id2, modification): Observable<ImgModifications[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<ImgModifications[]>(`${this._url}/imgadd/addCar/${id1}/${id2}`, modification, { headers: headers });
+    return this.http.post<ImgModifications[]>(`imgadd/addCar/${id1}/${id2}`, modification, { headers: headers });
   }
 
   // Создать новую агрегат
   createUnit(id1, id2, id3, unit): Observable<ImgUnits[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<ImgUnits[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}`, unit, { headers: headers });
+    return this.http.post<ImgUnits[]>(`imgadd/addCar/${id1}/${id2}/${id3}`, unit, { headers: headers });
   }
 
   // Создать новую схему
   createDetail(id1, id2, id3, id4, detail): Observable<ImgDetail[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<ImgDetail[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}/${id4}`, detail, { headers: headers });
+    return this.http.post<ImgDetail[]>(`imgadd/addCar/${id1}/${id2}/${id3}/${id4}`, detail, { headers: headers });
   }
 
   // Создать новую основную схему
   createDetailItem(id1, id2, id3, id4, id5, item): Observable<ImgItems[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<ImgItems[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}/${id4}/${id5}`, item, { headers: headers });
+    return this.http.post<ImgItems[]>(`imgadd/addCar/${id1}/${id2}/${id3}/${id4}/${id5}`, item, { headers: headers });
   }
 
   // Создать новые детали
   createItems(id1, id2, id3, id4, id5, id6, item): Observable<ImgDetailItems[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<ImgDetailItems[]>(`${this._url}/imgadd/addCar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`,
+    return this.http.post<ImgDetailItems[]>(`imgadd/addCar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`,
       item, { headers: headers });
   }
 
@@ -135,49 +135,49 @@ export class ApiImgCatalogService {
   editMark(id1, mark): Observable<ImgCar> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.put<ImgCar>(`${this._url}/imgedit/editcar/${id1}`, mark, { headers: headers });
+    return this.http.put<ImgCar>(`imgedit/editcar/${id1}`, mark, { headers: headers });
   }
 
   // Редактировать название модели авто
   editModel(id1, id2, model): Observable<ImgModels> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.put<ImgModels>(`${this._url}/imgedit/editcar/${id1}/${id2}`, model, { headers: headers });
+    return this.http.put<ImgModels>(`imgedit/editcar/${id1}/${id2}`, model, { headers: headers });
   }
 
   // Редактировать название модификации авто
   editModification(id1, id2, id3, modification): Observable<ImgModifications> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.put<ImgModifications>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}`, modification, { headers: headers });
+    return this.http.put<ImgModifications>(`imgedit/editcar/${id1}/${id2}/${id3}`, modification, { headers: headers });
   }
 
   // Редактировать название агрегата авто
   editUnit(id1, id2, id3, id4, unit): Observable<ImgUnits> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.put<ImgUnits>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}`, unit, { headers: headers });
+    return this.http.put<ImgUnits>(`imgedit/editcar/${id1}/${id2}/${id3}/${id4}`, unit, { headers: headers });
   }
 
   // Редактировать название раздел
   editDetail(id1, id2, id3, id4, id5, detail): Observable<ImgDetail> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.put<ImgDetail>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}`, detail, { headers: headers });
+    return this.http.put<ImgDetail>(`imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}`, detail, { headers: headers });
   }
 
   // Редактировать ссылку на схему раздела
   editDetailItems(id1, id2, id3, id4, id5, id6, item): Observable<ImgItems> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.put<ImgItems>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, item, { headers: headers });
+    return this.http.put<ImgItems>(`imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, item, { headers: headers });
   }
 
   // Редактировать детали раздела
   editItems(id1, id2, id3, id4, id5, id6, id7, item): Observable<ImgDetailItems> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.put<ImgDetailItems>(`${this._url}/imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`,
+    return this.http.put<ImgDetailItems>(`imgedit/editcar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`,
       item, { headers: headers });
   }
 
@@ -185,49 +185,49 @@ export class ApiImgCatalogService {
   removeMark(id1): Observable<ImgCar> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.delete<ImgCar>(`${this._url}/imgremove/removecar/${id1}`, { headers: headers });
+    return this.http.delete<ImgCar>(`imgremove/removecar/${id1}`, { headers: headers });
   }
 
   // Удалить модель
   removeModel(id1, id2): Observable<ImgModels> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.delete<ImgModels>(`${this._url}/imgremove/removecar/${id1}/${id2}`, { headers: headers });
+    return this.http.delete<ImgModels>(`imgremove/removecar/${id1}/${id2}`, { headers: headers });
   }
 
   // Удалить модификацию
   removeModification(id1, id2, id3): Observable<ImgModifications> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.delete<ImgModifications>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}`, { headers: headers });
+    return this.http.delete<ImgModifications>(`imgremove/removecar/${id1}/${id2}/${id3}`, { headers: headers });
   }
 
   // Удалить агрегат
   removeUnit(id1, id2, id3, id4): Observable<ImgUnits> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.delete<ImgUnits>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}`, { headers: headers });
+    return this.http.delete<ImgUnits>(`imgremove/removecar/${id1}/${id2}/${id3}/${id4}`, { headers: headers });
   }
 
   // Удалить раздел
   removeDetail(id1, id2, id3, id4, id5): Observable<ImgDetail> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.delete<ImgDetail>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}`, { headers: headers });
+    return this.http.delete<ImgDetail>(`imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}`, { headers: headers });
   }
 
   // Удалить ссылку на схему раздела
   removeItem(id1, id2, id3, id4, id5, id6): Observable<ImgItems> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.delete<ImgItems>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, { headers: headers });
+    return this.http.delete<ImgItems>(`imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}`, { headers: headers });
   }
 
   // Удалить данные раздела
   removeItems(id1, id2, id3, id4, id5, id6, id7): Observable<ImgDetailItems> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.delete<ImgDetailItems>(`${this._url}/imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`,
+    return this.http.delete<ImgDetailItems>(`imgremove/removecar/${id1}/${id2}/${id3}/${id4}/${id5}/${id6}/${id7}`,
       { headers: headers });
   }
 }
