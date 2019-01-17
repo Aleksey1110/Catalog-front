@@ -31,7 +31,7 @@ export class ApiService {
   getCars(): Observable<Car[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get<Car[]>(`api`, { headers: headers })
+    return this.http.get<Car[]>(`/api`, { headers: headers })
       .pipe(catchError(this.errorHandler));
   }
 
