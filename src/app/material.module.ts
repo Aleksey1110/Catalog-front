@@ -15,7 +15,6 @@ import {
         MatButtonModule,
         MatToolbarModule,
         MatIconModule
-
     ]
 })
 export class MaterialModule { }

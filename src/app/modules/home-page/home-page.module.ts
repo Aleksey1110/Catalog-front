@@ -6,6 +6,8 @@ import { HomePageRoutingModule } from './home-page-routing.module';
 import { DropdownNavigationComponent } from './dropdown-navigation/dropdown-navigation.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
 import { FlashMessageService } from 'src/app/services/flash-message.service';
+import { MaterialModule } from '../../material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     declarations: [
@@ -14,7 +16,9 @@ import { FlashMessageService } from 'src/app/services/flash-message.service';
     ],
     imports: [
         CommonModule,
-        HomePageRoutingModule
+        HomePageRoutingModule,
+        MaterialModule,
+        FlexLayoutModule
     ],
     providers: [
         ApiService,

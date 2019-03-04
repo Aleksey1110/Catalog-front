@@ -13,8 +13,8 @@ import { CoreModule } from './modules/core/core.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginService } from './services/login.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -30,8 +30,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HomePageModule,
     LoginModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MaterialModule
   ],
   providers: [
     AuthGuard,
