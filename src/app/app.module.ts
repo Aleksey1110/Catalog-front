@@ -12,6 +12,9 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { CoreModule } from './modules/core/core.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginService } from './services/login.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { LoginService } from './services/login.service';
     HttpClientModule,
     FormsModule,
     HomePageModule,
-    LoginModule
+    LoginModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [
     AuthGuard,

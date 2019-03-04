@@ -1,7 +1,6 @@
-<div class="row">
   <!-- Вывод флеш-сообщений -->
   <div class="alert alert-{{message.type}}" *ngIf="message">{{message.text}}</div>
-  <div class="col d-flex justify-content-between">
+  <div fxLayout="row" >
     <div class="form-group">
       <label for="markName">Марка</label>
       <!-- Передача ID выбранной марки в компонент -->
@@ -42,5 +41,6 @@
         <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
       </select>
     </div>
+    <button mat-button>Click me!</button>
   </div>
-</div>
+

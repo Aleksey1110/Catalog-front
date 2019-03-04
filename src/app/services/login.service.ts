@@ -15,7 +15,7 @@ export class LoginService {
     private _router: Router
     ) { }
 
-  private _url = 'login';
+  private _url = 'http://localhost:8080/login';
 
   // Функция логина пользователя
   loginUser(user): Observable<User> {
