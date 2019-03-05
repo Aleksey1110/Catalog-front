@@ -17,13 +17,13 @@
     <li class="nav-item" [routerLinkActive]="['active']" *ngIf="!_loginService.loggedIn()">
       <a class="nav-link" [routerLink]="['/login']">Login</a>
     </li>
-    <!-- Ссылка logout -->
-    <li class="nav-item" [routerLinkActive]="['active']" *ngIf="_loginService.loggedIn()">
-      <a class="nav-link" [routerLink]="['/login']" (click)="_loginService.logOut()">Logout</a>
-    </li>
     <!-- Ссылка на страницу о сайте -->
     <li class="nav-item" [routerLinkActive]="['active']">
       <a class="nav-link" [routerLink]="['/about']">О проекте</a>
+    </li>
+    <!-- Ссылка logout -->
+    <li class="nav-item" [routerLinkActive]="['active']" *ngIf="_loginService.loggedIn()">
+      <a class="nav-link" [routerLink]="['/login']" (click)="_loginService.logOut()">Logout</a>
     </li>
   </ul>
 </mat-toolbar>

@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { FlashMessageService } from 'src/app/services/flash-message.service';
 import { Message } from 'src/app/models/message';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',

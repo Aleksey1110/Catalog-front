@@ -1,3 +1,11 @@
 .btn {
     margin: 2px;
 }
+
+.header, .card {
+    text-align: center;
+}
+
+.header {
+    margin: 50px 0;
+}

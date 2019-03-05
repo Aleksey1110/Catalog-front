@@ -1,45 +1,43 @@
-  <!-- Вывод флеш-сообщений -->
-  <div class="alert alert-{{message.type}}" *ngIf="message">{{message.text}}</div>
-  <div fxLayout="row" >
-    <div class="form-group">
-      <label for="markName">Марка</label>
-      <!-- Передача ID выбранной марки в компонент -->
-      <select id="markName" (change)="passCarId($event)" class="custom-select">
-        <option selected></option>
-        <option *ngFor="let carItem of markName" [value]="carItem._id">{{carItem.markName}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="modelName">Модель</label>
-      <!-- Передача ID выбранной модели в компонент -->
-      <select id="modelName" (change)="passModelId($event)" class="custom-select">
-        <option></option>
-        <option *ngFor="let model of modelName" [value]="model._id">{{model.modelsName}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="modificationName">Модификация</label>
-      <!-- Передача ID выбранной модификации в компонент -->
-      <select id="modificationName" (change)="passModificationId($event)" class="custom-select">
-        <option></option>
-        <option *ngFor="let modification of modifications" [value]="modification._id">{{modification.modificationName}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="detailGroup">Название агрегата</label>
-      <!-- Передача ID выбранного агрегата в компонент -->
-      <select id="detailGroup" (change)="passUnitId($event)" class="custom-select">
-        <option></option>
-        <option *ngFor="let unit of units" [value]="unit._id">{{unit.unitName}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="detailName">Название детали</label>
-      <!-- Передача ID выбранной детали в компонент -->
-      <select id="detailName" (change)="passDetailId($event)" class="custom-select">
-        <option></option>
-        <option *ngFor="let detail of details" [value]="detail._id">{{detail.detailName}}</option>
-      </select>
-    </div>
-  </div>
-
+<!-- Вывод флеш-сообщений -->
+<div class="alert alert-{{message.type}}" *ngIf="message">{{message.text}}</div>
+<div fxLayoutAlign="space-around center">
+  <!-- Передача ID выбранной марки в компонент -->
+  <mat-form-field fxFlex="15%">
+    <mat-select placeholder="Марка">
+      <mat-option *ngFor="let carItem of markName" (click)="passCarId(carItem)" [value]="carItem.markName">
+        {{carItem.markName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- Передача ID выбранной модели в компонент -->
+  <mat-form-field fxFlex="15%">
+    <mat-select placeholder="Модель">
+      <mat-option *ngFor="let model of modelName" (click)="passModelId(model)" [value]="model.modelsName">
+        {{model.modelsName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- Передача ID выбранной модификации в компонент -->
+  <mat-form-field fxFlex="15%">
+    <mat-select placeholder="Модификация">
+      <mat-option *ngFor="let modification of modifications" (click)="passModificationId(modification)" [value]="modification.modificationName">
+        {{modification.modificationName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- Передача ID выбранного агрегата в компонент -->
+  <mat-form-field fxFlex="15%">
+    <mat-select placeholder="Название агрегата">
+      <mat-option *ngFor="let unit of units" (click)="passUnitId(unit)" [value]="unit.unitName">
+        {{unit.unitName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- Передача ID выбранной детали в компонент -->
+  <mat-form-field fxFlex="15%">
+    <mat-select placeholder="Название детали">
+      <mat-option *ngFor="let detail of details" (click)="passDetailId(detail)" [value]="detail.detailName">
+        {{detail.detailName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

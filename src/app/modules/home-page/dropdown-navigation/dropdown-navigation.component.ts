@@ -64,10 +64,9 @@ export class DropdownNavigationComponent implements OnInit {
       );
   }
 
-
   // Получение Id выбранной машины. Получение списка моделей
-  public passCarId(event): void {
-    this.carId = event.target.value;
+  public passCarId(carItem): void {
+    this.carId = carItem._id;
     this._apiService.getModelName(this.carId)
       .subscribe(data => {
         this.modelName = data;
@@ -79,8 +78,8 @@ export class DropdownNavigationComponent implements OnInit {
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
-  public passModelId(event): void {
-    this.modelId = event.target.value;
+  public passModelId(model): void {
+    this.modelId = model._id;
     this._apiService.getModificationName(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
@@ -92,8 +91,8 @@ export class DropdownNavigationComponent implements OnInit {
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
-  public passModificationId(event): void {
-    this.unitId = event.target.value;
+  public passModificationId(modification): void {
+    this.unitId = modification._id;
     this._apiService.getPartsList(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data.sort(this._compareUnit);
@@ -105,8 +104,8 @@ export class DropdownNavigationComponent implements OnInit {
   }
 
   // Получение Id выбранного агрегата. Получение списка деталей
-  public passUnitId(event) {
-    this.detailId = event.target.value;
+  public passUnitId(unit) {
+    this.detailId = unit._id;
     this._apiService.getDetailsItem(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data.sort(this._compareDetail);
@@ -118,8 +117,8 @@ export class DropdownNavigationComponent implements OnInit {
   }
 
   // Получение Id детали. Получение списка составляющих детали. Отправка данных их компонента
-  public passDetailId(event) {
-    this.itemId = event.target.value;
+  public passDetailId(detail) {
+    this.itemId = detail._id;
     this._apiService.getItem(this.carId, this.modelId, this.unitId, this.detailId, this.itemId)
       .subscribe(data => {
         this.items = data;

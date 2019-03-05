@@ -4,13 +4,17 @@ import { LoginComponent } from './login/login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
+import { MaterialModule } from 'src/app/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [LoginComponent],
   imports: [
     CommonModule,
     FormsModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [
     LoginService

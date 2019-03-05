@@ -6,6 +6,8 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 import { PictureCatalogRoutingModule } from './picture-catalog-routing.module';
 import { FlashMessageService } from 'src/app/services/flash-message.service';
+import { MaterialModule } from 'src/app/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { FlashMessageService } from 'src/app/services/flash-message.service';
   ],
   imports: [
     CommonModule,
-    PictureCatalogRoutingModule
+    PictureCatalogRoutingModule,
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [
     ApiImgCatalogService,

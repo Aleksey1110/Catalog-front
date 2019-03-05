@@ -61,8 +61,8 @@ export class DropdownComponent implements OnInit {
   }
 
   // Получение Id выбранной машины. Получение списка моделей
-  public passCarId(event): void {
-    this.carId = event.target.value;
+  public passCarId(carItem): void {
+    this.carId = carItem._id;
     this.apiImageCatalog.getModel(this.carId)
       .subscribe(data => {
         this.modelName = data;
@@ -74,8 +74,8 @@ export class DropdownComponent implements OnInit {
   }
 
   // Получение Id выбранной модели. Получение списка модификаций
-  public passModelId(event): void {
-    this.modelId = event.target.value;
+  public passModelId(model): void {
+    this.modelId = model._id;
     this.apiImageCatalog.getModification(this.carId, this.modelId)
       .subscribe(data => {
         this.modifications = data;
@@ -87,8 +87,8 @@ export class DropdownComponent implements OnInit {
   }
 
   // Получение Id выбранной модификации. Получение списка агрегатов
-  public passModificationId(event): void {
-    this.unitId = event.target.value;
+  public passModificationId(modification): void {
+    this.unitId = modification._id;
     this.apiImageCatalog.getUnit(this.carId, this.modelId, this.unitId)
       .subscribe(data => {
         this.units = data;
@@ -100,8 +100,8 @@ export class DropdownComponent implements OnInit {
   }
 
   // Получение Id агрегата. Получение списка деталей со схемами.
-  public passUnitId(event) {
-    this.detailId = event.target.value;
+  public passUnitId(unit) {
+    this.detailId = unit._id;
     this.apiImageCatalog.getDetail(this.carId, this.modelId, this.unitId, this.detailId)
       .subscribe(data => {
         this.details = data.sort(this._compareUnit);
