@@ -1,29 +1,35 @@
 <app-dropdown (showItems)="showItems($event)"></app-dropdown>
-<div class="row" *ngIf="isPassedId">
-    <div class="col-lg-6">
-        <img src="{{itemImage}}">
-    </div>
-    <div class="col-lg-6">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col"># п/п</th>
-                    <th scope="col">Артикул</th>
-                    <th scope="col">Название детали</th>
-                    <th scope="col">Примечание</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="table-active" *ngFor="let detail of details">
-                    <th scope="row">{{detail.itemNumber}}</th>
-                    <td>
-                        <p *ngFor="let article of detail.itemArticle">{{article}}</p>
-                    </td>
-                    <td>{{detail.itemName}}</td>
-                    <td>{{detail.itemNote}}</td>
-                </tr>
-                <tr>
-            </tbody>
-        </table>
-    </div>
+<div fxLayout="row" *ngIf="isPassedId">
+  <div fxFlex="50%">
+    <img src="{{itemImage}}">
+  </div>
+  <div fxFlex="50%">
+    
+    <table mat-table [dataSource]="details" class="">
+
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> # п/п </th>
+        <td mat-cell *matCellDef="let detail"> {{detail.itemNumber}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="article">
+        <th mat-header-cell *matHeaderCellDef> Артикул </th>
+        <td mat-cell *matCellDef="let detail"> <p *ngFor="let article of detail.itemArticle">{{article}}</p> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Название детали </th>
+        <td mat-cell *matCellDef="let detail"> {{detail.itemName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="info">
+        <th mat-header-cell *matHeaderCellDef> Примечание </th>
+        <td mat-cell *matCellDef="let detail"> {{detail.itemNote}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
 </div>

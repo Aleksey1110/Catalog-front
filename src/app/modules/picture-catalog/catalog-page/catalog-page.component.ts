@@ -12,6 +12,7 @@ export class CatalogPageComponent implements OnInit {
   public details = [];
   public itemImage: String;
   public isPassedId = false;
+  displayedColumns: string[] = ['position', 'article', 'name', 'info'];
 
   constructor() { }
 

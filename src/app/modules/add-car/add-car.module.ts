@@ -1,3 +1,5 @@
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from 'src/app/material.module';
 import { TokenInterceptorService } from './../../services/token-interceptor.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +16,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   imports: [
     CommonModule,
     FormsModule,
-    AddCarRoutingModule
+    AddCarRoutingModule,
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [
     FlashMessageService,

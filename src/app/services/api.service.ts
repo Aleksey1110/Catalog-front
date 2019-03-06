@@ -28,6 +28,14 @@ export class ApiService {
   }
 
   // Получить список всех марок
+  getAllCars(): Observable<Car[]> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get<Car[]>(`${this._url}/api/all`, { headers: headers })
+      .pipe(catchError(this.errorHandler));
+  }
+
+  // Получить список всех марок
   getCars(): Observable<Car[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

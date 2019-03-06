@@ -7,4 +7,5 @@ export interface Items {
     note: String;
     picture: String;
     _id: String;
+    children?: AnalogueNumber;
 }

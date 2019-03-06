@@ -5,8 +5,11 @@ import {
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatTreeModule
 } from '@angular/material';
+import { CdkTreeModule } from '@angular/cdk/tree';
 
 @NgModule({
     imports: [
@@ -15,7 +18,10 @@ import {
         MatIconModule,
         MatFormFieldModule,
         MatSelectModule,
-        MatInputModule
+        MatInputModule,
+        MatTableModule,
+        MatTreeModule,
+        CdkTreeModule
     ],
     exports: [
         MatButtonModule,
@@ -23,7 +29,10 @@ import {
         MatIconModule,
         MatFormFieldModule,
         MatSelectModule,
-        MatInputModule
+        MatInputModule,
+        MatTableModule,
+        MatTreeModule,
+        CdkTreeModule
     ]
 })
 export class MaterialModule { }

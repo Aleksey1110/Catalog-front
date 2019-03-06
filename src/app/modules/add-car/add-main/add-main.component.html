@@ -1,6 +1,6 @@
-<div class="row">
+<!-- <div class="row"> -->
   <!-- Колонка с роутами для добавления данных -->
-  <div class="col-lg-4">
+  <!-- <div class="col-lg-4">
     <ul class="nav nav-pills flex-column">
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" [routerLink]="['/editing/addmain/mark']">добавить марку</a>
@@ -25,8 +25,29 @@
       </li>
     </ul>
   </div>
-  <div class="col-lg-8">
+  <div class="col-lg-8"> -->
     <!-- Страницы добавления данных -->
-    <router-outlet></router-outlet>
+    <!-- <router-outlet></router-outlet>
   </div>
-</div>
+</div> -->
+
+<cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node template for leaf nodes -->
+    <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
+      <!-- use a disabled button to provide padding for tree leaf -->
+      <button mat-icon-button disabled></button>
+      {{node.markName}}
+    </cdk-nested-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node">
+      <button mat-icon-button [attr.aria-label]="'toggle ' + node.markName" cdkTreeNodeToggle>
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      {{node.markName}}
+      <div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+        <ng-container cdkTreeNodeOutlet></ng-container>
+      </div>
+    </cdk-nested-tree-node>
+  </cdk-tree>
