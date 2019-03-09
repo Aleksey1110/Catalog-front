@@ -7,9 +7,9 @@ import {
     MatSelectModule,
     MatInputModule,
     MatTableModule,
-    MatTreeModule
+    MatExpansionModule,
+    MatProgressBarModule
 } from '@angular/material';
-import { CdkTreeModule } from '@angular/cdk/tree';
 
 @NgModule({
     imports: [
@@ -20,8 +20,8 @@ import { CdkTreeModule } from '@angular/cdk/tree';
         MatSelectModule,
         MatInputModule,
         MatTableModule,
-        MatTreeModule,
-        CdkTreeModule
+        MatExpansionModule,
+        MatProgressBarModule
     ],
     exports: [
         MatButtonModule,
@@ -31,8 +31,8 @@ import { CdkTreeModule } from '@angular/cdk/tree';
         MatSelectModule,
         MatInputModule,
         MatTableModule,
-        MatTreeModule,
-        CdkTreeModule
+        MatExpansionModule,
+        MatProgressBarModule
     ]
 })
 export class MaterialModule { }

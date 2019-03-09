@@ -1,6 +1,6 @@
 <!-- <div class="row"> -->
-  <!-- Колонка с роутами для добавления данных -->
-  <!-- <div class="col-lg-4">
+<!-- Колонка с роутами для добавления данных -->
+<!-- <div class="col-lg-4">
     <ul class="nav nav-pills flex-column">
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" [routerLink]="['/editing/addmain/mark']">добавить марку</a>
@@ -26,28 +26,55 @@
     </ul>
   </div>
   <div class="col-lg-8"> -->
-    <!-- Страницы добавления данных -->
-    <!-- <router-outlet></router-outlet>
+<!-- Страницы добавления данных -->
+<!-- <router-outlet></router-outlet>
   </div>
 </div> -->
 
-<cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
-    <!-- This is the tree node template for leaf nodes -->
-    <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
-      <!-- use a disabled button to provide padding for tree leaf -->
-      <button mat-icon-button disabled></button>
-      {{node.markName}}
-    </cdk-nested-tree-node>
-    <!-- This is the tree node template for expandable nodes -->
-    <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node">
-      <button mat-icon-button [attr.aria-label]="'toggle ' + node.markName" cdkTreeNodeToggle>
-        <mat-icon class="mat-icon-rtl-mirror">
-          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-        </mat-icon>
-      </button>
-      {{node.markName}}
-      <div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
-        <ng-container cdkTreeNodeOutlet></ng-container>
-      </div>
-    </cdk-nested-tree-node>
-  </cdk-tree>
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelFirstLevelState = true" (closed)="panelFirstLevelState = false" *ngFor="let car of cars$ | async"
+    (click)="passMarkId(car._id)">
+    <mat-expansion-panel-header>
+      <mat-panel-title fxLayoutAlign="space-between center" fxFlex="50%">
+        {{car.markName}}
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+      </mat-panel-title>
+      <mat-panel-description fxLayoutAlign="end center" fxFlex="50%">
+        Внесите изменения или добавьте новые данные
+        <button mat-icon-button color="primary" (click)="expression">
+          <mat-icon>library_add</mat-icon>
+        </button>
+        <button mat-icon-button color="accent">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <!--  *ngIf="!isLoading" -->
+    <ng-template matExpansionPanelContent>
+      <mat-expansion-panel (opened)="panelSecondLevelState = true" (closed)="panelSecondLevelState = false" *ngFor="let model of models$ | async"
+        (click)="passModelId(model._id)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{model.modelsName}}
+          </mat-panel-title>
+          <mat-panel-description fxLayoutAlign="end center">
+            Внесите изменения или добавьте новые данные
+            <button mat-icon-button color="primary">
+              <mat-icon>library_add</mat-icon>
+            </button>
+            <button mat-icon-button color="accent">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>

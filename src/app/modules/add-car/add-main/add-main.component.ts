@@ -1,8 +1,10 @@
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { ApiService } from './../../../services/api.service';
-import { Component, OnInit } from '@angular/core';
+import { FlashMessageService } from './../../../services/flash-message.service';
+import { Message } from './../../../models/message';
+import { OnInit, Component } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
+import { Observable } from 'rxjs';
 import { Car } from 'src/app/models/car';
-import { ArrayDataSource } from '@angular/cdk/collections';
+import { Models } from 'src/app/models/models';
 
 @Component({
   selector: 'app-add-main',
@@ -12,19 +14,51 @@ import { ArrayDataSource } from '@angular/cdk/collections';
 
 export class AddMainComponent implements OnInit {
 
-  treeControl = new NestedTreeControl<Car>(node => node.children);
-  fetchedData;
-  dataSource = new ArrayDataSource(this.fetchedData);
+  isLoading = false;
+  panelFirstLevelState = false;
+  panelSecondLevelState = false;
+  public markName: String;
+  public message: Message;
+  cars$: Observable<Car[]>;
+  models$: Observable<Models[]>;
 
-  constructor(private _apiService: ApiService) { }
+  constructor(
+    private _apiService: ApiService,
+    private _flashMessagesService: FlashMessageService
+  ) { }
 
   ngOnInit() {
-    this._apiService.getAllCars().subscribe(data => {
-      console.log(data);
-      this.fetchedData = data;
-    });
+    this.cars$ = this._apiService.getCars();
   }
 
-  hasChild = (_: number, node: Car) => !!node.children && node.children.length > 0;
+  // Создать новый объект машины, передать название марки, отправить на сервер, очистить форму, вывести сообщение
+  addCar() {
+    const car = {
+      markName: this.markName
+    };
+    this._apiService.createCar(car)
+      .subscribe(data => {
+        this._flashMessagesService.showMessage('Данные успешно добавлены', 'success', 3000).subscribe(msg => {
+          this.message = msg;
+        });
+      },
+        error => {
+          this._flashMessagesService.showMessage(error).subscribe(data => this.message = data);
+        });
+    this.markName = '';
+  }
+
+  passMarkId(id1) {
+    this.models$ = this._apiService.getModelName(id1);
+    if (!this.models$) {
+      this.isLoading = true;
+    }
+  }
+
+  passModelId(id2) {
+    this.panelFirstLevelState = true;
+    this.panelSecondLevelState = true;
+  }
+
 
 }
